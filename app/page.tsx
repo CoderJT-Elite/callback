@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { InputCard } from "@/components/InputCard";
@@ -155,71 +155,95 @@ export default function HomePage() {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    if (isLoading) {
+      requestAnimationFrame(() =>
+        document.getElementById("result")?.scrollIntoView({ behavior: "smooth", block: "start" })
+      );
+    }
+  }, [isLoading]);
+
+  const hasResult = steps.length > 0 || !!verdict || !!errorMessage;
+
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-8 md:py-12 space-y-8">
-        {/* Pitch Hero */}
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="inline-block px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-900 text-xs font-semibold tracking-wide">
-            ForgeHacks 2026 · AI + Cybersecurity
-          </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-            Don&apos;t trust the number in the message.{" "}
-            <span className="text-brand-600 dark:text-brand-400">
-              Callback finds the real one.
-            </span>
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed">
-            Paste a suspicious text, email, or screenshot. Callback finds the claimed sender&apos;s real contact channels from sources the scammer doesn&apos;t control, and checks the message against them.
-          </p>
+      <main className="flex-1 max-w-6xl w-full mx-auto px-5 sm:px-8 pt-10 md:pt-16">
+        <div className="grid gap-12 lg:gap-16 lg:grid-cols-[5fr_7fr] items-start">
+          <section>
+            <p className="font-mono text-[11px] uppercase tracking-widest text-muted mb-5">
+              Scam checker · US messages
+            </p>
+            <h1 className="font-display text-[40px] sm:text-5xl lg:text-[56px] leading-[1.04] tracking-tight font-medium">
+              Don&apos;t trust the number in the message.{" "}
+              <em className="text-stamp italic font-medium">Callback finds the real one.</em>
+            </h1>
+            <p className="mt-6 text-[17px] leading-relaxed max-w-md">
+              Paste a suspicious text, email or screenshot. Callback looks up who it claims to be from, finds that
+              sender&apos;s real contact details in places a scammer can&apos;t edit, and compares them.
+            </p>
+            <ol className="mt-8 space-y-4 max-w-md border-t border-rule pt-6">
+              {[
+                ["Read", "who the message says it's from, and every phone, link and email in it."],
+                ["Look up", "the real organization's official domain and contact page."],
+                ["Compare", "and show each result with where it came from."],
+              ].map(([k, v], i) => (
+                <li key={k} className="flex gap-4">
+                  <span className="font-display text-3xl leading-none text-muted w-6">{i + 1}</span>
+                  <p>
+                    <strong className="font-semibold">{k}</strong> {v}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section>
+            <InputCard
+              onCheck={handleLiveCheck}
+              onReplaySample={handleReplaySample}
+              isLoading={isLoading}
+              externalText={inputText}
+              externalScreenshotUrl={screenshotUrl}
+            />
+          </section>
         </div>
 
-        {/* Input Card */}
-        <InputCard
-          onCheck={handleLiveCheck}
-          onReplaySample={handleReplaySample}
-          isLoading={isLoading}
-          externalText={inputText}
-          externalScreenshotUrl={screenshotUrl}
-        />
+        {hasResult && (
+          <div className="mt-16 max-w-3xl mx-auto space-y-8" id="result" aria-live="polite">
+            {errorMessage && (
+              <div role="alert" className="border-2 border-stamp text-stamp p-4 text-sm">
+                <strong className="font-semibold">The check didn&apos;t finish.</strong> {errorMessage}
+              </div>
+            )}
 
-        {/* Error Alert */}
-        {errorMessage && (
-          <div className="max-w-2xl mx-auto p-4 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-700 dark:text-red-300 text-sm">
-            <strong className="font-semibold">Check Error:</strong> {errorMessage}
+            <Trace steps={steps} isStreaming={isLoading} />
+
+            {verdict && explanation && (
+              <ResultReceipt
+                verdict={verdict}
+                evidences={evidences}
+                explanation={explanation}
+                extraction={
+                  extraction || {
+                    claimed_sender: { kind: "unknown" },
+                    asks: [],
+                    urgency_quotes: [],
+                    payment: { method: null },
+                    phones: [],
+                    urls: [],
+                    emails: [],
+                    handles: [],
+                  }
+                }
+                inputText={inputText}
+                officialChannel={officialChannel}
+                isPrecomputed={isPrecomputed}
+                precomputedDate={precomputedDate}
+              />
+            )}
           </div>
-        )}
-
-        {/* Investigation Live Trace */}
-        <div className="max-w-2xl mx-auto">
-          <Trace steps={steps} isStreaming={isLoading} />
-        </div>
-
-        {/* Verdict Result Receipt */}
-        {verdict && explanation && (
-          <ResultReceipt
-            verdict={verdict}
-            evidences={evidences}
-            explanation={explanation}
-            extraction={
-              extraction || {
-                claimed_sender: { kind: "unknown" },
-                asks: [],
-                urgency_quotes: [],
-                payment: { method: null },
-                phones: [],
-                urls: [],
-                emails: [],
-                handles: [],
-              }
-            }
-            inputText={inputText}
-            officialChannel={officialChannel}
-            isPrecomputed={isPrecomputed}
-            precomputedDate={precomputedDate}
-          />
         )}
       </main>
 

@@ -35,6 +35,7 @@
           "Call our fraud prevention line immediately at 888-555-0142 to secure your account."
         ],
         "urgency_quotes": [
+          "Suspicious transaction detected",
           "immediately"
         ],
         "payment": {
@@ -109,7 +110,7 @@
         "id": "E2",
         "kind": "urgency",
         "status": "warn",
-        "text": "Contains artificial urgency phrases: \"immediately\". High urgency is standard in imposter scams to force hurried decisions.",
+        "text": "Contains artificial urgency phrases: \"Suspicious transaction detected\", \"immediately\". High urgency is standard in imposter scams to force hurried decisions.",
         "source": {
           "rule_id": "RULE_URGENCY_CUES"
         }
@@ -148,13 +149,13 @@
       "data": {
         "sentences": [
           {
-            "text": "The phone number provided in the message is not listed on official Wells Fargo pages [E1].",
+            "text": "The phone number in the message is not an official address or number for Wells Fargo [E1].",
             "cites": [
               "E1"
             ]
           },
           {
-            "text": "In addition, the message uses artificial urgency phrases like immediately to force hurried decisions [E2].",
+            "text": "Furthermore, the message uses high urgency phrases to force hurried decisions, which is standard in imposter scams [E2].",
             "cites": [
               "E2"
             ]
@@ -176,7 +177,7 @@
     {
       "event": "done",
       "data": {
-        "ms": 2384
+        "ms": 2489
       }
     }
   ],
@@ -191,6 +192,7 @@
         "Call our fraud prevention line immediately at 888-555-0142 to secure your account."
       ],
       "urgency_quotes": [
+        "Suspicious transaction detected",
         "immediately"
       ],
       "payment": {
@@ -246,7 +248,7 @@
         "id": "E2",
         "kind": "urgency",
         "status": "warn",
-        "text": "Contains artificial urgency phrases: \"immediately\". High urgency is standard in imposter scams to force hurried decisions.",
+        "text": "Contains artificial urgency phrases: \"Suspicious transaction detected\", \"immediately\". High urgency is standard in imposter scams to force hurried decisions.",
         "source": {
           "rule_id": "RULE_URGENCY_CUES"
         }
@@ -271,13 +273,13 @@
     "explanation": {
       "sentences": [
         {
-          "text": "The phone number provided in the message is not listed on official Wells Fargo pages [E1].",
+          "text": "The phone number in the message is not an official address or number for Wells Fargo [E1].",
           "cites": [
             "E1"
           ]
         },
         {
-          "text": "In addition, the message uses artificial urgency phrases like immediately to force hurried decisions [E2].",
+          "text": "Furthermore, the message uses high urgency phrases to force hurried decisions, which is standard in imposter scams [E2].",
           "cites": [
             "E2"
           ]

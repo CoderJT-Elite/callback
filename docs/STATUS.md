@@ -560,5 +560,5 @@ Citi alert -> MATCHES; GIF upload rejected. Mobile (375 px): no horizontal scrol
 **Still open / not verified**
 - Free-tier daily request cap for `gemini-3.5-flash-lite` isn't published in the docs; per-minute
   429s were seen during the eval at about 13 requests/minute. Check AI Studio before judging.
-- Contact details inside the legitimate eval items were written by the agent and not each checked.
+- Contact points inside the legitimate eval items were checked on 2026-10-03 against the organization snapshots (see eval/SOURCES.md); the prose around them is still invented.
 - Not pushed, not deployed.

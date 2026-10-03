@@ -1,15 +1,6 @@
 "use client";
 
 import React from "react";
-import {
-  ShieldAlert,
-  ShieldCheck,
-  HelpCircle,
-  PhoneCall,
-  ExternalLink,
-  Receipt,
-  FileCheck2,
-} from "lucide-react";
 import { Verdict, Evidence, Explanation, Extraction, OfficialChannel } from "@/lib/types";
 import { RespondPanel } from "./RespondPanel";
 import { RuleTable } from "./RuleTable";
@@ -25,6 +16,25 @@ interface ResultReceiptProps {
   precomputedDate?: string;
 }
 
+const VERDICT_STYLE: Record<string, { color: string; glyph: string; word: string }> = {
+  DOESNT_MATCH: { color: "text-stamp", glyph: "✗", word: "Mismatch" },
+  MATCHES: { color: "text-pine", glyph: "✓", word: "Match" },
+  NO_ORGANIZATION_CLAIMED: { color: "text-ochre", glyph: "!", word: "No organization" },
+  CANT_VERIFY: { color: "text-graphite", glyph: "?", word: "Can't verify" },
+};
+
+const STATUS_MARK: Record<string, { glyph: string; cls: string; label: string }> = {
+  ok: { glyph: "✓", cls: "text-pine", label: "matches" },
+  info: { glyph: "i", cls: "text-muted", label: "info" },
+  fail: { glyph: "✗", cls: "text-stamp", label: "mismatch" },
+  warn: { glyph: "!", cls: "text-ochre", label: "warning" },
+};
+
+function prettyPhone(p: string) {
+  const m = p.match(/^\+1(\d{3})(\d{3})(\d{4})$/);
+  return m ? `1-${m[1]}-${m[2]}-${m[3]}` : p;
+}
+
 export function ResultReceipt({
   verdict,
   evidences,
@@ -35,141 +45,104 @@ export function ResultReceipt({
   isPrecomputed,
   precomputedDate,
 }: ResultReceiptProps) {
-  // Verdict styling
-  let bannerBg = "bg-red-500 text-white";
-  let bannerIcon = <ShieldAlert className="w-6 h-6 shrink-0" />;
-
-  if (verdict.type === "MATCHES") {
-    bannerBg = "bg-emerald-600 text-white";
-    bannerIcon = <ShieldCheck className="w-6 h-6 shrink-0" />;
-  } else if (verdict.type === "NO_ORGANIZATION_CLAIMED") {
-    bannerBg = "bg-amber-500 text-white";
-    bannerIcon = <ShieldAlert className="w-6 h-6 shrink-0" />;
-  } else if (verdict.type === "CANT_VERIFY") {
-    bannerBg = "bg-slate-600 text-white";
-    bannerIcon = <HelpCircle className="w-6 h-6 shrink-0" />;
-  }
+  const vs = VERDICT_STYLE[verdict.type] ?? VERDICT_STYLE.CANT_VERIFY;
 
   return (
-    <div className="w-full max-w-2xl mx-auto mt-6 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl shadow-lg overflow-hidden animate-in fade-in duration-300">
-      {/* Perforation header visual */}
-      <div className="h-3 w-full bg-slate-100 dark:bg-slate-800 receipt-perforation border-b border-dashed border-slate-300 dark:border-slate-700" />
-
-      {/* Precomputed sample badge if applicable */}
-      {isPrecomputed && (
-        <div className="bg-slate-100 dark:bg-slate-800/80 px-4 py-1.5 border-b border-slate-200 dark:border-slate-700 text-center text-xs text-slate-500 dark:text-slate-400 font-mono">
-          Sample: pre-computed on {precomputedDate || "2026-10-03"}. Paste your own message to run a live check.
-        </div>
-      )}
-
-      {/* 1. Verdict Banner */}
-      <div className={`p-4 md:p-5 flex items-center gap-3.5 ${bannerBg}`}>
-        {bannerIcon}
-        <div>
-          <span className="text-[11px] font-mono uppercase tracking-wider opacity-85 block">
-            Verification Verdict
-          </span>
-          <h2 className="text-lg md:text-xl font-bold tracking-tight">
-            {verdict.headline}
-          </h2>
-        </div>
+    <article className="bg-sheet border border-ink paper-shadow">
+      <div className="flex flex-wrap items-center justify-between gap-2 px-5 md:px-7 py-2.5 border-b border-ink font-mono text-[11px] uppercase tracking-widest text-muted">
+        <span>Case file · {verdict.rule_id}</span>
+        <span>{isPrecomputed ? `Saved example, run ${precomputedDate || "2026-10-03"}` : "Live check"}</span>
       </div>
 
-      <div className="p-5 md:p-6 space-y-6">
-        {/* Verdict Details & Rule */}
-        <div className="bg-slate-50 dark:bg-slate-800/40 p-3.5 rounded-lg border border-slate-200/80 dark:border-slate-800 text-sm">
-          <p className="text-slate-800 dark:text-slate-200 leading-relaxed">
-            {verdict.details}
-          </p>
-          <span className="inline-block mt-2 font-mono text-[11px] text-slate-500 dark:text-slate-400">
-            Governing Rule: {verdict.rule_id}
+      <div className="px-5 md:px-7 pt-8 pb-6">
+        <div className={`mb-6 ${vs.color}`}>
+          <span className="stamp text-sm md:text-base">
+            <span aria-hidden="true">{vs.glyph} </span>
+            {vs.word}
           </span>
         </div>
+        <h2 className="font-display text-3xl md:text-4xl leading-tight tracking-tight font-medium">
+          {verdict.headline}
+        </h2>
+        <p className="mt-4 max-w-2xl">{verdict.details}</p>
+      </div>
 
-        {/* 2. Official Channel: "Do this instead" */}
+      <div className="px-5 md:px-7 pb-8 space-y-10">
         {officialChannel && (
-          <div className="border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/50 dark:bg-emerald-950/20 p-4 rounded-xl">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-400 flex items-center gap-1.5 mb-2">
-              <FileCheck2 className="w-4 h-4" />
-              Do this instead (Official Verified Channels)
-            </h3>
-            <p className="text-xs text-slate-600 dark:text-slate-300 mb-3">
-              Type the web address yourself or call the official directory line directly. Do not tap links or call callback numbers in suspicious messages.
+          <section className="border-2 border-pine p-5">
+            <h3 className="font-display text-xl text-pine">Do this instead</h3>
+            <p className="text-[13px] text-muted mt-1 mb-4 max-w-xl">
+              Type the web address yourself, or call this number from the organization&apos;s own site. Don&apos;t use
+              links or numbers from the message.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+            <dl className="grid gap-4 sm:grid-cols-2 font-mono text-sm">
               {officialChannel.contact_url && (
-                <a
-                  href={officialChannel.contact_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between p-2.5 bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-900/80 rounded-lg hover:border-emerald-400 transition"
-                >
-                  <span className="truncate text-emerald-700 dark:text-emerald-300 font-medium">
-                    {officialChannel.domain || "Official Website"}
-                  </span>
-                  <ExternalLink className="w-3.5 h-3.5 text-slate-400 shrink-0 ml-1" />
-                </a>
-              )}
-              {officialChannel.phone && (
-                <div className="flex items-center gap-2 p-2.5 bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-900/80 rounded-lg text-emerald-800 dark:text-emerald-300 font-medium">
-                  <PhoneCall className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>{officialChannel.phone}</span>
+                <div>
+                  <dt className="text-[11px] uppercase tracking-widest text-muted">Official site</dt>
+                  <dd>
+                    <a
+                      href={officialChannel.contact_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-4 break-all"
+                    >
+                      {officialChannel.domain || "Official website"}
+                    </a>
+                  </dd>
                 </div>
               )}
-            </div>
+              {officialChannel.phone && (
+                <div>
+                  <dt className="text-[11px] uppercase tracking-widest text-muted">Official phone</dt>
+                  <dd className="text-lg font-medium">{prettyPhone(officialChannel.phone)}</dd>
+                </div>
+              )}
+            </dl>
             {officialChannel.source_note && (
-              <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-2 font-mono truncate">
-                Source: {officialChannel.source_note}
-              </p>
+              <p className="text-[12px] text-muted mt-4 font-mono break-words">Source: {officialChannel.source_note}</p>
             )}
-          </div>
+          </section>
         )}
 
-        {/* 3. Receipts: Numbered Evidence List */}
-        <div>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mb-3">
-            <Receipt className="w-4 h-4" />
-            Verified Evidence Receipts
-          </h3>
-          <div className="space-y-2">
-            {evidences.map((ev) => (
-              <div
-                key={ev.id}
-                className="font-mono text-xs p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-850"
-              >
-                <div className="flex items-start gap-2">
-                  <span className="font-bold text-brand-600 dark:text-brand-400 shrink-0">
-                    [{ev.id}]
+        <section>
+          <h3 className="font-display text-xl mb-3">What we checked</h3>
+          <ol className="border-t border-ink divide-y divide-rule font-mono text-[13px]">
+            {evidences.map((ev) => {
+              const m = STATUS_MARK[ev.status] ?? STATUS_MARK.info;
+              return (
+                <li key={ev.id} className="grid grid-cols-[2.5rem_1.25rem_1fr] gap-x-2 py-3">
+                  <span className="text-muted">[{ev.id}]</span>
+                  <span className={`font-bold ${m.cls}`} aria-label={m.label}>
+                    {m.glyph}
                   </span>
-                  <div className="flex-1">
-                    <p className="text-slate-800 dark:text-slate-200">{ev.text}</p>
+                  <div className="min-w-0">
+                    <p>{ev.text}</p>
                     {ev.source?.url && (
-                      <p className="text-[11px] text-slate-400 mt-1 truncate">
+                      <p className="text-[12px] text-muted mt-1 break-all">
                         {ev.kind === "url" && ev.status !== "ok"
                           ? `Link in the message (not opened): ${ev.source.url}`
                           : `Source: ${ev.source.url}`}
                       </p>
                     )}
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
 
-        {/* 4. Plain-English Cited Explanation */}
-        <div className="border-t border-slate-100 dark:border-slate-800 pt-4">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
-            Explanation ({explanation.mode === "llm" ? "AI Analysis" : "Deterministic Rules"})
-          </h3>
-          <div className="space-y-2 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+        <section>
+          <h3 className="font-display text-xl mb-1">In plain English</h3>
+          <p className="font-mono text-[11px] uppercase tracking-widest text-muted mb-3">
+            Written by {explanation.mode === "llm" ? "Gemini, every sentence tied to a numbered check" : "fixed templates, no AI"}
+          </p>
+          <div className="space-y-3 max-w-2xl">
             {explanation.sentences.map((sentence, idx) => (
               <p key={idx}>{sentence.text}</p>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* 5. Already clicked or paid? */}
         <RespondPanel
           verdict={verdict}
           evidences={evidences}
@@ -178,14 +151,12 @@ export function ResultReceipt({
           officialChannel={officialChannel}
         />
 
-        {/* 6. How Callback decided rule table */}
         <RuleTable />
       </div>
 
-      {/* Receipt footer */}
-      <div className="bg-slate-50 dark:bg-slate-800/40 p-4 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-400 font-mono">
-        CALLBACK REPORT RECEIPT · FORGEHACKS 2026
+      <div className="border-t border-ink px-5 md:px-7 py-3 font-mono text-[11px] uppercase tracking-widest text-muted">
+        Callback · ForgeHacks 2026 · Can be wrong
       </div>
-    </div>
+    </article>
   );
 }

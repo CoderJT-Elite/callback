@@ -38,3 +38,12 @@ All URLs checked on 2026-10-03.
 
 Real, licensed messages: for example ham messages from the UCI SMS Spam Collection (CC BY 4.0) as
 "no organization" controls, and smishing examples quoted on official pages, each cited per item.
+
+## Contact points in the legitimate messages (checked 2026-10-03)
+Every phone number in a `label: legit` item appears in that organization's own snapshot under
+`data/snapshots/`: Wells Fargo 1-800-869-3557, Capital One 1-877-383-4802, Bank of America
+1-800-432-1000, Medicare 1-800-633-4227. Every domain is on the organization's `officialDomains`
+list in `scripts/build-curated-orgs.ts` (usps.com, amazon.com, ups.com, paypal.com, bestbuy.com,
+venmo.com, zellepay.com, netflix.com, wellsfargo.com, capitalone.com, bankofamerica.com,
+medicare.gov). The message wording, order numbers and amounts are still invented; only the contact
+points were checked, so "legit confirmed" tests contact-point matching, not realism of the prose.

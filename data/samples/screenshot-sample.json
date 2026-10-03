@@ -29,20 +29,21 @@
         "claimed_sender": {
           "name": "USPS",
           "kind": "government",
-          "evidence_quote": "USPS Notification"
+          "evidence_quote": "USPS Notification:"
         },
         "asks": [
           "Update billing information"
         ],
-        "urgency_quotes": [],
+        "urgency_quotes": [
+          "Parcel shipment on hold"
+        ],
         "payment": {
           "method": null,
           "quote": null
         },
         "phones": [],
         "urls": [
-          "https://usps-address-update.xyz",
-          "usps-address-update.xyz"
+          "https://usps-address-update.xyz"
         ],
         "emails": [],
         "handles": [],
@@ -105,28 +106,12 @@
       "event": "evidence",
       "data": {
         "id": "E2",
-        "kind": "url",
-        "status": "fail",
-        "text": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)",
+        "kind": "urgency",
+        "status": "warn",
+        "text": "Contains artificial urgency phrases: \"Parcel shipment on hold\". High urgency is standard in imposter scams to force hurried decisions.",
         "source": {
-          "url": "usps-address-update.xyz",
-          "rule_id": "RULE_LOOKALIKE_DOMAIN"
-        },
-        "meta": {
-          "domain": "usps-address-update.xyz",
-          "is_official": false,
-          "lookalike_score": 0.85,
-          "age_days": null
+          "rule_id": "RULE_URGENCY_CUES"
         }
-      }
-    },
-    {
-      "event": "step",
-      "data": {
-        "id": "check_url_E2",
-        "label": "Checked link: usps-address-update.xyz",
-        "status": "fail",
-        "detail": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)"
       }
     },
     {
@@ -162,13 +147,13 @@
       "data": {
         "sentences": [
           {
-            "text": "The link provided in the message is not an official USPS address [E1].",
+            "text": "The message uses the link usps-address-update.xyz, which is not an official USPS address [E1].",
             "cites": [
               "E1"
             ]
           },
           {
-            "text": "The domain is an unregistered lookalike that only mimics the brand name [E2].",
+            "text": "Additionally, it creates artificial urgency by claiming your parcel shipment is on hold, a common tactic in imposter scams [E2].",
             "cites": [
               "E2"
             ]
@@ -190,7 +175,7 @@
     {
       "event": "done",
       "data": {
-        "ms": 2712
+        "ms": 3248
       }
     }
   ],
@@ -199,20 +184,21 @@
       "claimed_sender": {
         "name": "USPS",
         "kind": "government",
-        "evidence_quote": "USPS Notification"
+        "evidence_quote": "USPS Notification:"
       },
       "asks": [
         "Update billing information"
       ],
-      "urgency_quotes": [],
+      "urgency_quotes": [
+        "Parcel shipment on hold"
+      ],
       "payment": {
         "method": null,
         "quote": null
       },
       "phones": [],
       "urls": [
-        "https://usps-address-update.xyz",
-        "usps-address-update.xyz"
+        "https://usps-address-update.xyz"
       ],
       "emails": [],
       "handles": [],
@@ -256,18 +242,11 @@
       },
       {
         "id": "E2",
-        "kind": "url",
-        "status": "fail",
-        "text": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)",
+        "kind": "urgency",
+        "status": "warn",
+        "text": "Contains artificial urgency phrases: \"Parcel shipment on hold\". High urgency is standard in imposter scams to force hurried decisions.",
         "source": {
-          "url": "usps-address-update.xyz",
-          "rule_id": "RULE_LOOKALIKE_DOMAIN"
-        },
-        "meta": {
-          "domain": "usps-address-update.xyz",
-          "is_official": false,
-          "lookalike_score": 0.85,
-          "age_days": null
+          "rule_id": "RULE_URGENCY_CUES"
         }
       }
     ],
@@ -290,13 +269,13 @@
     "explanation": {
       "sentences": [
         {
-          "text": "The link provided in the message is not an official USPS address [E1].",
+          "text": "The message uses the link usps-address-update.xyz, which is not an official USPS address [E1].",
           "cites": [
             "E1"
           ]
         },
         {
-          "text": "The domain is an unregistered lookalike that only mimics the brand name [E2].",
+          "text": "Additionally, it creates artificial urgency by claiming your parcel shipment is on hold, a common tactic in imposter scams [E2].",
           "cites": [
             "E2"
           ]
@@ -331,12 +310,6 @@
       },
       {
         "id": "check_url_E1",
-        "label": "Checked link: usps-address-update.xyz",
-        "status": "fail",
-        "detail": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)"
-      },
-      {
-        "id": "check_url_E2",
         "label": "Checked link: usps-address-update.xyz",
         "status": "fail",
         "detail": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)"

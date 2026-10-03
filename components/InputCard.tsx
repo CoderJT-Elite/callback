@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { Upload, X, Shield, ArrowRight, Loader2, Sparkles } from "lucide-react";
 import { SampleChips, ReplayPayload } from "./SampleChips";
 
 interface InputCardProps {
@@ -105,59 +104,43 @@ export function InputCard({
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-4">
-      {/* Sample Chips */}
-      <SampleChips
-        disabled={isLoading}
-        onSelectSample={(sample) => {
-          onReplaySample(sample);
-        }}
-      />
-
-      {/* Input Card Form */}
+    <div className="w-full space-y-6">
       <form
         onSubmit={handleSubmit}
-        className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm p-4 md:p-6 space-y-4 transition-all"
+        className="bg-sheet border border-ink paper-shadow p-5 md:p-7 space-y-5"
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}
       >
         <div>
-          <label
-            htmlFor="message-input"
-            className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2"
-          >
-            Paste a text, email, or DM to check:
+          <label htmlFor="message-input" className="flex items-baseline justify-between mb-2">
+            <span className="font-display text-xl">The message you got</span>
+            <span className="font-mono text-[11px] text-muted">text, email or DM</span>
           </label>
           <textarea
             id="message-input"
             value={text}
             onChange={(e) => setText(e.target.value)}
             disabled={isLoading}
-            placeholder="e.g. USPS: Your package #US9402283 could not be delivered due to incorrect address. Pay $1.99 redelivery fee at usps-help.top..."
-            className="w-full h-32 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-850 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm resize-none transition-all"
+            placeholder="Paste it here. Example: USPS: Your package could not be delivered. Pay a $1.99 fee at usps-help.top"
+            className="lined w-full h-[168px] px-3 py-0 bg-transparent border-0 border-l-2 border-stamp/70 text-ink placeholder:text-muted/80 focus:outline-none focus-visible:outline-none focus:border-ink text-[15px] resize-none"
             maxLength={6000}
           />
         </div>
 
-        {/* Screenshot Upload or Preview */}
         {imagePreview ? (
-          <div className="relative inline-block border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden max-h-48 bg-slate-50 dark:bg-slate-800 p-2">
-            <img
-              src={imagePreview}
-              alt="Screenshot Preview"
-              className="max-h-40 rounded object-contain mx-auto"
-            />
+          <div className="relative inline-block border border-ink bg-paper p-2">
+            <img src={imagePreview} alt="Screenshot preview" className="max-h-40 object-contain" />
             <button
               type="button"
               onClick={handleClearImage}
-              className="absolute top-3 right-3 p-1 rounded-full bg-slate-900/70 text-white hover:bg-slate-900 transition"
-              title="Remove screenshot"
+              className="absolute top-1 right-1 h-6 w-6 bg-ink text-paper font-mono text-sm leading-none"
+              aria-label="Remove screenshot"
             >
-              <X className="w-4 h-4" />
+              ×
             </button>
           </div>
         ) : (
-          <div className="flex items-center gap-3">
+          <div>
             <input
               type="file"
               ref={fileInputRef}
@@ -172,40 +155,29 @@ export function InputCard({
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={isLoading}
-              className="inline-flex items-center gap-2 px-3 py-2 border border-dashed border-slate-300 dark:border-slate-700 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400 transition"
+              className="text-sm underline underline-offset-4 decoration-rule hover:decoration-ink"
             >
-              <Upload className="w-3.5 h-3.5" />
-              Upload / Drop Screenshot (PNG, JPG, WebP)
+              Or attach a screenshot
             </button>
+            <span className="font-mono text-[11px] text-muted ml-2">PNG, JPG or WebP, under 4 MB. You can also drop one here.</span>
           </div>
         )}
 
-        {/* Action Row */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 border-t border-slate-100 dark:border-slate-800/80">
-          <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
-            <Shield className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <span>We don&apos;t store what you paste. Text is sent to Google&apos;s Gemini API to read it; don&apos;t include passwords or card numbers.</span>
+        <div className="flex flex-col-reverse sm:flex-row sm:items-end justify-between gap-4 pt-4 border-t border-rule">
+          <p className="text-[12px] leading-snug text-muted max-w-sm">
+            We don&apos;t store what you paste. The text is sent to Google&apos;s Gemini API to be read; don&apos;t include passwords or card numbers.
           </p>
           <button
             type="submit"
             disabled={isLoading || (!text.trim() && !imagePreview)}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-semibold shadow-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="shrink-0 bg-ink text-paper px-6 py-3 text-sm font-semibold hover:bg-stamp transition-colors disabled:opacity-40 disabled:hover:bg-ink disabled:cursor-not-allowed"
           >
-            {isLoading ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Checking...
-              </>
-            ) : (
-              <>
-                <Sparkles className="w-4 h-4" />
-                Check it
-                <ArrowRight className="w-4 h-4" />
-              </>
-            )}
+            {isLoading ? "Checking…" : "Check it →"}
           </button>
         </div>
       </form>
+
+      <SampleChips disabled={isLoading} onSelectSample={(sample) => onReplaySample(sample)} />
     </div>
   );
 }

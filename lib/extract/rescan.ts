@@ -75,7 +75,7 @@ function dedupeUrls(urls: string[]): string[] {
  */
 export function deterministicExtract(text: string): Extraction {
   const phones = extractPhones(text);
-  const urls = extractUrls(text);
+  const urls = dedupeUrls(extractUrls(text));
   const emails = extractEmails(text);
   const payment = extractPayment(text);
   const urgency_quotes = extractUrgencyQuotes(text);

@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { MessageSquare, Package, Briefcase, CheckCircle2, Image as ImageIcon } from "lucide-react";
 import bankAlertData from "../data/samples/bank-alert.json";
 import packageDeliveryData from "../data/samples/package-delivery.json";
 import recruiterOfferData from "../data/samples/recruiter-offer.json";
@@ -32,41 +31,31 @@ export function SampleChips({ onSelectSample, disabled }: SampleChipsProps) {
     {
       id: "bank-alert",
       label: "Bank alert text",
-      badge: "Scam",
-      badgeColor: "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400",
-      icon: <MessageSquare className="w-3.5 h-3.5" />,
+      kind: "scam",
       data: bankAlertData,
     },
     {
       id: "package-delivery",
       label: "Package delivery",
-      badge: "Scam",
-      badgeColor: "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400",
-      icon: <Package className="w-3.5 h-3.5" />,
+      kind: "scam",
       data: packageDeliveryData,
     },
     {
       id: "recruiter-offer",
       label: "Recruiter job offer",
-      badge: "Scam",
-      badgeColor: "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400",
-      icon: <Briefcase className="w-3.5 h-3.5" />,
+      kind: "scam",
       data: recruiterOfferData,
     },
     {
       id: "real-bank-alert",
       label: "Real bank alert",
-      badge: "Legit",
-      badgeColor: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400",
-      icon: <CheckCircle2 className="w-3.5 h-3.5" />,
+      kind: "legit",
       data: realBankAlertData,
     },
     {
       id: "screenshot-sample",
       label: "Screenshot sample",
-      badge: "Vision",
-      badgeColor: "bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-400",
-      icon: <ImageIcon className="w-3.5 h-3.5" />,
+      kind: "image",
       data: screenshotSampleData,
       screenshotUrl: "/samples/sample-screenshot.png",
     },
@@ -101,29 +90,28 @@ export function SampleChips({ onSelectSample, disabled }: SampleChipsProps) {
     });
   };
 
+  const dot: Record<string, string> = { scam: "bg-stamp", legit: "bg-pine", image: "bg-ink" };
+  const word: Record<string, string> = { scam: "scam", legit: "genuine", image: "image" };
+
   return (
     <div className="w-full">
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-          Try a sample (instant pre-computed receipts):
-        </span>
-      </div>
-      <div className="flex flex-wrap gap-2">
+      <p className="font-mono text-[11px] uppercase tracking-widest mb-2">Try a saved example</p>
+      <ul className="flex flex-wrap gap-x-5 gap-y-2">
         {samples.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => handleClick(s)}
-            disabled={disabled}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 hover:shadow-sm transition-all text-xs font-medium text-slate-800 dark:text-slate-200 disabled:opacity-50"
-          >
-            <span className="text-slate-500 dark:text-slate-400">{s.icon}</span>
-            <span>{s.label}</span>
-            <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase ${s.badgeColor}`}>
-              {s.badge}
-            </span>
-          </button>
+          <li key={s.id}>
+            <button
+              type="button"
+              onClick={() => handleClick(s)}
+              disabled={disabled}
+              className="group inline-flex items-center gap-2 text-sm underline decoration-rule underline-offset-4 hover:decoration-ink disabled:opacity-50"
+            >
+              <span className={`inline-block h-2 w-2 ${dot[s.kind]}`} aria-hidden="true" />
+              <span>{s.label}</span>
+              <span className="font-mono text-[11px] text-muted no-underline">({word[s.kind]})</span>
+            </button>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

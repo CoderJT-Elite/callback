@@ -27,9 +27,9 @@
       "event": "extraction",
       "data": {
         "claimed_sender": {
-          "name": "Amazon Recruitment",
+          "name": "Amazon",
           "kind": "company",
-          "evidence_quote": "Amazon Recruitment"
+          "evidence_quote": "Sarah from Amazon Recruitment"
         },
         "asks": [
           "Contact me to start your interview"
@@ -137,7 +137,7 @@
             ]
           },
           {
-            "text": "Because this does not match official Amazon communication channels, this message cannot be verified [E1].",
+            "text": "Because of this discrepancy, the sender does not match the real organization [E1].",
             "cites": [
               "E1"
             ]
@@ -159,16 +159,16 @@
     {
       "event": "done",
       "data": {
-        "ms": 2008
+        "ms": 1961
       }
     }
   ],
   "result": {
     "extraction": {
       "claimed_sender": {
-        "name": "Amazon Recruitment",
+        "name": "Amazon",
         "kind": "company",
-        "evidence_quote": "Amazon Recruitment"
+        "evidence_quote": "Sarah from Amazon Recruitment"
       },
       "asks": [
         "Contact me to start your interview"
@@ -246,7 +246,7 @@
           ]
         },
         {
-          "text": "Because this does not match official Amazon communication channels, this message cannot be verified [E1].",
+          "text": "Because of this discrepancy, the sender does not match the real organization [E1].",
           "cites": [
             "E1"
           ]

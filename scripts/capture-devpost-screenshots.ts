@@ -34,7 +34,7 @@ async function capture() {
 
     // 1. Sample 1: Bank alert
     await page.getByRole("button", { name: /Bank alert text/i }).click();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2500);
     await page.screenshot({
       path: path.join(outDir, `01-sample1-bank-alert-${vp.name}.png`),
       fullPage: true,
@@ -42,7 +42,7 @@ async function capture() {
 
     // 2. Sample 2: Package delivery
     await page.getByRole("button", { name: /Package delivery/i }).click();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2500);
     await page.screenshot({
       path: path.join(outDir, `02-sample2-package-delivery-${vp.name}.png`),
       fullPage: true,
@@ -50,7 +50,7 @@ async function capture() {
 
     // 3. Sample 3: Recruiter job offer
     await page.getByRole("button", { name: /Recruiter job offer/i }).click();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2500);
     await page.screenshot({
       path: path.join(outDir, `03-sample3-job-offer-${vp.name}.png`),
       fullPage: true,
@@ -58,7 +58,7 @@ async function capture() {
 
     // 4. Sample 4: Real bank alert
     await page.getByRole("button", { name: /Real bank alert/i }).click();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2500);
     await page.screenshot({
       path: path.join(outDir, `04-sample4-legit-bank-${vp.name}.png`),
       fullPage: true,
@@ -66,7 +66,7 @@ async function capture() {
 
     // 5. Sample 5: Screenshot sample
     await page.getByRole("button", { name: /Screenshot sample/i }).click();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2500);
     await page.screenshot({
       path: path.join(outDir, `05-sample5-screenshot-usps-${vp.name}.png`),
       fullPage: true,

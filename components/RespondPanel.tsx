@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { AlertOctagon, ExternalLink, Download, Printer, ChevronDown, ChevronUp } from "lucide-react";
 import { Verdict, Evidence, Extraction, OfficialChannel } from "@/lib/types";
 
 interface RespondPanelProps {
@@ -127,39 +126,38 @@ ${inputText}
     }
   };
 
+  const methods = [
+    { id: "card", label: "Credit / debit card" },
+    { id: "gift_card", label: "Gift card" },
+    { id: "p2p", label: "Bank transfer / Zelle" },
+    { id: "crypto", label: "Cryptocurrency" },
+  ];
+
   return (
-    <div className="w-full mt-4 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden bg-white dark:bg-slate-900">
+    <section className="border-t border-ink no-print">
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-4 py-3 text-left font-medium text-sm flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+        aria-expanded={isOpen}
+        className="w-full py-3 text-left flex items-center justify-between font-display text-xl"
       >
-        <span className="flex items-center gap-2 text-amber-700 dark:text-amber-400 font-semibold">
-          <AlertOctagon className="w-4 h-4" />
-          Already clicked, replied, or paid? (Incident Response)
-        </span>
-        {isOpen ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+        <span>Already clicked, replied or paid?</span>
+        <span className="font-mono text-sm" aria-hidden="true">{isOpen ? "−" : "+"}</span>
       </button>
 
       {isOpen && (
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800 text-sm space-y-4">
+        <div className="pb-2 space-y-6 text-sm">
           <div>
-            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
-              Select how you responded or sent funds:
-            </label>
-            <div className="flex flex-wrap gap-2">
-              {[
-                { id: "card", label: "Credit / Debit Card" },
-                { id: "gift_card", label: "Gift Card" },
-                { id: "p2p", label: "Bank Transfer / Zelle" },
-                { id: "crypto", label: "Cryptocurrency" },
-              ].map((btn) => (
+            <p className="font-mono text-[11px] uppercase tracking-widest text-muted mb-2">How did you respond?</p>
+            <div className="flex flex-wrap gap-2" role="group" aria-label="How you responded">
+              {methods.map((btn) => (
                 <button
                   key={btn.id}
+                  type="button"
                   onClick={() => setSelectedMethod(btn.id)}
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                    selectedMethod === btn.id
-                      ? "bg-brand-600 text-white"
-                      : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                  aria-pressed={selectedMethod === btn.id}
+                  className={`px-3 py-1.5 border border-ink text-[13px] ${
+                    selectedMethod === btn.id ? "bg-ink text-paper" : "hover:bg-paper"
                   }`}
                 >
                   {btn.label}
@@ -168,50 +166,35 @@ ${inputText}
             </div>
           </div>
 
-          <div className="bg-slate-50 dark:bg-slate-800/50 p-3 rounded border border-slate-200 dark:border-slate-700">
-            <h4 className="font-semibold text-xs text-slate-900 dark:text-slate-100 mb-1">
-              Immediate action: {responseSteps[selectedMethod]?.title}
-            </h4>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-2">
-              {responseSteps[selectedMethod]?.step}
-            </p>
+          <div className="border-l-4 border-ochre pl-4">
+            <h4 className="font-semibold mb-1">Do this now: {responseSteps[selectedMethod]?.title}</h4>
+            <p className="text-muted leading-relaxed mb-2 max-w-xl">{responseSteps[selectedMethod]?.step}</p>
             <a
               href={responseSteps[selectedMethod]?.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-brand-600 dark:text-brand-400 inline-flex items-center gap-1 hover:underline"
+              className="underline underline-offset-4 text-[13px]"
             >
-              {responseSteps[selectedMethod]?.linkText}
-              <ExternalLink className="w-3 h-3" />
+              {responseSteps[selectedMethod]?.linkText} ↗
             </a>
           </div>
 
-          <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-            <h4 className="font-semibold text-xs text-slate-700 dark:text-slate-300 mb-2">
-              Download Pre-filled Incident Summary
-            </h4>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
-              Use this summary to copy-paste exact timestamps, contact points, and receipts into ReportFraud.ftc.gov or ic3.gov.
+          <div>
+            <h4 className="font-semibold mb-1">Incident summary to paste into a report</h4>
+            <p className="text-muted mb-3 max-w-xl">
+              Timestamps, contact points and receipts, ready for ReportFraud.ftc.gov or ic3.gov.
             </p>
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={handleDownloadTxt}
-                className="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-800 dark:bg-slate-700 text-white rounded text-xs font-medium hover:bg-slate-700 transition"
-              >
-                <Download className="w-3.5 h-3.5" />
-                Download Incident Summary (.txt)
+            <div className="flex flex-wrap gap-3">
+              <button type="button" onClick={handleDownloadTxt} className="bg-ink text-paper px-4 py-2 text-[13px] font-semibold hover:bg-stamp transition-colors">
+                Download summary (.txt)
               </button>
-              <button
-                onClick={handlePrintPdf}
-                className="inline-flex items-center gap-1.5 px-3 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition"
-              >
-                <Printer className="w-3.5 h-3.5" />
-                Print / Save as PDF
+              <button type="button" onClick={handlePrintPdf} className="border border-ink px-4 py-2 text-[13px] hover:bg-paper">
+                Print or save as PDF
               </button>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }

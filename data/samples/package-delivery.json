@@ -33,7 +33,7 @@
         },
         "asks": [
           "Pay $1.99 redelivery fee",
-          "Visit usps-redelivery-notice.xyz"
+          "Update address via link"
         ],
         "urgency_quotes": [
           "within 24 hours",
@@ -45,8 +45,7 @@
         },
         "phones": [],
         "urls": [
-          "https://usps-redelivery-notice.xyz",
-          "usps-redelivery-notice.xyz"
+          "https://usps-redelivery-notice.xyz"
         ],
         "emails": [],
         "handles": [],
@@ -109,34 +108,6 @@
       "event": "evidence",
       "data": {
         "id": "E2",
-        "kind": "url",
-        "status": "fail",
-        "text": "Link \"usps-redelivery-notice.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-redelivery-notice.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)",
-        "source": {
-          "url": "usps-redelivery-notice.xyz",
-          "rule_id": "RULE_LOOKALIKE_DOMAIN"
-        },
-        "meta": {
-          "domain": "usps-redelivery-notice.xyz",
-          "is_official": false,
-          "lookalike_score": 0.85,
-          "age_days": null
-        }
-      }
-    },
-    {
-      "event": "step",
-      "data": {
-        "id": "check_url_E2",
-        "label": "Checked link: usps-redelivery-notice.xyz",
-        "status": "fail",
-        "detail": "Link \"usps-redelivery-notice.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-redelivery-notice.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)"
-      }
-    },
-    {
-      "event": "evidence",
-      "data": {
-        "id": "E3",
         "kind": "payment",
         "status": "warn",
         "text": "Asks for card details or fee payment (\"Pay $1.99 redelivery fee\"). Imposter messages frequently demand small card fees to capture payment credentials.",
@@ -153,7 +124,7 @@
     {
       "event": "step",
       "data": {
-        "id": "check_payment_E3",
+        "id": "check_payment_E2",
         "label": "Payment demand flagged: card",
         "status": "warn",
         "detail": "Asks for card details or fee payment (\"Pay $1.99 redelivery fee\"). Imposter messages frequently demand small card fees to capture payment credentials."
@@ -162,7 +133,7 @@
     {
       "event": "evidence",
       "data": {
-        "id": "E4",
+        "id": "E3",
         "kind": "urgency",
         "status": "warn",
         "text": "Contains artificial urgency phrases: \"within 24 hours\", \"to avoid return\". High urgency is standard in imposter scams to force hurried decisions.",
@@ -204,22 +175,21 @@
       "data": {
         "sentences": [
           {
-            "text": "The link provided in the message is not an official USPS address and uses an unregistered lookalike domain [E1][E2].",
+            "text": "The link provided in the message is not an official USPS address [E1].",
             "cites": [
-              "E1",
+              "E1"
+            ]
+          },
+          {
+            "text": "It also asks for a fee payment, which is a common tactic used to capture payment credentials [E2].",
+            "cites": [
               "E2"
             ]
           },
           {
-            "text": "The message asks for a small card fee, which is a tactic commonly used by imposters to capture payment credentials [E3].",
+            "text": "Furthermore, the message creates artificial urgency by demanding action within 24 hours [E3].",
             "cites": [
               "E3"
-            ]
-          },
-          {
-            "text": "It also creates artificial urgency by demanding action within 24 hours to force hurried decisions [E4].",
-            "cites": [
-              "E4"
             ]
           }
         ],
@@ -239,7 +209,7 @@
     {
       "event": "done",
       "data": {
-        "ms": 3295
+        "ms": 2671
       }
     }
   ],
@@ -252,7 +222,7 @@
       },
       "asks": [
         "Pay $1.99 redelivery fee",
-        "Visit usps-redelivery-notice.xyz"
+        "Update address via link"
       ],
       "urgency_quotes": [
         "within 24 hours",
@@ -264,8 +234,7 @@
       },
       "phones": [],
       "urls": [
-        "https://usps-redelivery-notice.xyz",
-        "usps-redelivery-notice.xyz"
+        "https://usps-redelivery-notice.xyz"
       ],
       "emails": [],
       "handles": [],
@@ -309,22 +278,6 @@
       },
       {
         "id": "E2",
-        "kind": "url",
-        "status": "fail",
-        "text": "Link \"usps-redelivery-notice.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-redelivery-notice.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)",
-        "source": {
-          "url": "usps-redelivery-notice.xyz",
-          "rule_id": "RULE_LOOKALIKE_DOMAIN"
-        },
-        "meta": {
-          "domain": "usps-redelivery-notice.xyz",
-          "is_official": false,
-          "lookalike_score": 0.85,
-          "age_days": null
-        }
-      },
-      {
-        "id": "E3",
         "kind": "payment",
         "status": "warn",
         "text": "Asks for card details or fee payment (\"Pay $1.99 redelivery fee\"). Imposter messages frequently demand small card fees to capture payment credentials.",
@@ -338,7 +291,7 @@
         }
       },
       {
-        "id": "E4",
+        "id": "E3",
         "kind": "urgency",
         "status": "warn",
         "text": "Contains artificial urgency phrases: \"within 24 hours\", \"to avoid return\". High urgency is standard in imposter scams to force hurried decisions.",
@@ -366,22 +319,21 @@
     "explanation": {
       "sentences": [
         {
-          "text": "The link provided in the message is not an official USPS address and uses an unregistered lookalike domain [E1][E2].",
+          "text": "The link provided in the message is not an official USPS address [E1].",
           "cites": [
-            "E1",
+            "E1"
+          ]
+        },
+        {
+          "text": "It also asks for a fee payment, which is a common tactic used to capture payment credentials [E2].",
+          "cites": [
             "E2"
           ]
         },
         {
-          "text": "The message asks for a small card fee, which is a tactic commonly used by imposters to capture payment credentials [E3].",
+          "text": "Furthermore, the message creates artificial urgency by demanding action within 24 hours [E3].",
           "cites": [
             "E3"
-          ]
-        },
-        {
-          "text": "It also creates artificial urgency by demanding action within 24 hours to force hurried decisions [E4].",
-          "cites": [
-            "E4"
           ]
         }
       ],
@@ -419,13 +371,7 @@
         "detail": "Link \"usps-redelivery-notice.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-redelivery-notice.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)"
       },
       {
-        "id": "check_url_E2",
-        "label": "Checked link: usps-redelivery-notice.xyz",
-        "status": "fail",
-        "detail": "Link \"usps-redelivery-notice.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-redelivery-notice.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)"
-      },
-      {
-        "id": "check_payment_E3",
+        "id": "check_payment_E2",
         "label": "Payment demand flagged: card",
         "status": "warn",
         "detail": "Asks for card details or fee payment (\"Pay $1.99 redelivery fee\"). Imposter messages frequently demand small card fees to capture payment credentials."

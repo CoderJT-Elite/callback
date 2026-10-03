@@ -3,36 +3,98 @@
 @tailwind utilities;
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --paper: 243 238 228;
+  --sheet: 251 248 241;
+  --ink: 28 26 23;
+  --muted: 107 101 90;
+  --rule: 217 209 193;
+  --stamp: 194 59 34;
+  --pine: 31 106 75;
+  --ochre: 150 100 10;
+  --graphite: 74 74 72;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #090d16;
-    --foreground: #f1f5f9;
+    --paper: 20 18 15;
+    --sheet: 29 26 22;
+    --ink: 238 232 220;
+    --muted: 160 152 138;
+    --rule: 58 53 46;
+    --stamp: 236 108 82;
+    --pine: 98 184 142;
+    --ochre: 214 164 60;
+    --graphite: 176 176 170;
   }
 }
 
+html { background: rgb(var(--paper)); }
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: rgb(var(--ink));
+  background: rgb(var(--paper));
   min-height: 100vh;
+  font-feature-settings: "ss01", "kern";
 }
 
-/* Perforated receipt edge */
-.receipt-perforation {
-  background: radial-gradient(circle at 10px -5px, transparent 12px, currentColor 13px) repeat-x;
-  background-size: 20px 20px;
+::selection { background: rgb(var(--ink)); color: rgb(var(--paper)); }
+
+:focus-visible {
+  outline: 2px solid rgb(var(--ink));
+  outline-offset: 3px;
 }
 
-/* Print styling for incident summary */
+/* Lined slip for the message input */
+.lined {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 27px,
+    rgb(var(--rule)) 27px,
+    rgb(var(--rule)) 28px
+  );
+  background-attachment: local;
+  line-height: 28px;
+}
+
+.double-rule {
+  border-bottom: 3px double rgb(var(--ink));
+}
+
+.paper-shadow { box-shadow: 6px 6px 0 rgb(var(--ink) / 0.9); }
+
+/* Rubber stamp */
+.stamp {
+  display: inline-block;
+  border: 3px solid currentColor;
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+  padding: 0.35rem 0.9rem;
+  transform: rotate(-3deg);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  mix-blend-mode: multiply;
+  filter: url(#ink-rough);
+  animation: stamp-land 160ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@media (prefers-color-scheme: dark) { .stamp { mix-blend-mode: normal; } }
+
+@keyframes stamp-land {
+  from { transform: rotate(-3deg) scale(1.25); opacity: 0; }
+  to   { transform: rotate(-3deg) scale(1);    opacity: 1; }
+}
+@keyframes line-in {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: none; }
+}
+.line-in { animation: line-in 220ms ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp, .line-in { animation: none; }
+}
+
 @media print {
-  body {
-    background: white !important;
-    color: black !important;
-  }
-  .no-print {
-    display: none !important;
-  }
+  body { background: white !important; color: black !important; }
+  .no-print { display: none !important; }
 }

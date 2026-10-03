@@ -3,36 +3,28 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 py-8 mt-16 text-center text-xs text-slate-500 dark:text-slate-400">
-      <div className="max-w-4xl mx-auto px-4 space-y-3">
-        <p className="font-medium text-slate-600 dark:text-slate-300">
-          Callback helps you check. It can be wrong, and it does not replace your personal judgment.
-        </p>
-        <p className="text-[11px] leading-relaxed max-w-xl mx-auto">
-          Built for <strong className="text-slate-700 dark:text-slate-200">ForgeHacks Online 2026</strong> (AI + Cybersecurity Track) with AI coding agents under John Tewolde&apos;s direction. Verdicts come from fixed rules: a hand-checked list of official channels, domain checks and RDAP, not the AI.
-        </p>
-        <div className="pt-2 flex justify-center items-center gap-4 text-[11px]">
-          <Link href="/how-it-works" className="hover:underline">
-            Methodology & Rules
-          </Link>
-          <span>·</span>
-          <a
-            href="https://ai.google.dev/gemini-api/terms"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
-            Gemini API Terms
-          </a>
-          <span>·</span>
-          <a
-            href="https://github.com/CoderJT-Elite/callback"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
-            GitHub Source
-          </a>
+    <footer className="no-print w-full mt-20 border-t border-ink">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 py-10 grid gap-8 md:grid-cols-[1.4fr_1fr_1fr] text-[13px] text-muted">
+        <div className="space-y-2">
+          <p className="font-display text-lg text-ink">Callback helps you check. It can be wrong.</p>
+          <p className="max-w-md leading-relaxed">
+            Verdicts come from fixed rules: a hand-checked list of official channels, domain checks and RDAP,
+            not from the AI. It doesn&apos;t replace your own judgment.
+          </p>
+        </div>
+        <div className="space-y-2">
+          <p className="font-mono text-[11px] uppercase tracking-widest text-ink">Read more</p>
+          <ul className="space-y-1">
+            <li><Link href="/how-it-works" className="underline underline-offset-2 hover:text-ink">Methodology and rules</Link></li>
+            <li><a href="https://github.com/CoderJT-Elite/callback" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">GitHub source</a></li>
+            <li><a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">Gemini API terms</a></li>
+          </ul>
+        </div>
+        <div className="space-y-2">
+          <p className="font-mono text-[11px] uppercase tracking-widest text-ink">Made for</p>
+          <p className="leading-relaxed">
+            ForgeHacks Online 2026, Cybersecurity track. Built with AI coding agents under John Tewolde&apos;s direction.
+          </p>
         </div>
       </div>
     </footer>

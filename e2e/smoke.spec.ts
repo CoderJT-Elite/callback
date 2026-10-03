@@ -89,6 +89,6 @@ test.describe("Callback E2E Test Suite", () => {
   test("loads how-it-works page", async ({ page }) => {
     await page.goto("/how-it-works");
     await expect(page.locator("h1")).toContainText("How Callback Works");
-    await expect(page.locator("svg").first()).toBeVisible();
+    await expect(page.locator("svg[role=img]").first()).toBeVisible();
   });
 });
