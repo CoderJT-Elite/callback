@@ -1,0 +1,16 @@
+{
+  "org_id": "apple",
+  "org_name": "Apple",
+  "official_domains": [
+    "apple.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://support.apple.com/contact",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Contact Apple Support Update or restore iOS Billing and subscriptions Forgot passcode Get the help you need iPhone Support Mac laptops iPad Support Apple Account App Store More products Get the Apple Support app You can get personalized help with all your Apple products in the Apple Support app. Ask questions over chat, start a repair, watch videos, and more. Download the app Get help with purchasesCheck order status or find out about Apple Trade In. Buy an AppleCare plan or shop for products and accessories. See sales support options Connect with supportHere’s where to find the Apple Support phone number for your country or region. Contact us More topics Mobile carriers Check your service and support coverage Lost or stolen iPhone, iPad, or iPod touch Lost or stolen Mac",
+      "phones": []
+    }
+  ]
+}

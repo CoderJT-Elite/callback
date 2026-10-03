@@ -1,0 +1,43 @@
+{
+  "org_id": "wells-fargo",
+  "org_name": "Wells Fargo",
+  "official_domains": [
+    "wellsfargo.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.wellsfargo.com/help/contact-us/",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Skip to main content Esta página solo está disponible en inglés Selecione Cancele para permanecer en esta página o Continúe para ver nuestra página principal en español. CanceleContinúe How can we help? ‍ Find a location ‍ City, State or ZIP Go Make an appointment ‍ Quick help ‍ Customer service and FAQs Find routing and account numbers Popular FAQs How do I find my routing and account numbers? Is there a fee for Zelle®? How do I report suspected fraud? See more FAQs Contact Us ‍ Find the right contact to get help quickly Report fraud If you suspect fraud on your account, contact us immediately Make an appointment Schedule an appointment online to meet 1:1 with a banker. Contact us internationally Call customer service toll-free using our international access codes. We accept all relay calls, including 711. Banking Services - General, Affluent, Military Banking Services - General, Affluent, Military General Banking 1-800-869-3557 24 hours a day, 7 days a week Wells Fargo Premier Client Service 1-800-742-4932 24 hours a day, 7 days a week Learn More > ExpressSend® Service 1-800-556-0605 24 hours a day, 7 days a week Learn More > Wells Fargo Online ® 1-800-956-4442 24 hours a day, 7 days a week Wells Fargo Military Banking 1-855-USA-2WFB (1-855-872-2932) Learn More > Debit and Credit Cards Debit and Credit Cards Debit Cards Request a new or replacement debit card, report a lost/stolen debit card, or for debit card questions 1-800-869-3557 24 hours a day, 7 days a week Debit FAQ",
+      "phones": [
+        "+18008693557",
+        "+18007424932",
+        "+18005560605",
+        "+18009564442",
+        "+18558722932",
+        "+18006424720",
+        "+19258257600",
+        "+18009679521",
+        "+18775171358",
+        "+18662348271",
+        "+18779379357",
+        "+18669367272",
+        "+18664393557",
+        "+18002898004",
+        "+18775266332",
+        "+18009462626",
+        "+18772696056",
+        "+18662817436",
+        "+18662430931",
+        "+18775737997",
+        "+18552835565",
+        "+18552835567",
+        "+18774934727",
+        "+18003523705",
+        "+18887150380",
+        "+18665523312"
+      ]
+    }
+  ]
+}

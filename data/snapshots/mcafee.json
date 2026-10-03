@@ -1,0 +1,16 @@
+{
+  "org_id": "mcafee",
+  "org_name": "McAfee",
+  "official_domains": [
+    "mcafee.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.mcafee.com/support/contact/",
+      "fetched_at": "2026-10-03",
+      "status": 0,
+      "text_excerpt": "",
+      "phones": []
+    }
+  ]
+}

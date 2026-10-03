@@ -1,0 +1,16 @@
+{
+  "org_id": "geek-squad",
+  "org_name": "Geek Squad",
+  "official_domains": [
+    "geeksquad.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.bestbuy.com/site/services/geek-squad/pcmcat138100050018.c",
+      "fetched_at": "2026-10-03",
+      "status": 0,
+      "text_excerpt": "",
+      "phones": []
+    }
+  ]
+}

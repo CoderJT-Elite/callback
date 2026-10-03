@@ -1,0 +1,16 @@
+{
+  "org_id": "best-buy",
+  "org_name": "Best Buy",
+  "official_domains": [
+    "bestbuy.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.bestbuy.com/site/help-topics/contact-us/pcmcat204400050019.c",
+      "fetched_at": "2026-10-03",
+      "status": 0,
+      "text_excerpt": "",
+      "phones": []
+    }
+  ]
+}

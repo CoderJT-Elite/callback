@@ -1,0 +1,16 @@
+{
+  "org_id": "netflix",
+  "org_name": "Netflix",
+  "official_domains": [
+    "netflix.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://help.netflix.com/contactus",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Help Center Join Netflix Sign In Help Center Contact us Quick Links Reset password Update email Get help signing in Update payment method Request TV shows or movies Select your preferred language: Select a language Arabic Chinese (Simplified) Chinese (Traditional) Croatian Czech Danish Dutch English Filipino Finnish French French (Canada) German Greek Hebrew Hindi Hungarian Indonesian Italian Japanese Korean Malay Norwegian Polish Portuguese (Brazil) Portuguese (Portugal) Romanian Russian Spanish (Latin America) Spanish (Spain) Swedish Thai Turkish Ukrainian Vietnamese Terms of Use Privacy Do Not Sell or Share My Personal Information Ad Choices Cookie Preferences Corporate Information",
+      "phones": []
+    }
+  ]
+}

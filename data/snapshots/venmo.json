@@ -1,0 +1,16 @@
+{
+  "org_id": "venmo",
+  "org_name": "Venmo",
+  "official_domains": [
+    "venmo.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://help.venmo.com/hc/en-us/articles/217532217-Contact-Venmo",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Help CenterHow can we help you?VenmoAccounts, Profiles & SettingsUpdating your Venmo ProfilePayments & TransfersAll about money movement on VenmoTroubleshootingFrozen accounts & other concernsSecurity & PrivacyLearn how to stay safe on VenmoGetting StartedLearn how Venmo works and sign upWalletManage banks, cards, & CryptoDisputesOpen & manage disputesBuying & Selling with VenmoVenmo online, instores, & moreBusiness Profiles & Charity ProfilesPayments for business or charityTax CenterAll about taxes on VenmoAdding & Removing Friends Why should I add my friends on Venmo?Adding your friends on Venmo makes it easier for you to interact with their profiles. People in your Friends list can be instantly added to Groups you make and will show at the top of your results when you search on Venmo.After adding your favorite people as Friends, you’ll see their shared activity in the Venmo feed. Payments you choose to share with friends will show in their feeds too.Adding, removing, or viewing Venmo FriendsTo view your Venmo Friends list in the app, go to the Me tab and tap the \"friends\" tile under your profile picture.To add or remove someone from your Venmo Friends list, follow these steps: Navigate to the user's Venmo profile To add the user as a friend, tap \"Add Friend\" To remove a user from your Venmo Friends list, tap Friends, then Unfriend Venmo has not automatically added your device contacts as friends since 2022. You'll need to manually add any friends on Venmo, even if you have",
+      "phones": []
+    }
+  ]
+}

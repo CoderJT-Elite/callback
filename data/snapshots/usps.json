@@ -1,0 +1,21 @@
+{
+  "org_id": "usps",
+  "org_name": "USPS",
+  "official_domains": [
+    "usps.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.usps.com/help/contact-us.htm",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Skip to Main Content English Use arrow key to access related widget. English Español Customer Service My USPS › Skip to Main Content Skip All Utility Navigation Current language: English English Español Chinese Locations Support Informed Delivery Register / Sign In Skip all category navigation links Enter Search term for Search USPS.com Top Searches PO BOXES PASSPORTS FREE BOXES Contact Us Find the best way to get help and connect with USPS®. Fill out a short form or get tips to fix some of the most common issues right from your computer. If you still need more help, see the contact information for technical support, Postal Store orders, and more. Get Help Online Complete our online form to tell us about your issue, and for technical issues with our USPS.com services, a convenient chat feature is available. Find a Post Office Find the nearest USPS location by city and state or ZIP Code™. Get contact information, hours, and more. Check Postal Holidays Postal facilities are closed on federal holidays. See a list of all upcoming USPS holidays and events. Contact USPS Expand All General Information For general information, how-to steps, or to learn more about USPS products and services, check our FAQs. The most common questions have to do with tracking packages or delayed delivery. Frequently Asked Questions USPS Tracking® - The Basics Tracking Status Notifications Missing Mail – The Basics Email Customer Service Customer Care Center Connect with our customer service representati",
+      "phones": [
+        "+18002758777",
+        "+18003447779",
+        "+18002221811",
+        "+18006108734"
+      ]
+    }
+  ]
+}

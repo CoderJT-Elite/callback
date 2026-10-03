@@ -1,0 +1,16 @@
+{
+  "org_id": "sunpass",
+  "org_name": "SunPass",
+  "official_domains": [
+    "sunpass.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.sunpass.com/en/support/contactSunPass.shtml",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "",
+      "phones": []
+    }
+  ]
+}

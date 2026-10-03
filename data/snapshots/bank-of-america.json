@@ -1,0 +1,16 @@
+{
+  "org_id": "bank-of-america",
+  "org_name": "Bank of America",
+  "official_domains": [
+    "bankofamerica.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.bankofamerica.com/customer-service/contact-us/",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Skip to main contentBank of America Customer ServiceWe're here to helpQuickly access our convenient digital solutions:Dispute an ATM/Debit Card TransactionDispute a Credit Card TransactionManage/Cancel Funds TransfersManage/Cancel Recurring Bill PayCredit Line IncreaseBalance TransferZelle – a safe and easy way to send money fastPassword ResetUpdate Contact InformationContact usFor the best ways to contact us about specific issues, please select a topic.About Bank of AmericaAccount changesAutomated Teller MachineATMsAuto loansBank of America Login IssuesBank of America legal order processingCD & IRAsChecking & savingsCorporate & institutional bankingCredit cardsElder financial careEstate servicesInternational travelInvestment & wealth managementMedallion Signature GuaranteeMedical & professional practice loansMilitary bankingMobile BankingMortgage & home equityNotary servicesOnline Banking & Bill PayOrder foreign currencyPower of attorneyPrivacy & securitySmall business bankingBanking for students and young adultsAbout Bank of AmericaAccount changesAutomated Teller MachineATMsAuto loansBank of America Login IssuesBank of America legal order processingCD & IRAsChecking & savingsCorporate & institutional bankingCredit cardsElder financial careEstate servicesInternational travelInvestment & wealth managementMedallion Signature GuaranteeMedical & professional practice loansMilitary bankingMobile BankingMortgage & home equityNotary servicesOnline Banking & Bill PayOrder foreign cu",
+      "phones": []
+    }
+  ]
+}

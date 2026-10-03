@@ -1,0 +1,449 @@
+[
+  {
+    "id": "usps",
+    "name": "USPS",
+    "aliases": [
+      "United States Postal Service",
+      "Postal Service",
+      "Post Office"
+    ],
+    "wikidata": "Q668687",
+    "official_domains": [
+      "usps.com"
+    ],
+    "contact_pages": [
+      "https://www.usps.com/help/contact-us.htm"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q668687) fetched 2026-10-03; URL https://www.usps.com/help/contact-us.htm verified 200 2026-10-03"
+  },
+  {
+    "id": "ups",
+    "name": "UPS",
+    "aliases": [
+      "United Parcel Service"
+    ],
+    "wikidata": "Q155026",
+    "official_domains": [
+      "ups.com"
+    ],
+    "contact_pages": [
+      "https://www.ups.com/us/en/support/contact-us.page"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q155026) fetched 2026-10-03; URL https://www.ups.com/us/en/support/contact-us.page verified 200 2026-10-03"
+  },
+  {
+    "id": "fedex",
+    "name": "FedEx",
+    "aliases": [
+      "Federal Express"
+    ],
+    "wikidata": "Q459477",
+    "official_domains": [
+      "fedex.com"
+    ],
+    "contact_pages": [
+      "https://www.fedex.com/en-us/customer-support.html"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q459477) fetched 2026-10-03; URL https://www.fedex.com/en-us/customer-support.html verified ERROR 2026-10-03"
+  },
+  {
+    "id": "dhl",
+    "name": "DHL",
+    "aliases": [
+      "DHL Express"
+    ],
+    "wikidata": "Q489815",
+    "official_domains": [
+      "dhl.com"
+    ],
+    "contact_pages": [
+      "https://www.dhl.com/us-en/home/customer-service.html"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q489815) fetched 2026-10-03; URL https://www.dhl.com/us-en/home/customer-service.html verified 200 2026-10-03"
+  },
+  {
+    "id": "amazon",
+    "name": "Amazon",
+    "aliases": [
+      "Amazon.com",
+      "Amazon Prime"
+    ],
+    "wikidata": "Q3884",
+    "official_domains": [
+      "amazon.it"
+    ],
+    "contact_pages": [
+      "https://www.amazon.com/gp/help/customer/display.html"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q3884) fetched 2026-10-03; URL https://www.amazon.com/gp/help/customer/display.html verified 405 2026-10-03"
+  },
+  {
+    "id": "apple",
+    "name": "Apple",
+    "aliases": [
+      "Apple Inc.",
+      "Apple Support",
+      "iCloud"
+    ],
+    "wikidata": "Q312",
+    "official_domains": [
+      "apple.com"
+    ],
+    "contact_pages": [
+      "https://support.apple.com/contact"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q312) fetched 2026-10-03; URL https://support.apple.com/contact verified 200 2026-10-03"
+  },
+  {
+    "id": "microsoft",
+    "name": "Microsoft",
+    "aliases": [
+      "Microsoft Corporation",
+      "Microsoft Support"
+    ],
+    "wikidata": "Q2283",
+    "official_domains": [
+      "microsoft.com"
+    ],
+    "contact_pages": [
+      "https://support.microsoft.com/contactus"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q2283) fetched 2026-10-03; URL https://support.microsoft.com/contactus verified 200 2026-10-03"
+  },
+  {
+    "id": "paypal",
+    "name": "PayPal",
+    "aliases": [
+      "PayPal Inc."
+    ],
+    "wikidata": "Q483959",
+    "official_domains": [
+      "paypal.com"
+    ],
+    "contact_pages": [
+      "https://www.paypal.com/us/cshelp/contact-us"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q483959) fetched 2026-10-03; URL https://www.paypal.com/us/cshelp/contact-us verified 200 2026-10-03"
+  },
+  {
+    "id": "netflix",
+    "name": "Netflix",
+    "aliases": [
+      "Netflix Inc."
+    ],
+    "wikidata": "Q907311",
+    "official_domains": [
+      "netflix.com"
+    ],
+    "contact_pages": [
+      "https://help.netflix.com/contactus"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q907311) fetched 2026-10-03; URL https://help.netflix.com/contactus verified 200 2026-10-03"
+  },
+  {
+    "id": "chase",
+    "name": "Chase",
+    "aliases": [
+      "Chase Bank",
+      "JPMorgan Chase"
+    ],
+    "wikidata": "Q192314",
+    "official_domains": [
+      "chase.com",
+      "jpmorganchase.com"
+    ],
+    "contact_pages": [
+      "https://www.chase.com/digital/resources/privacy-security/security/how-we-protect-you"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q192314) fetched 2026-10-03; URL https://www.chase.com/digital/resources/privacy-security/security/how-we-protect-you verified 200 2026-10-03"
+  },
+  {
+    "id": "bank-of-america",
+    "name": "Bank of America",
+    "aliases": [
+      "BofA"
+    ],
+    "wikidata": "Q487907",
+    "official_domains": [
+      "bankofamerica.com"
+    ],
+    "contact_pages": [
+      "https://www.bankofamerica.com/customer-service/contact-us/"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q487907) fetched 2026-10-03; URL https://www.bankofamerica.com/customer-service/contact-us/ verified 200 2026-10-03"
+  },
+  {
+    "id": "wells-fargo",
+    "name": "Wells Fargo",
+    "aliases": [
+      "Wells Fargo Bank"
+    ],
+    "wikidata": "Q744149",
+    "official_domains": [
+      "wellsfargo.com"
+    ],
+    "contact_pages": [
+      "https://www.wellsfargo.com/help/contact-us/"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q744149) fetched 2026-10-03; URL https://www.wellsfargo.com/help/contact-us/ verified 200 2026-10-03"
+  },
+  {
+    "id": "citi",
+    "name": "Citi",
+    "aliases": [
+      "Citibank",
+      "Citigroup"
+    ],
+    "wikidata": "Q219508",
+    "official_domains": [
+      "citibnqa.com"
+    ],
+    "contact_pages": [
+      "https://www.citi.com/customer-service/contact-us"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q219508) fetched 2026-10-03; URL https://www.citi.com/customer-service/contact-us verified 403 2026-10-03"
+  },
+  {
+    "id": "capital-one",
+    "name": "Capital One",
+    "aliases": [
+      "Capital One Bank"
+    ],
+    "wikidata": "Q1034654",
+    "official_domains": [
+      "capitalone.com"
+    ],
+    "contact_pages": [
+      "https://www.capitalone.com/support-center/contact-us/"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q1034654) fetched 2026-10-03; URL https://www.capitalone.com/support-center/contact-us/ verified 200 2026-10-03"
+  },
+  {
+    "id": "irs",
+    "name": "Internal Revenue Service",
+    "aliases": [
+      "IRS"
+    ],
+    "wikidata": "Q973587",
+    "official_domains": [
+      "irs.gov"
+    ],
+    "contact_pages": [
+      "https://www.irs.gov/help/telephone-assistance"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q973587) fetched 2026-10-03; URL https://www.irs.gov/help/telephone-assistance verified 200 2026-10-03"
+  },
+  {
+    "id": "ssa",
+    "name": "Social Security Administration",
+    "aliases": [
+      "SSA"
+    ],
+    "wikidata": "Q2824618",
+    "official_domains": [
+      "ssa.gov"
+    ],
+    "contact_pages": [
+      "https://www.ssa.gov/agency/contact/"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q2824618) fetched 2026-10-03; URL https://www.ssa.gov/agency/contact/ verified 403 2026-10-03"
+  },
+  {
+    "id": "medicare",
+    "name": "Medicare",
+    "aliases": [
+      "Centers for Medicare & Medicaid Services",
+      "CMS"
+    ],
+    "wikidata": "Q5060058",
+    "official_domains": [
+      "cms.gov"
+    ],
+    "contact_pages": [
+      "https://www.medicare.gov/talk-to-someone"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q5060058) fetched 2026-10-03; URL https://www.medicare.gov/talk-to-someone verified 200 2026-10-03"
+  },
+  {
+    "id": "ezpass",
+    "name": "E-ZPass",
+    "aliases": [
+      "EZPass",
+      "E-ZPass Group"
+    ],
+    "wikidata": "Q800074",
+    "official_domains": [
+      "e-zpassiag.com"
+    ],
+    "contact_pages": [
+      "https://www.e-zpassiag.com/contact-us"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q800074) fetched 2026-10-03; URL https://www.e-zpassiag.com/contact-us verified 200 2026-10-03"
+  },
+  {
+    "id": "sunpass",
+    "name": "SunPass",
+    "aliases": [
+      "Florida SunPass",
+      "Florida Department of Transportation"
+    ],
+    "wikidata": "Q7638154",
+    "official_domains": [
+      "sunpass.com"
+    ],
+    "contact_pages": [
+      "https://www.sunpass.com/en/support/contactSunPass.shtml"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q7638154) fetched 2026-10-03; URL https://www.sunpass.com/en/support/contactSunPass.shtml verified 200 2026-10-03"
+  },
+  {
+    "id": "fastrak",
+    "name": "FasTrak",
+    "aliases": [
+      "California FasTrak",
+      "Bay Area FasTrak"
+    ],
+    "wikidata": "Q806096",
+    "official_domains": [
+      "bayareafastrak.org"
+    ],
+    "contact_pages": [
+      "https://www.bayareafastrak.org/en/support/contact-us.shtml"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q806096) fetched 2026-10-03; URL https://www.bayareafastrak.org/en/support/contact-us.shtml verified 200 2026-10-03"
+  },
+  {
+    "id": "coinbase",
+    "name": "Coinbase",
+    "aliases": [
+      "Coinbase Global"
+    ],
+    "wikidata": "Q16972754",
+    "official_domains": [
+      "coinbase.com"
+    ],
+    "contact_pages": [
+      "https://help.coinbase.com/en/contact-us"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q16972754) fetched 2026-10-03; URL https://help.coinbase.com/en/contact-us verified 403 2026-10-03"
+  },
+  {
+    "id": "venmo",
+    "name": "Venmo",
+    "aliases": [
+      "Venmo LLC"
+    ],
+    "wikidata": "Q24839341",
+    "official_domains": [
+      "venmo.com"
+    ],
+    "contact_pages": [
+      "https://help.venmo.com/hc/en-us/articles/217532217-Contact-Venmo"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q24839341) fetched 2026-10-03; URL https://help.venmo.com/hc/en-us/articles/217532217-Contact-Venmo verified 200 2026-10-03"
+  },
+  {
+    "id": "zelle",
+    "name": "Zelle",
+    "aliases": [
+      "Zellepay",
+      "Early Warning Services"
+    ],
+    "wikidata": "Q30295146",
+    "official_domains": [
+      "earlywarning.com"
+    ],
+    "contact_pages": [
+      "https://www.zellepay.com/contact-us"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q30295146) fetched 2026-10-03; URL https://www.zellepay.com/contact-us verified 200 2026-10-03"
+  },
+  {
+    "id": "geek-squad",
+    "name": "Geek Squad",
+    "aliases": [
+      "Best Buy Geek Squad"
+    ],
+    "wikidata": "Q3100073",
+    "official_domains": [
+      "geeksquad.com"
+    ],
+    "contact_pages": [
+      "https://www.bestbuy.com/site/services/geek-squad/pcmcat138100050018.c"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q3100073) fetched 2026-10-03; URL https://www.bestbuy.com/site/services/geek-squad/pcmcat138100050018.c verified ERROR 2026-10-03"
+  },
+  {
+    "id": "best-buy",
+    "name": "Best Buy",
+    "aliases": [
+      "Best Buy Co., Inc."
+    ],
+    "wikidata": "Q533415",
+    "official_domains": [
+      "bestbuy.com"
+    ],
+    "contact_pages": [
+      "https://www.bestbuy.com/site/help-topics/contact-us/pcmcat204400050019.c"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q533415) fetched 2026-10-03; URL https://www.bestbuy.com/site/help-topics/contact-us/pcmcat204400050019.c verified ERROR 2026-10-03"
+  },
+  {
+    "id": "norton",
+    "name": "Norton",
+    "aliases": [
+      "NortonLifeLock",
+      "Gen Digital"
+    ],
+    "wikidata": "Q677085",
+    "official_domains": [
+      "nortonlifelock.com"
+    ],
+    "contact_pages": [
+      "https://support.norton.com/sp/en/us/home/current/contact"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q677085) fetched 2026-10-03; URL https://support.norton.com/sp/en/us/home/current/contact verified 200 2026-10-03"
+  },
+  {
+    "id": "mcafee",
+    "name": "McAfee",
+    "aliases": [
+      "McAfee Corp."
+    ],
+    "wikidata": "Q16876633",
+    "official_domains": [
+      "mcafee.com"
+    ],
+    "contact_pages": [
+      "https://www.mcafee.com/support/contact/"
+    ],
+    "known_sms_shortcodes": [],
+    "source_notes": "domains from Wikidata P856 (Q16876633) fetched 2026-10-03; URL https://www.mcafee.com/support/contact/ verified ERROR 2026-10-03"
+  }
+]

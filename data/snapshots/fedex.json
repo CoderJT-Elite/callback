@@ -1,0 +1,16 @@
+{
+  "org_id": "fedex",
+  "org_name": "FedEx",
+  "official_domains": [
+    "fedex.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.fedex.com/en-us/customer-support.html",
+      "fetched_at": "2026-10-03",
+      "status": 0,
+      "text_excerpt": "",
+      "phones": []
+    }
+  ]
+}

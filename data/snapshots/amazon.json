@@ -1,0 +1,16 @@
+{
+  "org_id": "amazon",
+  "org_name": "Amazon",
+  "official_domains": [
+    "amazon.it"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.amazon.com/gp/help/customer/display.html",
+      "fetched_at": "2026-10-03",
+      "status": 403,
+      "text_excerpt": "",
+      "phones": []
+    }
+  ]
+}

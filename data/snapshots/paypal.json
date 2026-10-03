@@ -1,0 +1,16 @@
+{
+  "org_id": "paypal",
+  "org_name": "PayPal",
+  "official_domains": [
+    "paypal.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.paypal.com/us/cshelp/contact-us",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Contact UsNeed immediate help? Chat with us for instant supportWhat can we help withPassword and account accessResets, unlock account, unknown chargesLogin problemsReport unauthorized access or unknown chargesPaymentsHolds, declines, refunds, crypto, Pay in 4, withdrawals/transfers, PayPal SavingsCancel a paymentRefundsPayment on hold or pendingPayment declinedNegative BalanceAdding moneyTransfer moneySending moneyCryptocurrencyPay in 4Pay MonthlyPayment missingPayPal SavingsAccount profile and set upBank account, credit card, email, phoneCredit or debit cardBank accountName changeClose your accountPhone numberEmail addressMailing addressPrivacy QuestionsDisputes and account limitationsPayment disputes, chargeback, limitationDisputesAccount limitationsDonationsNonprofit, PayPal Giving FundNonprofitPayPal Giving FundBusiness solutionsQR code, fees, billing, orders, PayPal solutionsPayPal ZettlePayPal QR code paymentsTax-related questionShippingFeesSeller ProtectionOrders and capturing paymentsReservesPayPal Working CapitalPayPal payment solutionsDeveloper and technical inquiriesPayPal CreditApplications, payments, billing, featuresApplications and new accountRe-open PayPal Credit accountPaymentsBillingDisputesMy accountProduct and featuresReport fraud/prohibited usePayPal CardsPrepaid, Extras, Cashback and morePayPal Prepaid MasterCardPayPal Extras MasterCardPayPal Cashback MasterCardeBay MasterCardPayPal Smart ConnectBusiness Debit MastercardPayPal Cash Card (Debit Mastercard",
+      "phones": []
+    }
+  ]
+}

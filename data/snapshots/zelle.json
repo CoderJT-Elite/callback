@@ -1,0 +1,16 @@
+{
+  "org_id": "zelle",
+  "org_name": "Zelle",
+  "official_domains": [
+    "earlywarning.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.zellepay.com/contact-us",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Skip to main content Zelle® Support and Contact Information Contact Zelle® How can we help? Need help with a Zelle® issue? Contact us for assistance with payment related questions or other issues while using Zelle®. contact support Our Partners Want to join our growing list of bank and credit unions that offer Zelle®? Find out how Need help with Zelle® through your bank or credit union's online or mobile banking service?Our partner financial institutions handle all enrollment and payment related issues with Zelle® in their mobile app and online banking. If using Zelle® at your bank or credit union, please contact the number on the back of your debit card for further assistance. Still need help? VISIT OUR HELP CENTER",
+      "phones": []
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "org_id": "irs",
+  "org_name": "Internal Revenue Service",
+  "official_domains": [
+    "irs.gov"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.irs.gov/help/telephone-assistance",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Skip to main content Let us help you EnglishEspañol中文 (简体)中文 (繁體)한국어РусскийTiếng ViệtKreyòl ayisyen More In Help Interactive Tax Assistant Tools Report fraud Tax scams Identity theft Notices and letters Appeals Frequently asked questions Accessibility Contact your local IRS office Contact an international IRS office Tax topics Other languages AI-assisted content verified by the IRS We can help you online, by phone or in person.Online tools and resourcesYou can get help online with self-service options.Check refund statusWhere’s My Refund?Access your Online AccountRefund less than expectedReceived a refund but wasn't expecting oneLost refundRefundsExpecting a refund?The IRS issues most refunds in less than 21 days.You can check the status of your refund:E-filed return: within 24 hours after we receive itPaper return: 4 weeks after you mailed itYou should only call about your:E-filed return: 3 weeks after you filed itPaper return: 6 weeks after you mailed itForm 8379, Injured Spouse Allocation: 12 weeks for e-filed and 14 weeks for paper return filingRefund: If the Where’s My Refund? tool directs you to contact us.Get the latest information on IRS operations and services.Correct or amend a returnShould you file an amended returnWhere’s My Amended Return?Amended return Frequently Asked QuestionsTo check the status of your amended return:Wait 3 weeks after filing then use the Where’s My Amended Return? tool.You should only call if:It’s more than 16 weeks since you mailed your ame",
+      "phones": [
+        "+18008291040",
+        "+18335539895",
+        "+18445455640",
+        "+18666994096"
+      ]
+    }
+  ]
+}

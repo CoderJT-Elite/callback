@@ -1,0 +1,16 @@
+{
+  "org_id": "chase",
+  "org_name": "Chase",
+  "official_domains": [
+    "jpmorganchase.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.chase.com/digital/resources/privacy-security/security/how-we-protect-you",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Skip to main contentWELCOME TO The Chase Security CenterOur suite of security tools can help protect your account and give you peace of mindSecurity Center homeSecurity Center homeWhat you can doHow to spot scamsLatest scamsHow you pay mattersHelp safeguard seniorsStudents & young adultsProtect your businessPrivacyReport fraudLet’s work together to help protect your account and give you peace of mind. Know the latest scams happening now and the tools you can use to help protect your accounts.Explore the tools you can use to take actionWhat you can doTools and steps you can take to help strengthen your security.Get startedHow to spot scamsCommon warning signs and red flags to watch for.Spot warning signsThe latest scamsHow today’s sophisticated scams work and how people get pulled in.Review scamsPayment tipsWhat to know before sending money.See tipsHelp safeguard seniorsInformation, resources and tools for older adults and caregivers.Get resourcesStudents/young adultsGuidance for teens, students and parents.Explore tipsProtect your businessResources and tools to help protect your business from fraud and scams.Activate toolsReport fraudWhat to do and how to contact us.Report fraudWe use sophisticated security tools and protections to help safeguard your moneyOur online and mobile banking commitment to youIf you see that money was removed from your checking or savings account through our mobile or online banking bill pay or transfer services and you didn’t authorize the transact",
+      "phones": []
+    }
+  ]
+}

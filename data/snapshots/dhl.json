@@ -1,0 +1,16 @@
+{
+  "org_id": "dhl",
+  "org_name": "DHL",
+  "official_domains": [
+    "dhl.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.dhl.com/us-en/home/customer-service.html",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Navigation and Content Skip to main content Skip to main footer You are in United States of America Stay on this site or Select a different country Customer Service Your tracking number lets us find the right division contact to answer your questions. Enter your tracking number(s) Find Contact Please enter your tracking number(s) Request A Business Account Shipping regularly? Request a business account and profit from exclusive benefits Do you suspect you received a fraudulent email? Let us know. No tracking number? Find your contact here. Frequently Asked Questions What Is a Tracking Number & Where Can I Find It? A tracking number or ID is a combination of numbers and possibly letters that uniquely identifies your shipment for national or international tracking. Usually, the shipper or online shop is able to provide the tracking number or ID. If you have ordered a product in an online shop, the confirmation email or shipment tracking notification often contains the tracking number or ID. If not, please contact your shipper or online shop. When will my tracking information appear? Tracking events usually appear 24-48 hours after receiving the Track and Trace ID. In general, once the shipment has reached our facility, a tracking event will appear. Why is my tracking number/ID not working? Please make sure you entered the correct tracking number in the correct format: Check for minimum length of 5 characters, and if there are any special characters in your input. Tab, comma, sp",
+      "phones": []
+    }
+  ]
+}

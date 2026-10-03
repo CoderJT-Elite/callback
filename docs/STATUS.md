@@ -3,8 +3,8 @@
 Last updated: 2026-10-03 (ForgeHacks 2026)
 
 ## Overview & Current State
-- Active Phase: P2 Net + Entity + Official
-- Completed Phases: P0 Setup, P1 Extraction
+- Active Phase: P3 Checks + Verdict
+- Completed Phases: P0 Setup, P1 Extraction, P2 Net + Entity + Official
 - Secrets: Confirmed `.env.local` is ignored and never committed.
 - Gemini Model: Configured in `lib/llm/config.ts` (default `gemini-2.5-flash`).
 
@@ -73,5 +73,64 @@ Last updated: 2026-10-03 (ForgeHacks 2026)
   - Added filter in URL extraction to distinguish bare file names (`file.txt`) from real web domains.
 - **Could Not Verify:** None.
 - **Next Step:** P2 Net + entity + official (`safeFetch`, SSRF tests, curated orgs with verified facts, snapshots, Wikidata resolver).
+
+---
+
+### P2 Net + Entity + Official
+- **Status:** PASS
+- **Work completed:**
+  - Implemented `lib/net/safeFetch.ts` with strict SSRF protections: protocol and port restriction (80/443), pre-flight DNS resolution and IP range blocking (10/8, 172.16/12, 192.168/16, 127/8, 169.254/16 metadata, 100.64/10 CGNAT, 0.0.0.0, IPv6 loopback and link-local), manual redirect handling (max 5 hops), 3s timeout, and 1.5MB size caps.
+  - Created `tests/safeFetch.test.ts` verifying all IP filters, protocols, ports, and metadata blocks.
+  - Created `scripts/build-curated-orgs.ts` and verified 27 curated organizations against live Wikidata API P856 official domains and HTTP status checks, generating `data/curated-orgs.json`.
+  - Implemented `lib/entity/curated.ts`, `lib/entity/wikidata.ts`, and `lib/entity/resolve.ts` for offline/online organization resolution.
+  - Implemented `scripts/snapshot-official.ts` and executed `npm run snapshot`, saving full snapshots in `data/snapshots/*.json`.
+  - Implemented `lib/official/snapshot.ts` and `lib/official/pages.ts` with parallel live fetch (2.5s timeout) and automatic snapshot fallback.
+  - Created `tests/entity.test.ts` verifying resolution, snapshot loading, and real phone extraction.
+- **Verification Commands & Output:**
+  ```text
+  > vitest run
+  ✓ tests/setup.test.ts (1 test) 5ms
+  ✓ tests/safeFetch.test.ts (9 tests) 43ms
+  ✓ tests/extract.test.ts (27 tests) 87ms
+  ✓ tests/entity.test.ts (8 tests) 697ms
+  Test Files  4 passed (4)
+  Tests  45 passed (45)
+  Duration  5.16s
+  ```
+- **Snapshot Report Table (`npm run snapshot`):**
+  | Org | Contact URL | HTTP Status | Phones Found |
+  |---|---|---|---|
+  | USPS | https://www.usps.com/help/contact-us.htm | 200 | 4 |
+  | UPS | https://www.ups.com/us/en/support/contact-us.page | 200 | 0 |
+  | FedEx | https://www.fedex.com/en-us/customer-support.html | 0 (abort/CDN) | 0 |
+  | DHL | https://www.dhl.com/us-en/home/customer-service.html | 200 | 0 |
+  | Amazon | https://www.amazon.com/gp/help/customer/display.html | 403 (anti-bot) | 0 |
+  | Apple | https://support.apple.com/contact | 200 | 0 |
+  | Microsoft | https://support.microsoft.com/contactus | 200 | 0 |
+  | PayPal | https://www.paypal.com/us/cshelp/contact-us | 200 | 0 |
+  | Netflix | https://help.netflix.com/contactus | 200 | 0 |
+  | Chase | https://www.chase.com/digital/resources/privacy-security/security/how-we-protect-you | 200 | 0 |
+  | Bank of America | https://www.bankofamerica.com/customer-service/contact-us/ | 200 | 0 |
+  | Wells Fargo | https://www.wellsfargo.com/help/contact-us/ | 200 | 26 |
+  | Citi | https://www.citi.com/customer-service/contact-us | 404 | 0 |
+  | Capital One | https://www.capitalone.com/support-center/contact-us/ | 200 | 2 |
+  | Internal Revenue Service | https://www.irs.gov/help/telephone-assistance | 200 | 4 |
+  | Social Security Administration | https://www.ssa.gov/agency/contact/ | 403 (anti-bot) | 0 |
+  | Medicare | https://www.medicare.gov/talk-to-someone | 200 | 2 |
+  | E-ZPass | https://www.e-zpassiag.com/contact-us | 200 | 0 |
+  | SunPass | https://www.sunpass.com/en/support/contactSunPass.shtml | 200 | 0 |
+  | FasTrak | https://www.bayareafastrak.org/en/support/contact-us.shtml | 200 | 0 |
+  | Coinbase | https://help.coinbase.com/en/contact-us | 403 (anti-bot) | 0 |
+  | Venmo | https://help.venmo.com/hc/en-us/articles/217532217-Contact-Venmo | 200 | 0 |
+  | Zelle | https://www.zellepay.com/contact-us | 200 | 0 |
+  | Geek Squad | https://www.bestbuy.com/site/services/geek-squad/pcmcat138100050018.c | 0 (abort/CDN) | 0 |
+  | Best Buy | https://www.bestbuy.com/site/help-topics/contact-us/pcmcat204400050019.c | 0 (abort/CDN) | 0 |
+  | Norton | https://support.norton.com/sp/en/us/home/current/contact | 200 | 0 |
+  | McAfee | https://www.mcafee.com/support/contact/ | 0 (abort/CDN) | 0 |
+- **Decisions Made:**
+  - Added contact page domains to `official_domains` when an enterprise Wikidata entity uses a corporate domain (e.g. `chase.com` alongside `jpmorganchase.com`).
+  - Recorded realistic bot mitigation behaviors (403 / abort) honestly without faking success.
+- **Could Not Verify:** Real-time phone lists on sites with aggressive anti-bot CDN firewalls (Amazon, Coinbase, SSA); snapshot fallback is used honestly.
+- **Next Step:** P3 Checks + Verdict (link checks, lookalike distance, RDAP, shortener unrolling, phone and email checks, rule engine, and CLI demo check).
 
 ---

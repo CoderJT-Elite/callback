@@ -1,0 +1,16 @@
+{
+  "org_id": "coinbase",
+  "org_name": "Coinbase",
+  "official_domains": [
+    "coinbase.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://help.coinbase.com/en/contact-us",
+      "fetched_at": "2026-10-03",
+      "status": 403,
+      "text_excerpt": "",
+      "phones": []
+    }
+  ]
+}

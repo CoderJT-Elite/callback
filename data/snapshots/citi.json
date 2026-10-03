@@ -1,0 +1,16 @@
+{
+  "org_id": "citi",
+  "org_name": "Citi",
+  "official_domains": [
+    "citibnqa.com"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.citi.com/customer-service/contact-us",
+      "fetched_at": "2026-10-03",
+      "status": 404,
+      "text_excerpt": "",
+      "phones": []
+    }
+  ]
+}

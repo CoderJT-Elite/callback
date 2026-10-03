@@ -1,0 +1,19 @@
+{
+  "org_id": "medicare",
+  "org_name": "Medicare",
+  "official_domains": [
+    "cms.gov"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.medicare.gov/talk-to-someone",
+      "fetched_at": "2026-10-03",
+      "status": 200,
+      "text_excerpt": "Skip to main content Search Search Search Print this page. Contact Medicare Need help beyond what’s on Medicare.gov?You can talk or live chat with a real person, 24 hours a day, 7 days a week (except some federal holidays.) 1-800-MEDICARE (1-800-633-4227)TTY users can call 1-877-486-2048 Start a live chat Get more help Sign up for Medicare Contact the Social Security Administration (SSA) to:Sign up for Medicare Part A and/or Part BChange your addressApply for Extra Help with Medicare drug costsConfirm that you meet Medicare’s citizenship or residency requirements Contact SSA Get help with costs Contact your state to:Find Medicare Savings Programs that can lower your Medicare costsGet information about how to apply for MedicaidCheck if you’re eligible for other state programs that can help with health-related costs Find your state office Get free health insurance counseling State Health Insurance Assistance Programs (SHIPs) help people with Medicare and their families:Choose a planReview coverageUnderstand costsApply for Extra HelpFile a complaint or an appealMake informed Medicare decisions Get personalized help Important updates, straight to your inbox Get reminders about Open Enrollment, ways to save costs, and more. Enter your email address By checking this box, you consent to our data privacy policy.",
+      "phones": [
+        "+18006334227",
+        "+18774862048"
+      ]
+    }
+  ]
+}

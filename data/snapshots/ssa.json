@@ -1,0 +1,16 @@
+{
+  "org_id": "ssa",
+  "org_name": "Social Security Administration",
+  "official_domains": [
+    "ssa.gov"
+  ],
+  "contact_pages": [
+    {
+      "url": "https://www.ssa.gov/agency/contact/",
+      "fetched_at": "2026-10-03",
+      "status": 403,
+      "text_excerpt": "",
+      "phones": []
+    }
+  ]
+}
