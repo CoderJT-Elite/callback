@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-03",
+  "datasetHash": "fc732ac3ff23",
+  "geminiModel": "gemini-3.8-flash",
+  "geminiAvailable": false,
+  "metrics": {
+    "systemA": null,
+    "systemB": null,
+    "systemC": {
+      "total": 35,
+      "scamsTotal": 20,
+      "scamsCaught": 9,
+      "scamCatchRate": "45.0",
+      "legitTotal": 15,
+      "legitFalseAlarms": 2,
+      "falseAlarmRate": "13.3",
+      "legitMatched": 4,
+      "abstainsTotal": 20,
+      "abstainRate": "57.1",
+      "p50Latency": 202,
+      "p95Latency": 2683,
+      "citedSentencesRate": "76.7",
+      "breakdown": {
+        "real": {
+          "scams": "8/17 (47.1%)",
+          "legitFalseAlarms": "1/11 (9.1%)"
+        },
+        "synth": {
+          "scams": "1/3 (33.3%)",
+          "legitFalseAlarms": "1/4 (25.0%)"
+        }
+      }
+    }
+  },
+  "testItemCount": 35,
+  "devItemCount": 15
+}
