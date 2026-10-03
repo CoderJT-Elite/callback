@@ -3,8 +3,8 @@
 Last updated: 2026-10-03 (ForgeHacks 2026)
 
 ## Overview & Current State
-- Active Phase: P3 Checks + Verdict
-- Completed Phases: P0 Setup, P1 Extraction, P2 Net + Entity + Official
+- Active Phase: P4 LLM
+- Completed Phases: P0 Setup, P1 Extraction, P2 Net + Entity + Official, P3 Checks + Verdict
 - Secrets: Confirmed `.env.local` is ignored and never committed.
 - Gemini Model: Configured in `lib/llm/config.ts` (default `gemini-2.5-flash`).
 
@@ -132,5 +132,67 @@ Last updated: 2026-10-03 (ForgeHacks 2026)
   - Recorded realistic bot mitigation behaviors (403 / abort) honestly without faking success.
 - **Could Not Verify:** Real-time phone lists on sites with aggressive anti-bot CDN firewalls (Amazon, Coinbase, SSA); snapshot fallback is used honestly.
 - **Next Step:** P3 Checks + Verdict (link checks, lookalike distance, RDAP, shortener unrolling, phone and email checks, rule engine, and CLI demo check).
+
+---
+
+### P3 Checks + Verdict
+- **Status:** PASS
+- **Work completed:**
+  - Implemented `lib/checks/shortener.ts` (safe HEAD unrolling up to 5 hops).
+  - Implemented `lib/checks/lookalike.ts` (homoglyph normalization, brand token analysis, Levenshtein edit distance, punycode detection).
+  - Implemented `lib/checks/rdap.ts` (registration date and domain age computation via rdap.org, fictional domain un-registered verification).
+  - Implemented `lib/checks/url.ts` (linking domain evaluation, lookalike scoring, RDAP integration).
+  - Implemented `lib/checks/phone.ts` (E.164 phone evaluation against official page directories with receipt snippets).
+  - Implemented `lib/checks/email.ts` (sender domain validation and consumer freemail impersonation flagging).
+  - Implemented `lib/checks/payment.ts` (gift card, crypto, p2p, and card fee detection linked to primary FTC consumer guidance pages).
+  - Implemented `lib/verdict/rules.ts` (strict deterministic evaluation of rules 1 through 7).
+  - Implemented `lib/pipeline.ts` (orchestrating full check pipeline with SSE event streaming).
+  - Implemented `lib/explain/template.ts` (receipt-cited template explanations).
+  - Implemented CLI runner `scripts/check.ts`.
+  - Added unit test suite `tests/rules.test.ts` (12 tests covering all verdict rules).
+- **Verification Commands & Output:**
+  ```text
+  > vitest run
+  ✓ tests/setup.test.ts (1 test) 3ms
+  ✓ tests/safeFetch.test.ts (9 tests) 21ms
+  ✓ tests/rules.test.ts (12 tests) 10ms
+  ✓ tests/extract.test.ts (27 tests) 31ms
+  ✓ tests/entity.test.ts (8 tests) 232ms
+  Test Files  5 passed (5)
+  Tests  57 passed (57)
+  Duration  1.52s
+  ```
+  CLI Sample Runs:
+  1. `Sample 1 (Bank callback scam)`:
+     - `TYPE: DOESNT_MATCH`
+     - `HEADLINE: DOESN'T MATCH THE REAL WELLS FARGO`
+     - `RULE: RULE_4_PHONE_MISMATCH`
+     - `OFFICIAL PHONE: +18008693557`
+  2. `Sample 2 (USPS package delivery scam)`:
+     - `TYPE: DOESNT_MATCH`
+     - `HEADLINE: DOESN'T MATCH THE REAL USPS`
+     - `RULE: RULE_3_STRONG_MISMATCH`
+     - `LOOKALIKE: 0.85 (usps-redelivery-notice.xyz - unregistered RDAP)`
+  3. `Sample 3 (Amazon recruiter job offer)`:
+     - `TYPE: DOESNT_MATCH`
+     - `HEADLINE: DOESN'T MATCH THE REAL AMAZON`
+     - `RULE: RULE_3_STRONG_MISMATCH`
+     - `RECEIPT: Free consumer email address (@gmail.com) claiming to represent Amazon`
+  4. `Sample 4 (Legitimate Wells Fargo alert)`:
+     - `TYPE: MATCHES`
+     - `HEADLINE: MATCHES THE REAL WELLS FARGO`
+     - `RULE: RULE_5_ALL_OFFICIAL_MATCH`
+     - `RECEIPT: wellsfargo.com official domain + +18008693557 verified official support line`
+  5. `Sample 5 (USPS screenshot sample text)`:
+     - `TYPE: DOESNT_MATCH`
+     - `HEADLINE: DOESN'T MATCH THE REAL USPS`
+     - `RULE: RULE_3_STRONG_MISMATCH`
+     - `RECEIPT: Unofficial lookalike domain usps-address-update.xyz (score 0.85)`
+- **Decisions Made:**
+  - Evaluated rules strictly in order 1-7 as specified in Section 4.6.
+  - Verified sample scam domains (`usps-redelivery-notice.xyz`, `usps-address-update.xyz`) return 404 in RDAP to ensure no real domains are targeted.
+  - Used Wells Fargo's verified 24/7 hotline (`+18008693557`) for the legitimate sample receipt.
+- **Could Not Verify:** None.
+- **Next Step:** P4 LLM (Gemini adapter with `@google/genai`, JSON schema extraction, vision transcription, constrained explanation with citation validator, and fallback handling).
 
 ---
