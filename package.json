@@ -1,0 +1,43 @@
+{
+  "name": "callback",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "eval": "tsx eval/run.ts",
+    "snapshot": "tsx scripts/snapshot-official.ts",
+    "screens": "tsx scripts/render-sample-screens.ts",
+    "precompute": "tsx scripts/precompute-samples.ts"
+  },
+  "dependencies": {
+    "@google/genai": "^2.27.0",
+    "cheerio": "^1.0.0",
+    "fastest-levenshtein": "^1.0.16",
+    "libphonenumber-js": "^1.13.14",
+    "lucide-react": "^0.475.0",
+    "next": "^15.2.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tldts": "^7.4.16",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.13.5",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.6"
+  }
+}
