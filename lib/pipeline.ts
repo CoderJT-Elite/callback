@@ -15,11 +15,16 @@ import { checkEmail } from "./checks/email";
 import { checkPayment } from "./checks/payment";
 import { evaluateVerdictRules } from "./verdict/rules";
 import { generateTemplateExplanation } from "./explain/template";
+import { geminiExtract, geminiExplain } from "./llm/gemini";
+import { hasGeminiKey } from "./llm/config";
 
 export interface PipelineOptions {
   onEvent?: (event: SSEEventData) => void;
-  llmExtractor?: (text: string) => Promise<Partial<Extraction>>;
+  llmExtractor?: (text: string, imageBuffer?: Buffer) => Promise<Partial<Extraction> | null>;
   llmExplainer?: (verdict: Verdict, evidences: Evidence[], orgName: string) => Promise<Explanation>;
+  imageBuffer?: Buffer;
+  mimeType?: string;
+  skipLLM?: boolean;
 }
 
 export interface PipelineResult {
@@ -58,11 +63,18 @@ export async function runPipeline(
 
   // 2. Extraction
   let extraction: Extraction;
-  if (options.llmExtractor) {
+  const extractor = options.llmExtractor || (!options.skipLLM && hasGeminiKey() ? (t: string) => geminiExtract(t, options.imageBuffer, options.mimeType) : null);
+
+  if (extractor) {
     try {
-      const llmOutput = await options.llmExtractor(inputText);
-      extraction = mergeWithAntiHallucination(llmOutput, inputText);
-      addStep({ id: "extract", label: "Extracted contact points and claimed sender", status: "ok" });
+      const llmOutput = await extractor(inputText, options.imageBuffer);
+      if (llmOutput) {
+        extraction = mergeWithAntiHallucination(llmOutput, inputText);
+        addStep({ id: "extract", label: "AI extracted contact points and claimed sender", status: "ok" });
+      } else {
+        extraction = deterministicExtract(inputText);
+        addStep({ id: "extract", label: "AI reading unavailable; used deterministic extractors", status: "warn" });
+      }
     } catch {
       extraction = deterministicExtract(inputText);
       addStep({ id: "extract", label: "AI reading unavailable; used deterministic extractors", status: "warn" });
@@ -208,9 +220,11 @@ export async function runPipeline(
 
   // 7. Explanation
   let explanation: Explanation;
-  if (options.llmExplainer) {
+  const explainer = options.llmExplainer || (!options.skipLLM && hasGeminiKey() ? geminiExplain : null);
+
+  if (explainer) {
     try {
-      explanation = await options.llmExplainer(verdict, evidences, resolvedOrg?.name || "the sender");
+      explanation = await explainer(verdict, evidences, resolvedOrg?.name || "the sender");
     } catch {
       explanation = generateTemplateExplanation(verdict, evidences, resolvedOrg?.name || "the sender");
     }

@@ -3,10 +3,10 @@
 Last updated: 2026-10-03 (ForgeHacks 2026)
 
 ## Overview & Current State
-- Active Phase: P4 LLM
-- Completed Phases: P0 Setup, P1 Extraction, P2 Net + Entity + Official, P3 Checks + Verdict
+- Active Phase: P5 API + UI
+- Completed Phases: P0 Setup, P1 Extraction, P2 Net + Entity + Official, P3 Checks + Verdict, P4 LLM
 - Secrets: Confirmed `.env.local` is ignored and never committed.
-- Gemini Model: Configured in `lib/llm/config.ts` (default `gemini-2.5-flash`).
+- Gemini Model: Configured as `gemini-3.8-flash` in `lib/llm/config.ts` and `.env.local`.
 
 ---
 
@@ -194,5 +194,55 @@ Last updated: 2026-10-03 (ForgeHacks 2026)
   - Used Wells Fargo's verified 24/7 hotline (`+18008693557`) for the legitimate sample receipt.
 - **Could Not Verify:** None.
 - **Next Step:** P4 LLM (Gemini adapter with `@google/genai`, JSON schema extraction, vision transcription, constrained explanation with citation validator, and fallback handling).
+
+---
+
+### P4 LLM
+- **Status:** PASS
+- **Work completed:**
+  - Selected `gemini-3.8-flash` as model after upstream Google AI Studio notification; updated `DEFAULT_GEMINI_MODEL` and `.env.local` `GEMINI_MODEL=gemini-3.8-flash`.
+  - Implemented `lib/llm/config.ts` (safe environment retrieval, never exposing key).
+  - Implemented `lib/llm/schemas.ts` with Zod validation and coercion for payment methods.
+  - Implemented `lib/llm/prompts.ts` with strict untrusted data boundaries, ignoring prompt injections, and enforcing evidence citations.
+  - Implemented `lib/llm/validateCitations.ts` enforcing `[E#]` citation presence and validity, dropping uncited sentences, and falling back to template if all dropped.
+  - Implemented `lib/llm/gemini.ts` using `@google/genai` with JSON mode, 12s timeout, vision multimodal input, and resilient error recovery.
+  - Implemented `tests/llm.test.ts` (schemas, citation validation, prompt injection immunity, and mock error fallback).
+  - Created `scripts/test-live-gemini.ts` and ran live pipeline verification with Gemini.
+- **Verification Commands & Output:**
+  ```text
+  > vitest run
+  ✓ tests/setup.test.ts (1 test) 3ms
+  ✓ tests/safeFetch.test.ts (9 tests) 44ms
+  ✓ tests/rules.test.ts (12 tests) 8ms
+  ✓ tests/extract.test.ts (27 tests) 32ms
+  ✓ tests/entity.test.ts (8 tests) 229ms
+  ✓ tests/llm.test.ts (7 tests) 860ms
+  Test Files  6 passed (6)
+  Tests  64 passed (64)
+  Duration  2.32s
+  ```
+  Live Gemini Verification (`npx tsx scripts/test-live-gemini.ts`):
+  ```text
+  [Config] Model: gemini-3.8-flash, Key configured: YES (hidden)
+  --- LIVE GEMINI PIPELINE TEST ---
+  Input: "USPS Notification: Package #US8921 held at regional depot. Pay $1.99 redelivery fee within 24 hours at usps-redelivery-notice.xyz to release package."
+
+  Live Gemini Cited Explanation:
+  Mode: llm, Dropped uncited sentences: 0
+  - The link "usps-redelivery-notice.xyz" is not an official address for USPS and is an unregistered lookalike domain [E1]. [cites: E1]
+  - The message requests card details to pay a "$1.99 redelivery" fee, a tactic imposters frequently use to steal payment credentials [E2]. [cites: E2]
+  - It also uses artificial urgency phrases like "within 24 hours" to force a hurried decision [E3]. [cites: E3]
+
+  --- KEYLESS FALLBACK TEST ---
+  Fallback Verdict: DOESN'T MATCH THE REAL WELLS FARGO (RULE_4_PHONE_MISMATCH)
+  Fallback Explanation (template):
+  - The phone number provided (+18885550142) does not appear on Wells Fargo's official contact directory [E1].
+  ```
+- **Decisions Made:**
+  - Used `gemini-3.8-flash` per Gemini API instruction.
+  - Enforced that raw message is NEVER passed to the explanation prompt; only the verdict and numbered Evidence receipts [E#] are provided.
+  - Every explanation sentence must cite existing evidence IDs or be dropped.
+- **Could Not Verify:** None.
+- **Next Step:** P5 API + UI (`/api/check` SSE endpoint, components, precomputed sample replay, respond panel, `/report` print view, `/how-it-works`, Playwright e2e tests).
 
 ---
