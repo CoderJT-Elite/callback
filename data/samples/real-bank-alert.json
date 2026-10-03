@@ -1,0 +1,318 @@
+{
+  "sample_id": "real-bank-alert",
+  "chip_label": "Real bank alert",
+  "category": "legit",
+  "is_screenshot": false,
+  "input_text": "Wells Fargo: Fraud alert! Did you attempt a $42.50 transaction at TARGET? Reply YES or NO. For customer service, visit https://www.wellsfargo.com/help/contact-us/ or call 1-800-869-3557.",
+  "precomputed_at": "2026-10-03",
+  "events": [
+    {
+      "event": "step",
+      "data": {
+        "id": "ingest",
+        "label": "Read message input",
+        "status": "ok",
+        "detail": "186 characters"
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "extract",
+        "label": "Deterministic extraction of contact points",
+        "status": "ok"
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "resolve_org",
+        "label": "Identified claimed sender: Wells Fargo",
+        "status": "ok",
+        "detail": "Official domain: wellsfargo.com (curated)"
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "official_pages",
+        "label": "Official evidence channels for Wells Fargo",
+        "status": "ok",
+        "detail": "Live contact pages fetched 2026-10-03"
+      }
+    },
+    {
+      "event": "evidence",
+      "data": {
+        "id": "E1",
+        "kind": "url",
+        "status": "ok",
+        "text": "Link \"wellsfargo.com\" is an official Wells Fargo domain.",
+        "source": {
+          "url": "https://www.wellsfargo.com/help/contact-us/",
+          "rule_id": "RULE_OFFICIAL_DOMAIN"
+        },
+        "meta": {
+          "domain": "wellsfargo.com",
+          "is_official": true
+        }
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "check_url_E1",
+        "label": "Checked link: wellsfargo.com",
+        "status": "ok",
+        "detail": "Link \"wellsfargo.com\" is an official Wells Fargo domain."
+      }
+    },
+    {
+      "event": "evidence",
+      "data": {
+        "id": "E2",
+        "kind": "phone",
+        "status": "ok",
+        "text": "Phone +18008693557 matches official Wells Fargo support line.",
+        "source": {
+          "url": "https://www.wellsfargo.com/help/contact-us/",
+          "snippet": "Skip to main content Esta página solo está disponible en inglés Selecione Cancele para permanecer en esta página o Continúe para ver nuestra página principal en español. CanceleContinúe How can we hel",
+          "snapshot": false,
+          "fetched_at": "2026-10-03",
+          "rule_id": "RULE_PHONE_MATCH"
+        },
+        "meta": {
+          "phone": "+18008693557",
+          "is_listed": true,
+          "url": "https://www.wellsfargo.com/help/contact-us/"
+        }
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "check_phone_E2",
+        "label": "Checked phone: +18008693557",
+        "status": "ok",
+        "detail": "Phone +18008693557 matches official Wells Fargo support line."
+      }
+    },
+    {
+      "event": "verdict",
+      "data": {
+        "type": "MATCHES",
+        "org_name": "Wells Fargo",
+        "headline": "MATCHES THE REAL WELLS FARGO",
+        "details": "The contact channels in this message match verified public records for Wells Fargo. Always verify directly on the official site before submitting credentials or payments.",
+        "color": "green",
+        "rule_id": "RULE_5_ALL_OFFICIAL_MATCH",
+        "official_channel": {
+          "name": "Wells Fargo",
+          "domain": "wellsfargo.com",
+          "contact_url": "https://www.wellsfargo.com/help/contact-us/",
+          "phone": "+18008693557",
+          "source_note": "Live contact pages fetched 2026-10-03",
+          "snapshot": false
+        }
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "verdict",
+        "label": "Verdict: MATCHES THE REAL WELLS FARGO",
+        "status": "ok",
+        "detail": "The contact channels in this message match verified public records for Wells Fargo. Always verify directly on the official site before submitting credentials or payments."
+      }
+    },
+    {
+      "event": "explanation",
+      "data": {
+        "sentences": [
+          {
+            "text": "The web link points to wellsfargo.com, which is a verified official domain for Wells Fargo [E1].",
+            "cites": [
+              "E1"
+            ]
+          },
+          {
+            "text": "The phone number (+18008693557) matches Wells Fargo's verified public support lines [E2].",
+            "cites": [
+              "E2"
+            ]
+          }
+        ],
+        "mode": "template",
+        "dropped_count": 0
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "explanation",
+        "label": "Generated evidence-backed explanation",
+        "status": "ok",
+        "detail": "2 cited sentences (template)"
+      }
+    },
+    {
+      "event": "done",
+      "data": {
+        "ms": 467
+      }
+    }
+  ],
+  "result": {
+    "extraction": {
+      "claimed_sender": {
+        "name": "Wells Fargo",
+        "kind": "company",
+        "evidence_quote": "Wells Fargo"
+      },
+      "asks": [],
+      "urgency_quotes": [],
+      "payment": {
+        "method": null,
+        "quote": null
+      },
+      "phones": [
+        "+18008693557"
+      ],
+      "urls": [
+        "https://www.wellsfargo.com/help/contact-us/"
+      ],
+      "emails": [],
+      "handles": []
+    },
+    "resolved_org": {
+      "id": "wells-fargo",
+      "name": "Wells Fargo",
+      "wikidata_qid": "Q744149",
+      "official_domains": [
+        "wellsfargo.com"
+      ],
+      "contact_pages": [
+        "https://www.wellsfargo.com/help/contact-us/"
+      ],
+      "source": "curated",
+      "source_note": "domains from Wikidata P856 (Q744149) fetched 2026-10-03; URL https://www.wellsfargo.com/help/contact-us/ verified 200 2026-10-03"
+    },
+    "evidences": [
+      {
+        "id": "E1",
+        "kind": "url",
+        "status": "ok",
+        "text": "Link \"wellsfargo.com\" is an official Wells Fargo domain.",
+        "source": {
+          "url": "https://www.wellsfargo.com/help/contact-us/",
+          "rule_id": "RULE_OFFICIAL_DOMAIN"
+        },
+        "meta": {
+          "domain": "wellsfargo.com",
+          "is_official": true
+        }
+      },
+      {
+        "id": "E2",
+        "kind": "phone",
+        "status": "ok",
+        "text": "Phone +18008693557 matches official Wells Fargo support line.",
+        "source": {
+          "url": "https://www.wellsfargo.com/help/contact-us/",
+          "snippet": "Skip to main content Esta página solo está disponible en inglés Selecione Cancele para permanecer en esta página o Continúe para ver nuestra página principal en español. CanceleContinúe How can we hel",
+          "snapshot": false,
+          "fetched_at": "2026-10-03",
+          "rule_id": "RULE_PHONE_MATCH"
+        },
+        "meta": {
+          "phone": "+18008693557",
+          "is_listed": true,
+          "url": "https://www.wellsfargo.com/help/contact-us/"
+        }
+      }
+    ],
+    "verdict": {
+      "type": "MATCHES",
+      "org_name": "Wells Fargo",
+      "headline": "MATCHES THE REAL WELLS FARGO",
+      "details": "The contact channels in this message match verified public records for Wells Fargo. Always verify directly on the official site before submitting credentials or payments.",
+      "color": "green",
+      "rule_id": "RULE_5_ALL_OFFICIAL_MATCH",
+      "official_channel": {
+        "name": "Wells Fargo",
+        "domain": "wellsfargo.com",
+        "contact_url": "https://www.wellsfargo.com/help/contact-us/",
+        "phone": "+18008693557",
+        "source_note": "Live contact pages fetched 2026-10-03",
+        "snapshot": false
+      }
+    },
+    "explanation": {
+      "sentences": [
+        {
+          "text": "The web link points to wellsfargo.com, which is a verified official domain for Wells Fargo [E1].",
+          "cites": [
+            "E1"
+          ]
+        },
+        {
+          "text": "The phone number (+18008693557) matches Wells Fargo's verified public support lines [E2].",
+          "cites": [
+            "E2"
+          ]
+        }
+      ],
+      "mode": "template",
+      "dropped_count": 0
+    },
+    "steps": [
+      {
+        "id": "ingest",
+        "label": "Read message input",
+        "status": "ok",
+        "detail": "186 characters"
+      },
+      {
+        "id": "extract",
+        "label": "Deterministic extraction of contact points",
+        "status": "ok"
+      },
+      {
+        "id": "resolve_org",
+        "label": "Identified claimed sender: Wells Fargo",
+        "status": "ok",
+        "detail": "Official domain: wellsfargo.com (curated)"
+      },
+      {
+        "id": "official_pages",
+        "label": "Official evidence channels for Wells Fargo",
+        "status": "ok",
+        "detail": "Live contact pages fetched 2026-10-03"
+      },
+      {
+        "id": "check_url_E1",
+        "label": "Checked link: wellsfargo.com",
+        "status": "ok",
+        "detail": "Link \"wellsfargo.com\" is an official Wells Fargo domain."
+      },
+      {
+        "id": "check_phone_E2",
+        "label": "Checked phone: +18008693557",
+        "status": "ok",
+        "detail": "Phone +18008693557 matches official Wells Fargo support line."
+      },
+      {
+        "id": "verdict",
+        "label": "Verdict: MATCHES THE REAL WELLS FARGO",
+        "status": "ok",
+        "detail": "The contact channels in this message match verified public records for Wells Fargo. Always verify directly on the official site before submitting credentials or payments."
+      },
+      {
+        "id": "explanation",
+        "label": "Generated evidence-backed explanation",
+        "status": "ok",
+        "detail": "2 cited sentences (template)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "sample_id": "recruiter-offer",
+  "chip_label": "Recruiter job offer",
+  "category": "scam",
+  "is_screenshot": false,
+  "input_text": "Hello! I am Sarah from Amazon Recruitment. We have a remote Data Entry position paying $45/hr. Contact me at amazon-hr-careers@gmail.com to start your interview.",
+  "precomputed_at": "2026-10-03",
+  "events": [
+    {
+      "event": "step",
+      "data": {
+        "id": "ingest",
+        "label": "Read message input",
+        "status": "ok",
+        "detail": "161 characters"
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "extract",
+        "label": "Deterministic extraction of contact points",
+        "status": "ok"
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "resolve_org",
+        "label": "Identified claimed sender: Amazon",
+        "status": "ok",
+        "detail": "Official domain: amazon.com (curated)"
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "official_pages",
+        "label": "Official evidence channels for Amazon",
+        "status": "ok",
+        "detail": "Snapshot contact pages (fetched 2026-10-03)"
+      }
+    },
+    {
+      "event": "evidence",
+      "data": {
+        "id": "E1",
+        "kind": "email",
+        "status": "fail",
+        "text": "Sender uses a free consumer email address (\"@gmail.com\") while claiming to represent Amazon.",
+        "source": {
+          "rule_id": "RULE_EMAIL_FREEMAIL"
+        },
+        "meta": {
+          "email": "amazon-hr-careers@gmail.com",
+          "domain": "gmail.com",
+          "is_official": false,
+          "is_freemail": true
+        }
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "check_email_E1",
+        "label": "Checked email: amazon-hr-careers@gmail.com",
+        "status": "fail",
+        "detail": "Sender uses a free consumer email address (\"@gmail.com\") while claiming to represent Amazon."
+      }
+    },
+    {
+      "event": "verdict",
+      "data": {
+        "type": "DOESNT_MATCH",
+        "org_name": "Amazon",
+        "headline": "DOESN'T MATCH THE REAL AMAZON",
+        "details": "Sender uses a free consumer email address (\"@gmail.com\") while claiming to represent Amazon.",
+        "color": "red",
+        "rule_id": "RULE_3_STRONG_MISMATCH",
+        "official_channel": {
+          "name": "Amazon",
+          "domain": "amazon.com",
+          "contact_url": "https://www.amazon.com/gp/help/customer/display.html",
+          "source_note": "Snapshot contact pages (fetched 2026-10-03)",
+          "snapshot": true
+        }
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "verdict",
+        "label": "Verdict: DOESN'T MATCH THE REAL AMAZON",
+        "status": "fail",
+        "detail": "Sender uses a free consumer email address (\"@gmail.com\") while claiming to represent Amazon."
+      }
+    },
+    {
+      "event": "explanation",
+      "data": {
+        "sentences": [
+          {
+            "text": "The email address (amazon-hr-careers@gmail.com) is not from Amazon's verified email domain [E1].",
+            "cites": [
+              "E1"
+            ]
+          }
+        ],
+        "mode": "template",
+        "dropped_count": 0
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "explanation",
+        "label": "Generated evidence-backed explanation",
+        "status": "ok",
+        "detail": "1 cited sentences (template)"
+      }
+    },
+    {
+      "event": "done",
+      "data": {
+        "ms": 181
+      }
+    }
+  ],
+  "result": {
+    "extraction": {
+      "claimed_sender": {
+        "name": "Amazon",
+        "kind": "company",
+        "evidence_quote": "Amazon"
+      },
+      "asks": [],
+      "urgency_quotes": [],
+      "payment": {
+        "method": null,
+        "quote": null
+      },
+      "phones": [],
+      "urls": [],
+      "emails": [
+        "amazon-hr-careers@gmail.com"
+      ],
+      "handles": []
+    },
+    "resolved_org": {
+      "id": "amazon",
+      "name": "Amazon",
+      "wikidata_qid": "Q3884",
+      "official_domains": [
+        "amazon.com",
+        "amazon.it"
+      ],
+      "contact_pages": [
+        "https://www.amazon.com/gp/help/customer/display.html"
+      ],
+      "source": "curated",
+      "source_note": "domains from Wikidata P856 (Q3884) fetched 2026-10-03; URL https://www.amazon.com/gp/help/customer/display.html verified 405 2026-10-03"
+    },
+    "evidences": [
+      {
+        "id": "E1",
+        "kind": "email",
+        "status": "fail",
+        "text": "Sender uses a free consumer email address (\"@gmail.com\") while claiming to represent Amazon.",
+        "source": {
+          "rule_id": "RULE_EMAIL_FREEMAIL"
+        },
+        "meta": {
+          "email": "amazon-hr-careers@gmail.com",
+          "domain": "gmail.com",
+          "is_official": false,
+          "is_freemail": true
+        }
+      }
+    ],
+    "verdict": {
+      "type": "DOESNT_MATCH",
+      "org_name": "Amazon",
+      "headline": "DOESN'T MATCH THE REAL AMAZON",
+      "details": "Sender uses a free consumer email address (\"@gmail.com\") while claiming to represent Amazon.",
+      "color": "red",
+      "rule_id": "RULE_3_STRONG_MISMATCH",
+      "official_channel": {
+        "name": "Amazon",
+        "domain": "amazon.com",
+        "contact_url": "https://www.amazon.com/gp/help/customer/display.html",
+        "source_note": "Snapshot contact pages (fetched 2026-10-03)",
+        "snapshot": true
+      }
+    },
+    "explanation": {
+      "sentences": [
+        {
+          "text": "The email address (amazon-hr-careers@gmail.com) is not from Amazon's verified email domain [E1].",
+          "cites": [
+            "E1"
+          ]
+        }
+      ],
+      "mode": "template",
+      "dropped_count": 0
+    },
+    "steps": [
+      {
+        "id": "ingest",
+        "label": "Read message input",
+        "status": "ok",
+        "detail": "161 characters"
+      },
+      {
+        "id": "extract",
+        "label": "Deterministic extraction of contact points",
+        "status": "ok"
+      },
+      {
+        "id": "resolve_org",
+        "label": "Identified claimed sender: Amazon",
+        "status": "ok",
+        "detail": "Official domain: amazon.com (curated)"
+      },
+      {
+        "id": "official_pages",
+        "label": "Official evidence channels for Amazon",
+        "status": "ok",
+        "detail": "Snapshot contact pages (fetched 2026-10-03)"
+      },
+      {
+        "id": "check_email_E1",
+        "label": "Checked email: amazon-hr-careers@gmail.com",
+        "status": "fail",
+        "detail": "Sender uses a free consumer email address (\"@gmail.com\") while claiming to represent Amazon."
+      },
+      {
+        "id": "verdict",
+        "label": "Verdict: DOESN'T MATCH THE REAL AMAZON",
+        "status": "fail",
+        "detail": "Sender uses a free consumer email address (\"@gmail.com\") while claiming to represent Amazon."
+      },
+      {
+        "id": "explanation",
+        "label": "Generated evidence-backed explanation",
+        "status": "ok",
+        "detail": "1 cited sentences (template)"
+      }
+    ]
+  }
+}

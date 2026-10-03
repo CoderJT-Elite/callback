@@ -16,4 +16,5 @@ coverage/
 *.log
 eval/results/*.raw.json
 eval/cache/
-
+playwright-report/
+test-results/

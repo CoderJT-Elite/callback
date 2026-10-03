@@ -246,3 +246,61 @@ Last updated: 2026-10-03 (ForgeHacks 2026)
 - **Next Step:** P5 API + UI (`/api/check` SSE endpoint, components, precomputed sample replay, respond panel, `/report` print view, `/how-it-works`, Playwright e2e tests).
 
 ---
+
+### P5 API + UI + Judge Test
+- **Status:** PASS
+- **Work completed:**
+  - Implemented `lib/ratelimit.ts` with in-memory IP token bucket (6 req / 60s window).
+  - Implemented `/api/check` route (`app/api/check/route.ts`) supporting Server-Sent Events (SSE), multi-part and JSON parsing, image base64 decode, input length/size guards.
+  - Implemented UI components:
+    - `components/Navbar.tsx` (header, brand mark, navigation).
+    - `components/Footer.tsx` (honest disclaimer, source methodology link).
+    - `components/SampleChips.tsx` (instant pre-computed receipts for 5 sample cases).
+    - `components/InputCard.tsx` (textarea, screenshot upload / drop zone, character counter).
+    - `components/Trace.tsx` (real-time streaming investigation step log).
+    - `components/RuleTable.tsx` (how Callback decided rule table with rule IDs).
+    - `components/RespondPanel.tsx` (incident response actions, payment method guidance, text summary download, and print report view).
+    - `components/ResultReceipt.tsx` (verdict banner, official channel box, numbered verified receipts, cited sentences, and response actions).
+  - Implemented pages:
+    - `app/page.tsx` (landing page with instant sample replay and live SSE streaming check).
+    - `app/how-it-works/page.tsx` (interactive 7-step pipeline diagram and deterministic rule ladder).
+    - `app/report/page.tsx` (clean print/PDF incident report view for law enforcement and bank submissions).
+  - Generated precomputed samples via `scripts/precompute-samples.ts` stored in `data/samples/*.json`.
+  - Rendered sample screenshot `public/sample-screenshot.png` via Playwright (`scripts/render-sample-screens.ts`).
+  - Added comprehensive E2E test suite `e2e/smoke.spec.ts` (18 tests across desktop chromium and mobile chrome).
+  - Captured full judge test screenshots at 1280px and 360px in `docs/devpost/`:
+    - `00-landing-{desktop,mobile}.png`
+    - `01-sample1-bank-alert-{desktop,mobile}.png`
+    - `02-sample2-package-delivery-{desktop,mobile}.png`
+    - `03-sample3-job-offer-{desktop,mobile}.png`
+    - `04-sample4-legit-bank-{desktop,mobile}.png`
+    - `05-sample5-screenshot-usps-{desktop,mobile}.png`
+    - `06-fresh-paste-apple-{desktop,mobile}.png`
+    - `07-how-it-works-{desktop,mobile}.png`
+- **Verification Commands & Output:**
+  ```text
+  > next build
+  ✓ Compiled successfully in 19.1s
+  Route (app)                                 Size  First Load JS
+  ┌ ○ /                                    15.3 kB         122 kB
+  ├ ○ /_not-found                            993 B         104 kB
+  ├ ƒ /api/check                             123 B         103 kB
+  ├ ○ /how-it-works                        2.53 kB         109 kB
+  └ ○ /report                              2.56 kB         109 kB
+  ✓ Generating static pages (7/7)
+
+  > playwright test
+  Running 18 tests using 4 workers
+  ✓ 18 passed (18.5s)
+
+  > vitest run
+  ✓ 6 passed (6), 64 passed (64)
+  ```
+- **Decisions Made:**
+  - Added robust fallback handling when external AI quota is exhausted or model is unavailable, gracefully utilizing deterministic extractors and cited template explanations without UI breakage.
+  - Provided instant pre-computed replay (<1s) for judges testing standard samples, with sequential animation and explicit pre-computation date badge.
+  - Ensured fully responsive design verified at 360px mobile width with zero horizontal overflow.
+- **Could Not Verify:** None.
+- **Next Step:** P6 Images (asset generation using generate_image per section 8: icon mark, hero illustration, OG image, Devpost cover).
+
+---

@@ -1,16 +1,16 @@
 export type SenderKind = "company" | "government" | "person" | "unknown";
 
 export interface ClaimedSender {
-  name: string | null;
+  name?: string | null;
   kind: SenderKind;
-  evidence_quote: string | null;
+  evidence_quote?: string | null;
 }
 
 export type PaymentMethod = "card" | "gift_card" | "crypto" | "wire" | "p2p" | "other" | null;
 
 export interface PaymentExtraction {
   method: PaymentMethod;
-  quote: string | null;
+  quote?: string | null;
 }
 
 export interface Extraction {
@@ -130,6 +130,6 @@ export interface SnapshotData {
 }
 
 export interface SSEEventData {
-  event: "step" | "evidence" | "verdict" | "explanation" | "error" | "done";
+  event: "step" | "evidence" | "verdict" | "explanation" | "extraction" | "error" | "done";
   data: unknown;
 }

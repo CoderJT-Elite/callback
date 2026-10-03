@@ -84,6 +84,8 @@ export async function runPipeline(
     addStep({ id: "extract", label: "Deterministic extraction of contact points", status: "ok" });
   }
 
+  emit({ event: "extraction" as any, data: extraction });
+
   // 3. Resolve Organization
   const claimedName = extraction.claimed_sender.name;
   let resolvedOrg: ResolvedOrg | null = null;
@@ -179,7 +181,7 @@ export async function runPipeline(
       addStep({
         id: `check_payment_${eId}`,
         label: `Payment demand flagged: ${extraction.payment.method}`,
-        status: payRes.evidence.status,
+        status: payRes.evidence.status === "fail" ? "fail" : payRes.evidence.status === "warn" ? "warn" : "ok",
         detail: payRes.evidence.text,
       });
     }

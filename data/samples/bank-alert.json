@@ -1,0 +1,256 @@
+{
+  "sample_id": "bank-alert",
+  "chip_label": "Bank alert text",
+  "category": "scam",
+  "is_screenshot": false,
+  "input_text": "Wells Fargo Alert: Suspicious transaction detected. Call our fraud prevention line immediately at 888-555-0142 to secure your account.",
+  "precomputed_at": "2026-10-03",
+  "events": [
+    {
+      "event": "step",
+      "data": {
+        "id": "ingest",
+        "label": "Read message input",
+        "status": "ok",
+        "detail": "134 characters"
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "extract",
+        "label": "Deterministic extraction of contact points",
+        "status": "ok"
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "resolve_org",
+        "label": "Identified claimed sender: Wells Fargo",
+        "status": "ok",
+        "detail": "Official domain: wellsfargo.com (curated)"
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "official_pages",
+        "label": "Official evidence channels for Wells Fargo",
+        "status": "ok",
+        "detail": "Live contact pages fetched 2026-10-03"
+      }
+    },
+    {
+      "event": "evidence",
+      "data": {
+        "id": "E1",
+        "kind": "phone",
+        "status": "fail",
+        "text": "Phone +18885550142 is NOT listed on official Wells Fargo pages. (Official number: +18008693557)",
+        "source": {
+          "url": "https://www.wellsfargo.com/help/contact-us/",
+          "snapshot": false,
+          "fetched_at": "2026-10-03",
+          "rule_id": "RULE_PHONE_MISMATCH"
+        },
+        "meta": {
+          "phone": "+18885550142",
+          "is_listed": false,
+          "official_phone": "+18008693557"
+        }
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "check_phone_E1",
+        "label": "Checked phone: +18885550142",
+        "status": "fail",
+        "detail": "Phone +18885550142 is NOT listed on official Wells Fargo pages. (Official number: +18008693557)"
+      }
+    },
+    {
+      "event": "verdict",
+      "data": {
+        "type": "DOESNT_MATCH",
+        "org_name": "Wells Fargo",
+        "headline": "DOESN'T MATCH THE REAL WELLS FARGO",
+        "details": "Phone +18885550142 is NOT listed on official Wells Fargo pages. (Official number: +18008693557)",
+        "color": "red",
+        "rule_id": "RULE_4_PHONE_MISMATCH",
+        "official_channel": {
+          "name": "Wells Fargo",
+          "domain": "wellsfargo.com",
+          "contact_url": "https://www.wellsfargo.com/help/contact-us/",
+          "phone": "+18008693557",
+          "source_note": "Live contact pages fetched 2026-10-03",
+          "snapshot": false
+        }
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "verdict",
+        "label": "Verdict: DOESN'T MATCH THE REAL WELLS FARGO",
+        "status": "fail",
+        "detail": "Phone +18885550142 is NOT listed on official Wells Fargo pages. (Official number: +18008693557)"
+      }
+    },
+    {
+      "event": "explanation",
+      "data": {
+        "sentences": [
+          {
+            "text": "The phone number provided (+18885550142) does not appear on Wells Fargo's official contact directory [E1].",
+            "cites": [
+              "E1"
+            ]
+          }
+        ],
+        "mode": "template",
+        "dropped_count": 0
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "explanation",
+        "label": "Generated evidence-backed explanation",
+        "status": "ok",
+        "detail": "1 cited sentences (template)"
+      }
+    },
+    {
+      "event": "done",
+      "data": {
+        "ms": 377
+      }
+    }
+  ],
+  "result": {
+    "extraction": {
+      "claimed_sender": {
+        "name": "Wells Fargo",
+        "kind": "company",
+        "evidence_quote": "Wells Fargo"
+      },
+      "asks": [],
+      "urgency_quotes": [],
+      "payment": {
+        "method": null,
+        "quote": null
+      },
+      "phones": [
+        "+18885550142"
+      ],
+      "urls": [],
+      "emails": [],
+      "handles": []
+    },
+    "resolved_org": {
+      "id": "wells-fargo",
+      "name": "Wells Fargo",
+      "wikidata_qid": "Q744149",
+      "official_domains": [
+        "wellsfargo.com"
+      ],
+      "contact_pages": [
+        "https://www.wellsfargo.com/help/contact-us/"
+      ],
+      "source": "curated",
+      "source_note": "domains from Wikidata P856 (Q744149) fetched 2026-10-03; URL https://www.wellsfargo.com/help/contact-us/ verified 200 2026-10-03"
+    },
+    "evidences": [
+      {
+        "id": "E1",
+        "kind": "phone",
+        "status": "fail",
+        "text": "Phone +18885550142 is NOT listed on official Wells Fargo pages. (Official number: +18008693557)",
+        "source": {
+          "url": "https://www.wellsfargo.com/help/contact-us/",
+          "snapshot": false,
+          "fetched_at": "2026-10-03",
+          "rule_id": "RULE_PHONE_MISMATCH"
+        },
+        "meta": {
+          "phone": "+18885550142",
+          "is_listed": false,
+          "official_phone": "+18008693557"
+        }
+      }
+    ],
+    "verdict": {
+      "type": "DOESNT_MATCH",
+      "org_name": "Wells Fargo",
+      "headline": "DOESN'T MATCH THE REAL WELLS FARGO",
+      "details": "Phone +18885550142 is NOT listed on official Wells Fargo pages. (Official number: +18008693557)",
+      "color": "red",
+      "rule_id": "RULE_4_PHONE_MISMATCH",
+      "official_channel": {
+        "name": "Wells Fargo",
+        "domain": "wellsfargo.com",
+        "contact_url": "https://www.wellsfargo.com/help/contact-us/",
+        "phone": "+18008693557",
+        "source_note": "Live contact pages fetched 2026-10-03",
+        "snapshot": false
+      }
+    },
+    "explanation": {
+      "sentences": [
+        {
+          "text": "The phone number provided (+18885550142) does not appear on Wells Fargo's official contact directory [E1].",
+          "cites": [
+            "E1"
+          ]
+        }
+      ],
+      "mode": "template",
+      "dropped_count": 0
+    },
+    "steps": [
+      {
+        "id": "ingest",
+        "label": "Read message input",
+        "status": "ok",
+        "detail": "134 characters"
+      },
+      {
+        "id": "extract",
+        "label": "Deterministic extraction of contact points",
+        "status": "ok"
+      },
+      {
+        "id": "resolve_org",
+        "label": "Identified claimed sender: Wells Fargo",
+        "status": "ok",
+        "detail": "Official domain: wellsfargo.com (curated)"
+      },
+      {
+        "id": "official_pages",
+        "label": "Official evidence channels for Wells Fargo",
+        "status": "ok",
+        "detail": "Live contact pages fetched 2026-10-03"
+      },
+      {
+        "id": "check_phone_E1",
+        "label": "Checked phone: +18885550142",
+        "status": "fail",
+        "detail": "Phone +18885550142 is NOT listed on official Wells Fargo pages. (Official number: +18008693557)"
+      },
+      {
+        "id": "verdict",
+        "label": "Verdict: DOESN'T MATCH THE REAL WELLS FARGO",
+        "status": "fail",
+        "detail": "Phone +18885550142 is NOT listed on official Wells Fargo pages. (Official number: +18008693557)"
+      },
+      {
+        "id": "explanation",
+        "label": "Generated evidence-backed explanation",
+        "status": "ok",
+        "detail": "1 cited sentences (template)"
+      }
+    ]
+  }
+}

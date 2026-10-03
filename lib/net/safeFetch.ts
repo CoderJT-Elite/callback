@@ -148,7 +148,7 @@ export async function safeFetch(
         throw new SSRFError(`Blocked access to private/reserved IP: ${hostname}`);
       }
     } else {
-      let addresses: dns.LookupAddress[];
+      let addresses: Array<{ address: string; family: number }>;
       try {
         addresses = await dns.lookup(hostname, { all: true });
       } catch (err: unknown) {

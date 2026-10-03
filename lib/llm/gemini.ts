@@ -36,9 +36,9 @@ export async function geminiExtract(
 
   const { ai, model } = clientInfo;
   const timeoutMs = 12000;
+  const contents: Array<string | { inlineData: { data: string; mimeType: string } }> = [];
 
   try {
-    const contents: Array<string | { inlineData: { data: string; mimeType: string } }> = [];
 
     if (imageBuffer) {
       contents.push({
