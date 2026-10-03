@@ -3,8 +3,8 @@
 Last updated: 2026-10-03 (ForgeHacks 2026)
 
 ## Overview & Current State
-- Active Phase: P1 Extraction
-- Completed Phases: P0 Setup
+- Active Phase: P2 Net + Entity + Official
+- Completed Phases: P0 Setup, P1 Extraction
 - Secrets: Confirmed `.env.local` is ignored and never committed.
 - Gemini Model: Configured in `lib/llm/config.ts` (default `gemini-2.5-flash`).
 
@@ -45,5 +45,33 @@ Last updated: 2026-10-03 (ForgeHacks 2026)
   - Configured strict TypeScript with `@/*` aliases.
 - **Could Not Verify:** None.
 - **Next Step:** P1 Extraction (Deterministic extraction, normalization, and tests).
+
+---
+
+### P1 Extraction
+- **Status:** PASS
+- **Work completed:**
+  - Implemented `lib/types.ts` defining pipeline types (Evidence, Step, Verdict, Extraction, CuratedOrg, etc.).
+  - Implemented `lib/extract/phones.ts` with `libphonenumber-js` (US and international numbers, E.164 normalization).
+  - Implemented `lib/extract/urls.ts` with bare domain detection, `tldts` validation, punycode handling, and file extension filtering.
+  - Implemented `lib/extract/emails.ts` with freemail domain identification.
+  - Implemented `lib/extract/payments.ts` supporting gift cards, crypto, p2p, wires, and credit card fee requests.
+  - Implemented `lib/extract/urgency.ts` covering time-bound urgency, suspensions, and legal threats.
+  - Implemented `lib/extract/rescan.ts` with full deterministic re-scan, fallback sender detection, and anti-hallucination merge.
+  - Created `tests/extract.test.ts` with 27 unit tests verifying all edge cases.
+- **Verification Commands & Output:**
+  ```text
+  > vitest run
+  ✓ tests/setup.test.ts (1 test) 2ms
+  ✓ tests/extract.test.ts (27 tests) 22ms
+  Test Files  2 passed (2)
+  Tests  28 passed (28)
+  Duration  629ms
+  ```
+- **Decisions Made:**
+  - Normalized all extracted phone numbers to E.164 (`+1xxxxxxxxxx`).
+  - Added filter in URL extraction to distinguish bare file names (`file.txt`) from real web domains.
+- **Could Not Verify:** None.
+- **Next Step:** P2 Net + entity + official (`safeFetch`, SSRF tests, curated orgs with verified facts, snapshots, Wikidata resolver).
 
 ---
