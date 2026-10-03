@@ -14,7 +14,7 @@ Callback checks suspicious text messages, emails, and screenshots. It:
 ## How we built it
 - **Full-Stack Framework:** Next.js 15 App Router, React 19, TypeScript strict mode, Tailwind CSS v3.
 - **Verification Engine:** Pure deterministic TypeScript rule engine (Rules 1–7) evaluating public suffix lookups (`tldts`), E.164 phone normalization (`libphonenumber-js`), and safe network fetches.
-- **Multimodal AI:** Google Gemini (`gemini-3.8-flash`) via `@google/genai` for vision-based screenshot reading and plain-English explanation synthesis.
+- **Multimodal AI:** Google Gemini (`gemini-3.5-flash-lite`) via `@google/genai` for vision-based screenshot reading and plain-English explanation synthesis.
 - **Defensive Networking:** Custom SSRF protection rejecting RFC1918 private ranges, AWS/GCP metadata endpoints, and non-standard ports. URLs inside messages are queried strictly via HTTP HEAD—never downloading untrusted page bodies.
 - **Testing & Evals:** 64 Vitest unit tests, 18 Playwright end-to-end tests across desktop and mobile Chrome, and an automated 50-item evaluation harness (`npm run eval`).
 

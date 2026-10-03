@@ -1,4 +1,4 @@
-export const DEFAULT_GEMINI_MODEL = "gemini-3.8-flash";
+export const DEFAULT_GEMINI_MODEL = "gemini-3.5-flash-lite";
 
 export function getGeminiConfig() {
   const apiKey = process.env.GEMINI_API_KEY?.trim() || "";

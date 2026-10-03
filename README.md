@@ -29,7 +29,7 @@ The numbers below are copied directly from the evaluation harness output in [`ev
 - **Dataset Hash:** `fc732ac3ff23`
 - **Total Dataset Size:** 50 items (30% Dev = 15, 70% Test = 35)
 - **Test Split Composition:** 20 scams, 15 legitimate items
-- **Gemini Runtime Model:** `gemini-3.8-flash`
+- **Gemini Runtime Model:** `gemini-3.5-flash-lite`
 - **Gemini Live Status:** PENDING: needs GEMINI_API_KEY (Free-tier request quota limit reached: 20 req/day)
 
 ### System Comparison on Test Split (N = 35)
@@ -153,5 +153,5 @@ npm run eval      # System C deterministic benchmarks & metrics
 
 In accordance with ForgeHacks 2026 rules:
 - **Development Tooling:** Application architecture, implementation, and test suites were developed with autonomous pair-programming AI coding agents (an AI coding assistant, the review pass) under the direction of **John Tewolde** during ForgeHacks (October 3–10, 2026).
-- **Runtime AI:** Google Gemini (`gemini-3.8-flash`) via the official `@google/genai` SDK is used selectively for multimodal screenshot OCR and plain-English explanation synthesis.
+- **Runtime AI:** Google Gemini (`gemini-3.5-flash-lite`) via the official `@google/genai` SDK is used selectively for multimodal screenshot OCR and plain-English explanation synthesis.
 - **Pre-computed vs Live:** 5 standard demo cases are pre-computed at build time for instant zero-latency judge testing. All user-pasted text and uploaded screenshots run dynamically through the live pipeline.
