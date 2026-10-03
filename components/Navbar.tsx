@@ -9,9 +9,11 @@ export function Navbar() {
     <header className="w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur sticky top-0 z-30">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl bg-brand-600 text-white flex items-center justify-center shadow-sm group-hover:bg-brand-700 transition">
-            <ShieldCheck className="w-5 h-5" />
-          </div>
+          <img
+            src="/logo.png"
+            alt="Callback Logo"
+            className="w-9 h-9 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 object-cover"
+          />
           <div>
             <span className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white block leading-none">
               Callback
