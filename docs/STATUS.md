@@ -562,3 +562,12 @@ Citi alert -> MATCHES; GIF upload rejected. Mobile (375 px): no horizontal scrol
   429s were seen during the eval at about 13 requests/minute. Check AI Studio before judging.
 - Contact points inside the legitimate eval items were checked on 2026-10-03 against the organization snapshots (see eval/SOURCES.md); the prose around them is still invented.
 - Not pushed, not deployed.
+
+## Redesign, eval audit, GitHub (the review pass, 2026-10-03, later)
+- **Redesign** ("case file" identity): warm paper/ink palette with stamp-red, pine and ochre; Newsreader + IBM Plex; square corners and hairline rules; rubber-stamp verdict; evidence as a ledger; saved examples as a plain text list; new SVG logo mark and code-drawn Open Graph image. Removed the AI-generated `logo.png`, `hero-illustration.png`, `og-background.png`, `app/icon.png`, `app/apple-icon.png`, `app/opengraph-image.png`. `lucide-react` is no longer imported. Commit `dbc5e56`.
+- **Eval audit:** every phone in the legitimate test messages is in that organization's snapshot (Wells Fargo, Capital One, Bank of America, Medicare); domains are on the official lists. Recorded in `eval/SOURCES.md`. Eval numbers unchanged (no text changed).
+- **Bug fixed:** the keyless extractor could list the same link twice (`https://x` and `x`); deduped. Saved examples regenerated with the AI on.
+- **Verification:** `npx tsc --noEmit`, 76 unit tests, `npm run build`, 18 Playwright tests all pass; Devpost screenshots recaptured against the production build.
+- **GitHub:** public repo https://github.com/CoderJT-Elite/callback pushed (key check: no `.env.local` tracked, no key string in history).
+- **Vercel: blocked.** The Vercel connector returns 403 on project creation and the CLI's saved token is invalid. John must either run `vercel login` or import the repo in the Vercel dashboard, then add `GEMINI_API_KEY` and `GEMINI_MODEL=gemini-3.5-flash-lite`. `LIVE_URL_TBD` stays in the README until then.
+- **the build agent prompt** for the video and submission package: `.agents/BUILD_AGENT_GOAL_SUBMISSION_PACKAGE_VIDEO_2026-10-03.md` (HyperFrames, footage slots, gallery, packet).
