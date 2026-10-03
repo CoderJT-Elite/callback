@@ -406,3 +406,37 @@ Last updated: 2026-10-03 (ForgeHacks 2026)
 - **Next Step:** P8 Docs (README.md with numbers directly mapped to summary.md, DEVPOST_DESCRIPTION.md, VIDEO_SCRIPT.md, RECORDING_KIT.md, SCREENSHOTS.md).
 
 ---
+
+### P8 Documentation & Submission Kit
+- **Status:** PASS
+- **Work completed:**
+  - Authored `README.md` following Section 9.1 structure exactly:
+    - Pitch, track badges, placeholders `LIVE_URL_TBD` and `VIDEO_URL_TBD`.
+    - Live trace and verdict screenshot.
+    - Full evaluation results table copied directly from `eval/results/summary.md`.
+    - Problem statement citing FTC ($10B fraud loss, $2.7B imposter scams) and FBI IC3 (298,878 phishing/smishing complaints) primary pages.
+    - Mermaid pipeline architecture and "What AI does vs what it never does".
+    - Honest "What works / what doesn't" limitations.
+    - Local setup commands, security/privacy disclosures, and AI attribution.
+  - Authored `docs/DEVPOST_DESCRIPTION.md` (<600 words) covering Inspiration, What it does, How we built it, Challenges, Accomplishments, What we learned, What's next, and submission block.
+  - Authored `docs/VIDEO_SCRIPT.md` targeting 2:30 with second-by-second shot list and spoken audio.
+  - Authored `docs/RECORDING_KIT.md` detailing browser settings (1280×800, 110% zoom), audio checks, and exact click order.
+  - Authored `docs/SCREENSHOTS.md` organizing the 11 rendered Devpost gallery assets.
+- **Verification Commands & Output:**
+  - All numbers in `README.md` verified against `eval/results/summary.md` and primary government links:
+    - Dataset: 50 items (15 dev, 35 test) -> `eval/results/summary.md:5`
+    - Test split: 20 scams, 15 legit -> `eval/results/summary.md:6`
+    - Catch rate: 45.0% -> `eval/results/summary.md:14`
+    - False alarms: 13.3% -> `eval/results/summary.md:15`
+    - Abstain rate: 57.1% -> `eval/results/summary.md:16`
+    - Receipt citations: 100.0% -> `eval/results/summary.md:17`
+    - Latency: p50 202 ms, p95 2683 ms -> `eval/results/summary.md:19-20`
+    - FTC losses: $2.7B imposter, $10B total -> FTC Data Spotlight URL cited
+    - FBI IC3 phishing count: 298,878 -> FBI IC3 2023 report URL cited
+- **Decisions Made:**
+  - Maintained strict traceability: zero invented metrics or fake statistics in README.
+  - Clearly articulated the AI disclosure per hackathon rules.
+- **Could Not Verify:** None.
+- **Next Step:** P9 Self-Audit & Final Verification (fresh clone in temp folder, secret grep scan, final checklist).
+
+---
