@@ -143,9 +143,16 @@ export default function HowItWorksPage() {
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-slate-800 dark:text-slate-200 mb-1">Prompt Injection Immunity</h4>
+              <h4 className="font-semibold text-slate-800 dark:text-slate-200 mb-1">Prompt Injection Handling</h4>
               <p className="leading-relaxed">
-                Untrusted message text is strictly isolated as data inside JSON schemas. Injection instructions (e.g. &quot;system override&quot;) cannot alter the deterministic rule engine outcome.
+                Message text is treated as data. The AI&apos;s output must fit a fixed JSON schema, every contact point it reports must appear in the original text, and the verdict comes from the rules, not the AI. An injected instruction can still mislead the AI&apos;s reading (for example, the claimed sender), but it can&apos;t write the verdict.
+              </p>
+            </div>
+            <div className="md:col-span-2">
+              <h4 className="font-semibold text-slate-800 dark:text-slate-200 mb-1">Where your message goes</h4>
+              <p className="leading-relaxed">
+                Callback doesn&apos;t store or log what you paste. When the AI service is on, the text (or screenshot) is sent to Google&apos;s Gemini API to read it and write the explanation; on Gemini&apos;s free tier Google may use that data to improve its products (see the{" "}
+                <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener noreferrer" className="underline">Gemini API terms</a>). Don&apos;t paste passwords, full card numbers or ID numbers.
               </p>
             </div>
           </div>

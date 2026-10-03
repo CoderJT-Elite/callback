@@ -8,6 +8,10 @@ interface OrgSeed {
   aliases: string[];
   searchQuery: string;
   contactPages: string[];
+  // Hand-checked: each domain is the organization's own (contact page lives on it or it redirects to it).
+  // Wikidata P856 is recorded for reference only; it is never trusted blindly (Citigroup's P856 pointed at a
+  // 45-day-old unrelated domain on 2026-10-03).
+  officialDomains: string[];
   knownSmsShortcodes?: string[];
 }
 
@@ -18,6 +22,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["United States Postal Service", "Postal Service", "Post Office"],
     searchQuery: "United States Postal Service",
     contactPages: ["https://www.usps.com/help/contact-us.htm"],
+    officialDomains: ["usps.com"]
   },
   {
     id: "ups",
@@ -25,13 +30,15 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["United Parcel Service"],
     searchQuery: "United Parcel Service",
     contactPages: ["https://www.ups.com/us/en/support/contact-us.page"],
+    officialDomains: ["ups.com"]
   },
   {
     id: "fedex",
     name: "FedEx",
     aliases: ["Federal Express"],
     searchQuery: "FedEx",
-    contactPages: ["https://www.fedex.com/en-us/customer-support.html"],
+    contactPages: ["https://www.fedex.com/en-us/customer-support/call-us.html"],
+    officialDomains: ["fedex.com"]
   },
   {
     id: "dhl",
@@ -39,6 +46,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["DHL Express"],
     searchQuery: "DHL",
     contactPages: ["https://www.dhl.com/us-en/home/customer-service.html"],
+    officialDomains: ["dhl.com"]
   },
   {
     id: "amazon",
@@ -46,13 +54,15 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["Amazon.com", "Amazon Prime"],
     searchQuery: "Amazon",
     contactPages: ["https://www.amazon.com/gp/help/customer/display.html"],
+    officialDomains: ["amazon.com"]
   },
   {
     id: "apple",
     name: "Apple",
     aliases: ["Apple Inc.", "Apple Support", "iCloud"],
     searchQuery: "Apple Inc.",
-    contactPages: ["https://support.apple.com/contact"],
+    contactPages: ["https://www.apple.com/contact/"],
+    officialDomains: ["apple.com", "icloud.com"]
   },
   {
     id: "microsoft",
@@ -60,6 +70,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["Microsoft Corporation", "Microsoft Support"],
     searchQuery: "Microsoft",
     contactPages: ["https://support.microsoft.com/contactus"],
+    officialDomains: ["microsoft.com"]
   },
   {
     id: "paypal",
@@ -67,6 +78,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["PayPal Inc."],
     searchQuery: "PayPal",
     contactPages: ["https://www.paypal.com/us/cshelp/contact-us"],
+    officialDomains: ["paypal.com"]
   },
   {
     id: "netflix",
@@ -74,20 +86,23 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["Netflix Inc."],
     searchQuery: "Netflix",
     contactPages: ["https://help.netflix.com/contactus"],
+    officialDomains: ["netflix.com"]
   },
   {
     id: "chase",
     name: "Chase",
     aliases: ["Chase Bank", "JPMorgan Chase"],
     searchQuery: "JPMorgan Chase",
-    contactPages: ["https://www.chase.com/digital/resources/privacy-security/security/how-we-protect-you"],
+    contactPages: ["https://www.chase.com/digital/customer-service"],
+    officialDomains: ["chase.com", "jpmorganchase.com"]
   },
   {
     id: "bank-of-america",
     name: "Bank of America",
     aliases: ["BofA"],
     searchQuery: "Bank of America",
-    contactPages: ["https://www.bankofamerica.com/customer-service/contact-us/"],
+    contactPages: ["https://www.bankofamerica.com/customer-service/contact-us/", "https://web.bankofamerica.com/en/security/report-suspicious-activity"],
+    officialDomains: ["bankofamerica.com"]
   },
   {
     id: "wells-fargo",
@@ -95,13 +110,15 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["Wells Fargo Bank"],
     searchQuery: "Wells Fargo",
     contactPages: ["https://www.wellsfargo.com/help/contact-us/"],
+    officialDomains: ["wellsfargo.com"]
   },
   {
     id: "citi",
     name: "Citi",
     aliases: ["Citibank", "Citigroup"],
     searchQuery: "Citigroup",
-    contactPages: ["https://www.citi.com/customer-service/contact-us"],
+    contactPages: ["https://www.citi.com/credit-cards/citi-contact-us"],
+    officialDomains: ["citi.com", "citibank.com"]
   },
   {
     id: "capital-one",
@@ -109,6 +126,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["Capital One Bank"],
     searchQuery: "Capital One",
     contactPages: ["https://www.capitalone.com/support-center/contact-us/"],
+    officialDomains: ["capitalone.com"]
   },
   {
     id: "irs",
@@ -116,6 +134,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["IRS"],
     searchQuery: "Internal Revenue Service",
     contactPages: ["https://www.irs.gov/help/telephone-assistance"],
+    officialDomains: ["irs.gov"]
   },
   {
     id: "ssa",
@@ -123,6 +142,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["SSA"],
     searchQuery: "Social Security Administration",
     contactPages: ["https://www.ssa.gov/agency/contact/"],
+    officialDomains: ["ssa.gov", "socialsecurity.gov"]
   },
   {
     id: "medicare",
@@ -130,13 +150,15 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["Centers for Medicare & Medicaid Services", "CMS"],
     searchQuery: "Centers for Medicare & Medicaid Services",
     contactPages: ["https://www.medicare.gov/talk-to-someone"],
+    officialDomains: ["medicare.gov", "cms.gov"]
   },
   {
     id: "ezpass",
     name: "E-ZPass",
     aliases: ["EZPass", "E-ZPass Group"],
     searchQuery: "E-ZPass",
-    contactPages: ["https://www.e-zpassiag.com/contact-us"],
+    contactPages: ["https://www.e-zpassgroup.org/index.php"],
+    officialDomains: ["e-zpassiag.com", "e-zpassgroup.org"]
   },
   {
     id: "sunpass",
@@ -144,6 +166,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["Florida SunPass", "Florida Department of Transportation"],
     searchQuery: "SunPass",
     contactPages: ["https://www.sunpass.com/en/support/contactSunPass.shtml"],
+    officialDomains: ["sunpass.com"]
   },
   {
     id: "fastrak",
@@ -151,6 +174,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["California FasTrak", "Bay Area FasTrak"],
     searchQuery: "FasTrak",
     contactPages: ["https://www.bayareafastrak.org/en/support/contact-us.shtml"],
+    officialDomains: ["bayareafastrak.org"]
   },
   {
     id: "coinbase",
@@ -158,20 +182,23 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["Coinbase Global"],
     searchQuery: "Coinbase",
     contactPages: ["https://help.coinbase.com/en/contact-us"],
+    officialDomains: ["coinbase.com"]
   },
   {
     id: "venmo",
     name: "Venmo",
     aliases: ["Venmo LLC"],
     searchQuery: "Venmo",
-    contactPages: ["https://help.venmo.com/hc/en-us/articles/217532217-Contact-Venmo"],
+    contactPages: ["https://help.venmo.com/"],
+    officialDomains: ["venmo.com"]
   },
   {
     id: "zelle",
     name: "Zelle",
     aliases: ["Zellepay", "Early Warning Services"],
     searchQuery: "Early Warning Services",
-    contactPages: ["https://www.zellepay.com/contact-us"],
+    contactPages: ["https://www.zelle.com/contact-us"],
+    officialDomains: ["zelle.com", "zellepay.com"]
   },
   {
     id: "geek-squad",
@@ -179,6 +206,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["Best Buy Geek Squad"],
     searchQuery: "Geek Squad",
     contactPages: ["https://www.bestbuy.com/site/services/geek-squad/pcmcat138100050018.c"],
+    officialDomains: ["geeksquad.com", "bestbuy.com"]
   },
   {
     id: "best-buy",
@@ -186,6 +214,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["Best Buy Co., Inc."],
     searchQuery: "Best Buy",
     contactPages: ["https://www.bestbuy.com/site/help-topics/contact-us/pcmcat204400050019.c"],
+    officialDomains: ["bestbuy.com"]
   },
   {
     id: "norton",
@@ -193,6 +222,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["NortonLifeLock", "Gen Digital"],
     searchQuery: "NortonLifeLock",
     contactPages: ["https://support.norton.com/sp/en/us/home/current/contact"],
+    officialDomains: ["norton.com"]
   },
   {
     id: "mcafee",
@@ -200,6 +230,7 @@ const TARGET_ORGS: OrgSeed[] = [
     aliases: ["McAfee Corp."],
     searchQuery: "McAfee",
     contactPages: ["https://www.mcafee.com/support/contact/"],
+    officialDomains: ["mcafee.com"]
   },
 ];
 
@@ -266,19 +297,20 @@ async function main() {
       statusReports.push(`URL ${pageUrl} verified ${status} ${dateStr}`);
     }
 
-    // Determine official domain
-    const officialDomains: string[] = [];
-    if (domain) {
-      officialDomains.push(domain);
+    // Official domains: hand-checked list; each one must answer over HTTPS.
+    const officialDomains = org.officialDomains;
+    const domainReports: string[] = [];
+    for (const d of officialDomains) {
+      const status = await verifyUrlStatus(`https://www.${d}/`);
+      domainReports.push(`${d} ${status}`);
     }
-    for (const cp of org.contactPages) {
-      const pageDomain = getDomain(cp);
-      if (pageDomain && !officialDomains.includes(pageDomain)) {
-        officialDomains.push(pageDomain);
-      }
-    }
+    const p856Note = domain
+      ? officialDomains.includes(domain)
+        ? `Wikidata P856 (${qid}) agrees: ${domain}`
+        : `Wikidata P856 (${qid}) lists ${domain}, NOT used (not the organization's consumer domain)`
+      : `Wikidata P856 (${qid}): none`;
 
-    const sourceNotes = `domains from Wikidata P856 (${qid}) fetched ${dateStr}; ${statusReports.join("; ")}`;
+    const sourceNotes = `official domains hand-checked ${dateStr} (${domainReports.join(", ")}); ${p856Note}; ${statusReports.join("; ")}`;
 
     results.push({
       id: org.id,

@@ -60,8 +60,10 @@ export function checkPayment(
     const evidence: Evidence = {
       id: evidenceId,
       kind: "payment",
-      status: "fail",
-      text: `Instructs payment via wire transfer or peer-to-peer app ("${payment.quote}") to resolve an issue for ${orgName}.`,
+      // Amber, not red: real payment-app notices mention Zelle/Venmo too. Rule 3 only treats
+      // gift cards and crypto as a strong mismatch (plan section 4.6).
+      status: "warn",
+      text: `Mentions payment by wire transfer or a peer-to-peer app ("${payment.quote}"). Real banks and agencies don't ask you to move money this way to fix a problem with ${orgName}.`,
       source: {
         url: FTC_PAGES.wire,
         rule_id: "RULE_PAYMENT_WIRE_P2P",

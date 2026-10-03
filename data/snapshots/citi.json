@@ -2,14 +2,15 @@
   "org_id": "citi",
   "org_name": "Citi",
   "official_domains": [
-    "citibnqa.com"
+    "citi.com",
+    "citibank.com"
   ],
   "contact_pages": [
     {
-      "url": "https://www.citi.com/customer-service/contact-us",
+      "url": "https://www.citi.com/credit-cards/citi-contact-us",
       "fetched_at": "2026-10-03",
-      "status": 404,
-      "text_excerpt": "",
+      "status": 200,
+      "text_excerpt": "Skip to Content Oops! Page Not Found We're sorry, the page you're looking for no longer exists. Try the links below or sign on to citi.com/creditcards if you're already a cardmember. View All Credit Cards > You can view and compare features for all Citi® Credit Cards to decide which is best for you. Instantly compare up to 3 credit cards side by side. Citi Credit Knowledge Center > The more you know about credit, the better you can manage it. Visit the Knowledge Center for bite-size credit tips that make a big difference. Balance Transfer Credit Cards > A balance transfer may allow you to move existing balances from a high interest card to a credit card with a low intro APR on balance transfers. Explore and compare some of Citi's best credit cards. Site Map > Access the Site Map for a directory of the website.",
       "phones": []
     }
   ]

@@ -184,7 +184,7 @@ export function InputCard({
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 border-t border-slate-100 dark:border-slate-800/80">
           <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
             <Shield className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <span>We don&apos;t store what you paste. Analysis runs securely.</span>
+            <span>We don&apos;t store what you paste. Text is sent to Google&apos;s Gemini API to read it; don&apos;t include passwords or card numbers.</span>
           </p>
           <button
             type="submit"

@@ -172,7 +172,7 @@ export default function HomePage() {
             </span>
           </h1>
           <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed">
-            Callback checks suspicious texts, emails, or screenshots against official public directories and Wikidata P856 records from sources the scammer does not control.
+            Paste a suspicious text, email, or screenshot. Callback finds the claimed sender&apos;s real contact channels from sources the scammer doesn&apos;t control, and checks the message against them.
           </p>
         </div>
 

@@ -1,6 +1,9 @@
 import fs from "fs";
 import path from "path";
 
+// Every item is synthetic: written for this project (by the AI coding agent), modeled on the scam
+// patterns described in public consumer warnings (FTC, USPIS, IRS, SSA). None is a verbatim quote
+// from those pages or from a public dataset. See eval/SOURCES.md.
 interface EvalItem {
   id: string;
   text: string;
@@ -18,8 +21,8 @@ const items: EvalItem[] = [
     text: "USPS Notice: Your package US94022 could not be delivered due to an incorrect zip code. Update delivery address at usps-redelivery-post.xyz or package will be returned.",
     label: "scam",
     claimed_org: "USPS",
-    source_type: "published_example",
-    source_ref: "uspis_package_tracking_smishing",
+    source_type: "synthetic",
+    source_ref: "modeled_on:uspis_package_tracking_smishing",
     split: "dev",
   },
   {
@@ -27,8 +30,8 @@ const items: EvalItem[] = [
     text: "Wells Fargo Alert: Unusual charge of $489.12 detected on your debit card. If this was not you, call fraud prevention immediately at 888-555-0142.",
     label: "scam",
     claimed_org: "Wells Fargo",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "dev",
   },
   {
@@ -36,8 +39,8 @@ const items: EvalItem[] = [
     text: "Amazon: Your order #402-88192 for Sony TV ($949.00) is confirmed. If you did not authorize this purchase, cancel within 2 hours by calling +1 888-555-0199.",
     label: "scam",
     claimed_org: "Amazon",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "dev",
   },
   {
@@ -45,8 +48,8 @@ const items: EvalItem[] = [
     text: "Wells Fargo: Online access code is 492018. Do not share. We will never call to ask for this code. If you didn't request this, call 1-800-869-3557 or visit wellsfargo.com.",
     label: "legit",
     claimed_org: "Wells Fargo",
-    source_type: "published_example",
-    source_ref: "official_wellsfargo_alerts",
+    source_type: "synthetic",
+    source_ref: "synthetic_legit_brand_notice",
     split: "dev",
   },
   {
@@ -54,8 +57,8 @@ const items: EvalItem[] = [
     text: "USPS: Tracking #9400111899223344 has arrived at local facility. Scheduled delivery by 7pm today. Track details at https://tools.usps.com/go/TrackConfirmAction.",
     label: "legit",
     claimed_org: "USPS",
-    source_type: "published_example",
-    source_ref: "official_usps_informed_delivery",
+    source_type: "synthetic",
+    source_ref: "synthetic_legit_brand_notice",
     split: "dev",
   },
   {
@@ -63,8 +66,8 @@ const items: EvalItem[] = [
     text: "Hey Sarah, are we still meeting at the library at 3pm today? Let me know if you need a ride.",
     label: "legit",
     claimed_org: null,
-    source_type: "public_dataset",
-    source_ref: "uci_sms_spam_ham_baseline",
+    source_type: "synthetic",
+    source_ref: "synthetic_personal_message",
     split: "dev",
   },
   {
@@ -72,8 +75,8 @@ const items: EvalItem[] = [
     text: "Netflix: Your monthly subscription payment failed. Your account will be frozen unless updated within 24h at netflix-billing-update.top.",
     label: "scam",
     claimed_org: "Netflix",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "dev",
   },
   {
@@ -81,8 +84,8 @@ const items: EvalItem[] = [
     text: "IRS Warning: Final notice regarding unfiled tax assessment. Immediate settlement of $450 required via Target gift card to avoid arrest warrant. Call 800-555-0191.",
     label: "scam",
     claimed_org: "Internal Revenue Service",
-    source_type: "published_example",
-    source_ref: "irs_smishing_phishing_alerts",
+    source_type: "synthetic",
+    source_ref: "modeled_on:irs_smishing_phishing_alerts",
     split: "dev",
   },
   {
@@ -90,8 +93,8 @@ const items: EvalItem[] = [
     text: "Geek Squad Renewal: $399.00 auto-debited for 2-year PC tech protection. To dispute or refund, call our 24/7 hotline at 888-555-0188.",
     label: "scam",
     claimed_org: "Geek Squad",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "dev",
   },
   {
@@ -99,8 +102,8 @@ const items: EvalItem[] = [
     text: "PayPal: You sent $150.00 USD to John Doe. Review this transaction at paypal.com or contact support at paypal.com/us/cshelp/contact-us.",
     label: "legit",
     claimed_org: "PayPal",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "synthetic_legit_brand_notice",
     split: "dev",
   },
   {
@@ -108,8 +111,8 @@ const items: EvalItem[] = [
     text: "Don't forget mom's birthday dinner tomorrow night at 7! Dad made reservations.",
     label: "legit",
     claimed_org: null,
-    source_type: "public_dataset",
-    source_ref: "uci_sms_spam_ham_baseline",
+    source_type: "synthetic",
+    source_ref: "synthetic_personal_message",
     split: "dev",
   },
   {
@@ -117,8 +120,8 @@ const items: EvalItem[] = [
     text: "PayPal Security: Unauthorized login from Moscow. Secure your account now at paypal-security-check.xyz or funds will be locked.",
     label: "scam",
     claimed_org: "PayPal",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "dev",
   },
   {
@@ -126,8 +129,8 @@ const items: EvalItem[] = [
     text: "E-ZPass Toll Notice: You have an unpaid toll balance of $12.50. Pay immediately at ezpass-toll-violation.xyz to avoid $50 late penalty.",
     label: "scam",
     claimed_org: "E-ZPass",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "dev",
   },
   {
@@ -135,8 +138,8 @@ const items: EvalItem[] = [
     text: "Amazon: Your package with order 112-990182 has shipped. Delivery estimated by Thursday. View tracking at amazon.com/orders.",
     label: "legit",
     claimed_org: "Amazon",
-    source_type: "published_example",
-    source_ref: "official_amazon_shipment",
+    source_type: "synthetic",
+    source_ref: "synthetic_legit_brand_notice",
     split: "dev",
   },
   {
@@ -155,8 +158,8 @@ const items: EvalItem[] = [
     text: "USPS: We tried to deliver your parcel 94001928, but address was missing apartment number. Confirm address and pay $1.99 redelivery fee at usps-redelivery.xyz.",
     label: "scam",
     claimed_org: "USPS",
-    source_type: "published_example",
-    source_ref: "uspis_package_tracking_smishing",
+    source_type: "synthetic",
+    source_ref: "modeled_on:uspis_package_tracking_smishing",
     split: "test",
   },
   {
@@ -164,8 +167,8 @@ const items: EvalItem[] = [
     text: "Chase Fraud Alert: Did you attempt a $750.00 Zelle transfer to David Miller? Reply YES or NO. If NO, call 888-555-0155 immediately.",
     label: "scam",
     claimed_org: "Chase",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -173,8 +176,8 @@ const items: EvalItem[] = [
     text: "Social Security: Your SSN has been suspended due to suspected fraudulent activity in Texas. Contact investigator at 800-555-0177 immediately.",
     label: "scam",
     claimed_org: "Social Security Administration",
-    source_type: "published_example",
-    source_ref: "ssa_scam_advisory",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ssa_scam_advisory",
     split: "test",
   },
   {
@@ -182,8 +185,8 @@ const items: EvalItem[] = [
     text: "Bank of America: Debit card ending in 4019 temporarily restricted after suspicious POS charge in Miami. Re-verify identity at bankofamerica-security-portal.xyz.",
     label: "scam",
     claimed_org: "Bank of America",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -191,8 +194,8 @@ const items: EvalItem[] = [
     text: "Wells Fargo Alert: Did you spend $82.40 at CHEVRON #401? Reply YES or NO. If unauthorized, visit wellsfargo.com or call 1-800-869-3557.",
     label: "legit",
     claimed_org: "Wells Fargo",
-    source_type: "published_example",
-    source_ref: "official_wellsfargo_alerts",
+    source_type: "synthetic",
+    source_ref: "synthetic_legit_brand_notice",
     split: "test",
   },
   {
@@ -200,8 +203,8 @@ const items: EvalItem[] = [
     text: "Can you email me the slides from today's meeting before 5pm?",
     label: "legit",
     claimed_org: null,
-    source_type: "public_dataset",
-    source_ref: "uci_sms_spam_ham_baseline",
+    source_type: "synthetic",
+    source_ref: "synthetic_personal_message",
     split: "test",
   },
   {
@@ -209,8 +212,8 @@ const items: EvalItem[] = [
     text: "Apple ID: Your iCloud storage has expired and files will be permanently deleted in 12 hours. Renew payment at support-appleid-verify.com.",
     label: "scam",
     claimed_org: "Apple",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -228,7 +231,7 @@ const items: EvalItem[] = [
     label: "legit",
     claimed_org: "Venmo",
     source_type: "synthetic",
-    source_ref: "official_wellsfargo_alerts",
+    source_ref: "synthetic_legit_brand_notice",
     split: "test",
   },
   {
@@ -245,8 +248,8 @@ const items: EvalItem[] = [
     text: "SunPass Toll Enforcement: Final reminder. Outstanding toll balance $7.90 past due. Pay now at sunpass-toll-settlement.top to avoid registration hold.",
     label: "scam",
     claimed_org: "SunPass",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -254,8 +257,8 @@ const items: EvalItem[] = [
     text: "USPS: Package 920559028833 is out for delivery. View tracking updates at https://www.usps.com.",
     label: "legit",
     claimed_org: "USPS",
-    source_type: "published_example",
-    source_ref: "official_usps_informed_delivery",
+    source_type: "synthetic",
+    source_ref: "synthetic_legit_brand_notice",
     split: "test",
   },
   {
@@ -263,8 +266,8 @@ const items: EvalItem[] = [
     text: "Netflix: Your payment for next month has been processed. View details at https://help.netflix.com/contactus.",
     label: "legit",
     claimed_org: "Netflix",
-    source_type: "published_example",
-    source_ref: "official_wellsfargo_alerts",
+    source_type: "synthetic",
+    source_ref: "synthetic_legit_brand_notice",
     split: "test",
   },
   {
@@ -272,8 +275,8 @@ const items: EvalItem[] = [
     text: "Coinbase Security: A withdrawal request of 1.45 BTC was initiated from an unknown IP address. Cancel withdrawal at coinbase-support-auth.xyz.",
     label: "scam",
     claimed_org: "Coinbase",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -281,8 +284,8 @@ const items: EvalItem[] = [
     text: "Just checking in to see if you got home safely from the airport!",
     label: "legit",
     claimed_org: null,
-    source_type: "public_dataset",
-    source_ref: "uci_sms_spam_ham_baseline",
+    source_type: "synthetic",
+    source_ref: "synthetic_personal_message",
     split: "test",
   },
   {
@@ -291,7 +294,7 @@ const items: EvalItem[] = [
     label: "legit",
     claimed_org: "Best Buy",
     source_type: "synthetic",
-    source_ref: "official_amazon_shipment",
+    source_ref: "synthetic_legit_brand_notice",
     split: "test",
   },
   {
@@ -299,8 +302,8 @@ const items: EvalItem[] = [
     text: "FasTrak Alert: Unpaid toll of $6.00 detected on Golden Gate Bridge. Avoid court fees by paying at fastrak-bayarea-pay.top.",
     label: "scam",
     claimed_org: "FasTrak",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -308,8 +311,8 @@ const items: EvalItem[] = [
     text: "IRS: Notice of tax refund calculation error. An additional refund of $820.00 is available. Claim your payment at irs-tax-portal-gov.xyz.",
     label: "scam",
     claimed_org: "Internal Revenue Service",
-    source_type: "published_example",
-    source_ref: "irs_smishing_phishing_alerts",
+    source_type: "synthetic",
+    source_ref: "modeled_on:irs_smishing_phishing_alerts",
     split: "test",
   },
   {
@@ -317,8 +320,8 @@ const items: EvalItem[] = [
     text: "Capital One Fraud Alert: Did you attempt $320 at BEST BUY? Reply YES or NO. If NO, call 1-877-383-4802 or visit capitalone.com.",
     label: "legit",
     claimed_org: "Capital One",
-    source_type: "published_example",
-    source_ref: "official_wellsfargo_alerts",
+    source_type: "synthetic",
+    source_ref: "synthetic_legit_brand_notice",
     split: "test",
   },
   {
@@ -326,8 +329,8 @@ const items: EvalItem[] = [
     text: "Capital One: Unusual transaction detected. Account locked. Unlock now at capitalone-verify-signin.xyz or call 888-555-0182.",
     label: "scam",
     claimed_org: "Capital One",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -335,8 +338,8 @@ const items: EvalItem[] = [
     text: "Hey! Can you send over the recipe you used for the pasta last weekend?",
     label: "legit",
     claimed_org: null,
-    source_type: "public_dataset",
-    source_ref: "uci_sms_spam_ham_baseline",
+    source_type: "synthetic",
+    source_ref: "synthetic_personal_message",
     split: "test",
   },
   {
@@ -344,8 +347,8 @@ const items: EvalItem[] = [
     text: "Norton Security: $499 subscription auto-renewed for Norton 360 Deluxe. To cancel auto-debit, call customer care at 888-555-0133.",
     label: "scam",
     claimed_org: "Norton",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -354,7 +357,7 @@ const items: EvalItem[] = [
     label: "legit",
     claimed_org: "Zelle",
     source_type: "synthetic",
-    source_ref: "official_wellsfargo_alerts",
+    source_ref: "synthetic_legit_brand_notice",
     split: "test",
   },
   {
@@ -362,8 +365,8 @@ const items: EvalItem[] = [
     text: "Zelle: Security code 449201. A transfer of $500 to unknown account is pending. Cancel by calling Zelle Support at 888-555-0176.",
     label: "scam",
     claimed_org: "Zelle",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -371,8 +374,8 @@ const items: EvalItem[] = [
     text: "Medicare: New Medicare digital card issued. Confirm your address and Medicare ID at medicare-card-renew.top to receive your new card.",
     label: "scam",
     claimed_org: "Medicare",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -380,8 +383,8 @@ const items: EvalItem[] = [
     text: "Medicare: Review your preventative health benefit information at medicare.gov or call 1-800-633-4227.",
     label: "legit",
     claimed_org: "Medicare",
-    source_type: "published_example",
-    source_ref: "official_wellsfargo_alerts",
+    source_type: "synthetic",
+    source_ref: "synthetic_legit_brand_notice",
     split: "test",
   },
   {
@@ -389,8 +392,8 @@ const items: EvalItem[] = [
     text: "Thanks for meeting up today! Safe travels back home.",
     label: "legit",
     claimed_org: null,
-    source_type: "public_dataset",
-    source_ref: "uci_sms_spam_ham_baseline",
+    source_type: "synthetic",
+    source_ref: "synthetic_personal_message",
     split: "test",
   },
   {
@@ -398,8 +401,8 @@ const items: EvalItem[] = [
     text: "McAfee: Your antivirus subscription expired today. Your computer is infected with 5 viruses. Renew instantly at mcafee-antivirus-renew.xyz.",
     label: "scam",
     claimed_org: "McAfee",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -407,8 +410,8 @@ const items: EvalItem[] = [
     text: "Citi Security: Card blocked after unauthorized purchase of $890 at Apple Store. Unblock at citi-online-security.top.",
     label: "scam",
     claimed_org: "Citi",
-    source_type: "published_example",
-    source_ref: "ftc_consumer_alerts_2025_2026",
+    source_type: "synthetic",
+    source_ref: "modeled_on:ftc_consumer_alerts_2025_2026",
     split: "test",
   },
   {
@@ -417,7 +420,7 @@ const items: EvalItem[] = [
     label: "legit",
     claimed_org: "UPS",
     source_type: "synthetic",
-    source_ref: "official_amazon_shipment",
+    source_ref: "synthetic_legit_brand_notice",
     split: "test",
   },
   {
@@ -425,8 +428,8 @@ const items: EvalItem[] = [
     text: "UPS Express: Customs fee of $3.50 required before package release. Pay online at ups-customs-tracking.xyz.",
     label: "scam",
     claimed_org: "UPS",
-    source_type: "published_example",
-    source_ref: "uspis_package_tracking_smishing",
+    source_type: "synthetic",
+    source_ref: "modeled_on:uspis_package_tracking_smishing",
     split: "test",
   },
   {
@@ -434,8 +437,8 @@ const items: EvalItem[] = [
     text: "FedEx Delivery: Your parcel 7892182910 could not be delivered. Confirm re-delivery at fedex-schedule-package.top.",
     label: "scam",
     claimed_org: "FedEx",
-    source_type: "published_example",
-    source_ref: "uspis_package_tracking_smishing",
+    source_type: "synthetic",
+    source_ref: "modeled_on:uspis_package_tracking_smishing",
     split: "test",
   },
   {
@@ -452,8 +455,8 @@ const items: EvalItem[] = [
     text: "Let me know when you are free for a quick phone call this afternoon.",
     label: "legit",
     claimed_org: null,
-    source_type: "public_dataset",
-    source_ref: "uci_sms_spam_ham_baseline",
+    source_type: "synthetic",
+    source_ref: "synthetic_personal_message",
     split: "test",
   },
   {
@@ -461,8 +464,8 @@ const items: EvalItem[] = [
     text: "Bank of America: Your online banking password was changed. If you did not make this change, visit bankofamerica.com/customer-service/contact-us/ or call 1-800-432-1000.",
     label: "legit",
     claimed_org: "Bank of America",
-    source_type: "published_example",
-    source_ref: "official_wellsfargo_alerts",
+    source_type: "synthetic",
+    source_ref: "synthetic_legit_brand_notice",
     split: "test",
   },
 ];

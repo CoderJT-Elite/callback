@@ -69,8 +69,16 @@ export async function runPipeline(
     try {
       const llmOutput = await extractor(inputText, options.imageBuffer);
       if (llmOutput) {
-        extraction = mergeWithAntiHallucination(llmOutput, inputText);
-        addStep({ id: "extract", label: "AI extracted contact points and claimed sender", status: "ok" });
+        // For a screenshot the only "source text" is the AI's own transcription, so the
+        // substring check guards against invented contact points, not against misreading.
+        const sourceText = inputText.trim() ? inputText : llmOutput.is_screenshot_text || "";
+        extraction = mergeWithAntiHallucination(llmOutput, sourceText);
+        addStep({
+          id: "extract",
+          label: "AI extracted contact points and claimed sender",
+          status: "ok",
+          detail: !inputText.trim() && options.imageBuffer ? "Read from screenshot" : undefined,
+        });
       } else {
         extraction = deterministicExtract(inputText);
         addStep({ id: "extract", label: "AI reading unavailable; used deterministic extractors", status: "warn" });
@@ -82,6 +90,14 @@ export async function runPipeline(
   } else {
     extraction = deterministicExtract(inputText);
     addStep({ id: "extract", label: "Deterministic extraction of contact points", status: "ok" });
+  }
+
+  if (options.imageBuffer && !inputText.trim() && extraction.is_screenshot_text == null) {
+    addStep({
+      id: "extract_image",
+      label: "Screenshot reading needs the AI service, which is unavailable right now. Paste the text instead.",
+      status: "warn",
+    });
   }
 
   emit({ event: "extraction" as any, data: extraction });
@@ -138,7 +154,7 @@ export async function runPipeline(
     addStep({
       id: `check_url_${eId}`,
       label: `Checked link: ${urlRes.registrable_domain || url}`,
-      status: urlRes.is_official ? "ok" : "fail",
+      status: urlRes.evidence.status === "info" ? "ok" : urlRes.evidence.status,
       detail: urlRes.evidence.text,
     });
   }
@@ -166,7 +182,7 @@ export async function runPipeline(
     addStep({
       id: `check_email_${eId}`,
       label: `Checked email: ${email}`,
-      status: emailRes.is_official ? "ok" : "fail",
+      status: emailRes.evidence.status === "info" ? "ok" : emailRes.evidence.status,
       detail: emailRes.evidence.text,
     });
   }

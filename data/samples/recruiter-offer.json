@@ -19,8 +19,39 @@
       "event": "step",
       "data": {
         "id": "extract",
-        "label": "Deterministic extraction of contact points",
+        "label": "AI extracted contact points and claimed sender",
         "status": "ok"
+      }
+    },
+    {
+      "event": "extraction",
+      "data": {
+        "claimed_sender": {
+          "name": "Amazon Recruitment",
+          "kind": "company",
+          "evidence_quote": "Amazon Recruitment"
+        },
+        "asks": [
+          "Contact me to start your interview"
+        ],
+        "urgency_quotes": [],
+        "payment": {
+          "method": null,
+          "quote": null
+        },
+        "phones": [],
+        "urls": [],
+        "emails": [
+          "amazon-hr-careers@gmail.com"
+        ],
+        "handles": [],
+        "is_screenshot_text": null,
+        "dropped_hallucinations": {
+          "phones": [],
+          "urls": [],
+          "emails": [],
+          "invalid_sender_quote": false
+        }
       }
     },
     {
@@ -100,13 +131,19 @@
       "data": {
         "sentences": [
           {
-            "text": "The email address (amazon-hr-careers@gmail.com) is not from Amazon's verified email domain [E1].",
+            "text": "The message claims to be from Amazon, but the sender is using a free consumer email address [E1].",
+            "cites": [
+              "E1"
+            ]
+          },
+          {
+            "text": "Because this does not match official Amazon communication channels, this message cannot be verified [E1].",
             "cites": [
               "E1"
             ]
           }
         ],
-        "mode": "template",
+        "mode": "llm",
         "dropped_count": 0
       }
     },
@@ -116,24 +153,26 @@
         "id": "explanation",
         "label": "Generated evidence-backed explanation",
         "status": "ok",
-        "detail": "1 cited sentences (template)"
+        "detail": "2 cited sentences (llm)"
       }
     },
     {
       "event": "done",
       "data": {
-        "ms": 181
+        "ms": 2008
       }
     }
   ],
   "result": {
     "extraction": {
       "claimed_sender": {
-        "name": "Amazon",
+        "name": "Amazon Recruitment",
         "kind": "company",
-        "evidence_quote": "Amazon"
+        "evidence_quote": "Amazon Recruitment"
       },
-      "asks": [],
+      "asks": [
+        "Contact me to start your interview"
+      ],
       "urgency_quotes": [],
       "payment": {
         "method": null,
@@ -144,21 +183,27 @@
       "emails": [
         "amazon-hr-careers@gmail.com"
       ],
-      "handles": []
+      "handles": [],
+      "is_screenshot_text": null,
+      "dropped_hallucinations": {
+        "phones": [],
+        "urls": [],
+        "emails": [],
+        "invalid_sender_quote": false
+      }
     },
     "resolved_org": {
       "id": "amazon",
       "name": "Amazon",
       "wikidata_qid": "Q3884",
       "official_domains": [
-        "amazon.com",
-        "amazon.it"
+        "amazon.com"
       ],
       "contact_pages": [
         "https://www.amazon.com/gp/help/customer/display.html"
       ],
       "source": "curated",
-      "source_note": "domains from Wikidata P856 (Q3884) fetched 2026-10-03; URL https://www.amazon.com/gp/help/customer/display.html verified 405 2026-10-03"
+      "source_note": "official domains hand-checked 2026-10-03 (amazon.com 405); Wikidata P856 (Q3884) lists amazon.it, NOT used (not the organization's consumer domain); URL https://www.amazon.com/gp/help/customer/display.html verified 405 2026-10-03"
     },
     "evidences": [
       {
@@ -195,13 +240,19 @@
     "explanation": {
       "sentences": [
         {
-          "text": "The email address (amazon-hr-careers@gmail.com) is not from Amazon's verified email domain [E1].",
+          "text": "The message claims to be from Amazon, but the sender is using a free consumer email address [E1].",
+          "cites": [
+            "E1"
+          ]
+        },
+        {
+          "text": "Because this does not match official Amazon communication channels, this message cannot be verified [E1].",
           "cites": [
             "E1"
           ]
         }
       ],
-      "mode": "template",
+      "mode": "llm",
       "dropped_count": 0
     },
     "steps": [
@@ -213,7 +264,7 @@
       },
       {
         "id": "extract",
-        "label": "Deterministic extraction of contact points",
+        "label": "AI extracted contact points and claimed sender",
         "status": "ok"
       },
       {
@@ -244,7 +295,7 @@
         "id": "explanation",
         "label": "Generated evidence-backed explanation",
         "status": "ok",
-        "detail": "1 cited sentences (template)"
+        "detail": "2 cited sentences (llm)"
       }
     ]
   }

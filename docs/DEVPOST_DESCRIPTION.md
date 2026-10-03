@@ -1,42 +1,66 @@
-# Callback: Imposter Scam Verification Engine
+# Callback: find the real number before you call the fake one
 
 ## Inspiration
-According to the Federal Trade Commission (FTC), imposter scams remain the #1 reported fraud category, costing consumers over $2.7 billion in reported losses in 2023. Phishing and smishing tactics exploit fear and artificial urgency, tricking people into calling fake support numbers or clicking lookalike links contained right inside the message. Existing AI tools often fail because general-purpose LLMs hallucinate answers or invent fake facts. We built **Callback** to flip the paradigm: never trust contact details inside a message—find the real ones from sources the scammer cannot control.
+Imposter scams were the most reported fraud category in 2025: nearly one in three fraud reports to
+the FTC, and $3.5 billion in reported losses. The FTC notes some of the costliest start with a fake
+bank security alert. Every one of these scams depends on you using the phone number or link inside
+the message. The standard advice is "contact the company through a channel you find yourself," but
+almost nobody does that in the moment. AI-written scams make it worse: they're fluent, with no
+typos to give them away. So instead of judging how a message sounds, Callback checks whether its
+contact details really belong to the organization it claims to be.
 
 ## What it does
-Callback checks suspicious text messages, emails, and screenshots. It:
-1. Identifies the claimed organization or brand.
-2. Resolves official channels from independent public directories (curated build-time records and Wikidata P856 official website properties).
-3. Compares links, phones, and emails using deterministic rules (Levenshtein lookalike distance, RDAP domain registration age, and public suffix math).
-4. Issues an auditable verdict receipt (`MATCHES` or `DOESN'T MATCH`) with verified evidence citations (`[E1]`, `[E2]`).
-5. Provides an immediate incident response toolkit with pre-filled FTC/IC3 fraud summaries and printable PDF reports.
+Paste a text or email, or drop a screenshot. Callback:
+1. Works out who the message claims to be from (Gemini reads it; regexes re-check everything it
+   reports, and anything not in the original text is dropped).
+2. Looks up that organization's official domains and contact pages from a hand-checked list of 27
+   commonly impersonated US organizations, or from Wikidata with guards, never from the message.
+3. Checks every link (official domain? lookalike? registered how long ago?), phone number (listed on
+   the official contact page?), email (official domain or a free Gmail address?) and payment ask
+   (gift cards, crypto).
+4. Gives a verdict from seven fixed rules: DOESN'T MATCH (plus the real channel to use instead),
+   MATCHES, CAN'T VERIFY, or NO ORGANIZATION CLAIMED. Gemini then explains it, and every sentence
+   must cite a piece of evidence or it's dropped.
+5. If you already clicked or paid: next steps and a downloadable incident summary to paste into
+   ReportFraud.ftc.gov or ic3.gov.
 
 ## How we built it
-- **Full-Stack Framework:** Next.js 15 App Router, React 19, TypeScript strict mode, Tailwind CSS v3.
-- **Verification Engine:** Pure deterministic TypeScript rule engine (Rules 1–7) evaluating public suffix lookups (`tldts`), E.164 phone normalization (`libphonenumber-js`), and safe network fetches.
-- **Multimodal AI:** Google Gemini (`gemini-3.5-flash-lite`) via `@google/genai` for vision-based screenshot reading and plain-English explanation synthesis.
-- **Defensive Networking:** Custom SSRF protection rejecting RFC1918 private ranges, AWS/GCP metadata endpoints, and non-standard ports. URLs inside messages are queried strictly via HTTP HEAD—never downloading untrusted page bodies.
-- **Testing & Evals:** 64 Vitest unit tests, 18 Playwright end-to-end tests across desktop and mobile Chrome, and an automated 50-item evaluation harness (`npm run eval`).
+Next.js 15 and TypeScript on Vercel, streaming the investigation step by step. Gemini
+(`gemini-3.5-flash-lite`, JSON schema output) for reading messages and screenshots and for the
+explanation; `libphonenumber-js`, `tldts`, RDAP and Wikidata for the deterministic checks. Links in
+messages are never opened: only HEAD requests through an SSRF-safe fetch that blocks private and
+cloud-metadata addresses on every redirect. If Gemini is down or over quota, the rules still run
+and the trace says so. Tested with Vitest and Playwright, plus a three-way evaluation
+(`npm run eval`).
 
-## Challenges we overcame
-- **Preventing AI Hallucinations:** LLMs frequently invent phone numbers. We enforced a strict anti-hallucination substring merge: any extracted contact point not present in the raw input is dropped.
-- **API Quota Resilience:** When external LLM rate limits or 503 spikes occur, Callback gracefully degrades to deterministic regex extractors and template explanations without crashing.
-- **SSRF Safety:** Ensuring users cannot probe private internal networks through crafted URLs by enforcing pre-lookup DNS IP validation.
-
-## Accomplishments
-- **100% Deterministic Verdicts:** The verdict is decided strictly by rule code—the LLM never decides whether a message is fraudulent.
-- **Lighthouse Performance:** 98 Performance and 95 Accessibility on localhost.
-- **Zero Secrets Tracked:** Environment keys are guarded and never exposed to client browsers.
+## Challenges
+- **The internet's "official" data isn't always official.** Wikidata listed a 45-day-old unrelated
+  domain as Citigroup's official website. Trusting it would have marked real Citi texts as scams and
+  the fake domain as official. We switched to a hand-checked list and only accept a Wikidata website
+  if its label matches and the domain is over a year old.
+- **Official sites hide their phone numbers** or block scripts (Amazon, SSA, Coinbase). Callback says
+  "couldn't confirm" in those cases instead of guessing.
+- **Free-tier AI limits.** The first model we tried allowed 20 requests a day. We moved to a lighter
+  model and made every AI step optional.
 
 ## What we learned
-Deterministic code grounded in authoritative knowledge graphs (Wikidata P856) is infinitely more reliable for fraud detection than open-ended generative text. AI shines when transcribing messy screenshots or summarizing verified receipts—not deciding the verdict.
+We ran the same 35 test messages through Gemini alone and through Callback. All of them are synthetic
+examples we wrote. Gemini alone flagged all 20 scams but also called a legitimate Zelle receipt a
+scam, and it can't show why. Callback flagged 15 of 20, never flagged a legitimate message, and
+backed every verdict with a source. The other 5 it marked "can't verify" rather than guessing. For a
+tool people use before they call a number, we think a receipt matters more than a confident guess.
+The numbers come from our own synthetic set, not real-world data.
 
 ## What's next
-- Native mobile SMS filtering extension (iOS CallKit and Android SMS spam filter).
-- Expanding the curated institution directory beyond 27 US brands to international telecommunications and banking portals.
+Real labeled smishing data for evaluation, more organizations and countries, checking Telegram and
+WhatsApp handles, and a share-sheet shortcut so you can check a text without copying it.
 
 ---
 
-### What Works / What Doesn't (Submission Block)
-- **Works:** Instant replay on standard samples, 27 curated US brands, lookalike domain scoring, RDAP domain age checks, incident reporting toolkit, mobile responsiveness.
-- **Doesn't:** Brands lacking Wikidata P856 records result in honest `CAN'T VERIFY` abstentions; official websites with aggressive Cloudflare/Akamai bot blockers fall back to build-time snapshots; personal impersonation texts receive situational advice rather than brand matches.
+### What works / what doesn't
+- **Works:** live checks of pasted text and screenshots; 5 pre-computed samples; 27 hand-checked
+  organizations; lookalike, domain-age, shortener, phone, email and payment checks; incident summary;
+  keyless fallback; mobile layout.
+- **Doesn't (yet):** phone numbers can only be confirmed where the official page lists them (several
+  don't or block scripts); organizations outside the list depend on Wikidata; Telegram/WhatsApp
+  handles aren't checked; US numbers and English first; the evaluation set is synthetic.

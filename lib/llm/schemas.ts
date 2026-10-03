@@ -29,10 +29,15 @@ export const PaymentExtractionSchema = z.object({
 });
 
 export const LlmExtractionSchema = z.object({
-  claimed_sender: ClaimedSenderSchema.default({ name: null, kind: "unknown", evidence_quote: null }),
+  claimed_sender: ClaimedSenderSchema.nullable()
+    .transform(v => v ?? { name: null, kind: "unknown" as const, evidence_quote: null })
+    .default({ name: null, kind: "unknown", evidence_quote: null }),
   asks: z.array(z.string()).default([]),
   urgency_quotes: z.array(z.string()).default([]),
-  payment: PaymentExtractionSchema.default({ method: null, quote: null }),
+  // Models sometimes return payment: null when there is no payment ask; treat that as "none".
+  payment: PaymentExtractionSchema.nullable()
+    .transform(v => v ?? { method: null, quote: null })
+    .default({ method: null, quote: null }),
   phones: z.array(z.string()).default([]),
   urls: z.array(z.string()).default([]),
   emails: z.array(z.string()).default([]),

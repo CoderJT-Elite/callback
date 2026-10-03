@@ -2,11 +2,12 @@
   "org_id": "ezpass",
   "org_name": "E-ZPass",
   "official_domains": [
-    "e-zpassiag.com"
+    "e-zpassiag.com",
+    "e-zpassgroup.org"
   ],
   "contact_pages": [
     {
-      "url": "https://www.e-zpassiag.com/contact-us",
+      "url": "https://www.e-zpassgroup.org/index.php",
       "fetched_at": "2026-10-03",
       "status": 200,
       "text_excerpt": "Skip to main content Search Site Search IAG Portal There has been a major increase in fraudulent text & email messages being sent that appear to be from various toll agencies across the country including the E-ZPass Group stating there is money owed. If you receive a text that appears to be from E-ZPass or a specific toll facility, please go directly to that toll facility's website to validate. Do not click on any links or call any phone numbers in the message you received.The E-ZPass Group itself does not hold customer accounts or collect tolls! We support our member agencies/companies who directly support their own customers. A list of our member agencies/companies can be found here: E-ZPass Group - Members. If you get a message claiming to be from the E-ZPass Group saying that you owe a toll, it is a scam!If you believe you have been targeted, you can report fraudulent texts to the Federal Trade Commission and/or the FBI’s Internet Crime Complaint Center. Be sure to include the phone number or email address from where the message was sent, and the website listed in the text of the message. Welcome to the E-ZPass Group For customers, select from below: Get An Find the nearest E-ZPass Customer Service center near you. Get Started Here Get Started Here Customer Service Centers Need assistance with your E-ZPass transponder or E-ZPass account? Learn More Learn More FAQs Find answers to commonly asked questions from E-ZPass Customers. Continue Continue E-ZPass News & Press Relea",

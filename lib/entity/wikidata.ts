@@ -23,6 +23,8 @@ const VALID_ORG_P31 = new Set([
   "Q6881511", // enterprise
   "Q1589009", // commercial organization
   "Q1334812", // agency
+  "Q22687",   // bank
+  "Q3918",    // university
 ]);
 
 /**

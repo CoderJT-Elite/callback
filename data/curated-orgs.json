@@ -15,7 +15,7 @@
       "https://www.usps.com/help/contact-us.htm"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q668687) fetched 2026-10-03; URL https://www.usps.com/help/contact-us.htm verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (usps.com 200); Wikidata P856 (Q668687) agrees: usps.com; URL https://www.usps.com/help/contact-us.htm verified 200 2026-10-03"
   },
   {
     "id": "ups",
@@ -31,7 +31,7 @@
       "https://www.ups.com/us/en/support/contact-us.page"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q155026) fetched 2026-10-03; URL https://www.ups.com/us/en/support/contact-us.page verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (ups.com 200); Wikidata P856 (Q155026) agrees: ups.com; URL https://www.ups.com/us/en/support/contact-us.page verified 200 2026-10-03"
   },
   {
     "id": "fedex",
@@ -44,10 +44,10 @@
       "fedex.com"
     ],
     "contact_pages": [
-      "https://www.fedex.com/en-us/customer-support.html"
+      "https://www.fedex.com/en-us/customer-support/call-us.html"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q459477) fetched 2026-10-03; URL https://www.fedex.com/en-us/customer-support.html verified ERROR 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (fedex.com ERROR); Wikidata P856 (Q459477) agrees: fedex.com; URL https://www.fedex.com/en-us/customer-support/call-us.html verified ERROR 2026-10-03"
   },
   {
     "id": "dhl",
@@ -63,7 +63,7 @@
       "https://www.dhl.com/us-en/home/customer-service.html"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q489815) fetched 2026-10-03; URL https://www.dhl.com/us-en/home/customer-service.html verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (dhl.com ERROR); Wikidata P856 (Q489815) agrees: dhl.com; URL https://www.dhl.com/us-en/home/customer-service.html verified 200 2026-10-03"
   },
   {
     "id": "amazon",
@@ -74,14 +74,13 @@
     ],
     "wikidata": "Q3884",
     "official_domains": [
-      "amazon.com",
-      "amazon.it"
+      "amazon.com"
     ],
     "contact_pages": [
       "https://www.amazon.com/gp/help/customer/display.html"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q3884) fetched 2026-10-03; URL https://www.amazon.com/gp/help/customer/display.html verified 405 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (amazon.com 405); Wikidata P856 (Q3884) lists amazon.it, NOT used (not the organization's consumer domain); URL https://www.amazon.com/gp/help/customer/display.html verified 405 2026-10-03"
   },
   {
     "id": "apple",
@@ -93,13 +92,14 @@
     ],
     "wikidata": "Q312",
     "official_domains": [
-      "apple.com"
+      "apple.com",
+      "icloud.com"
     ],
     "contact_pages": [
-      "https://support.apple.com/contact"
+      "https://www.apple.com/contact/"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q312) fetched 2026-10-03; URL https://support.apple.com/contact verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (apple.com 200, icloud.com 200); Wikidata P856 (Q312) agrees: apple.com; URL https://www.apple.com/contact/ verified 200 2026-10-03"
   },
   {
     "id": "microsoft",
@@ -116,7 +116,7 @@
       "https://support.microsoft.com/contactus"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q2283) fetched 2026-10-03; URL https://support.microsoft.com/contactus verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (microsoft.com 200); Wikidata P856 (Q2283) agrees: microsoft.com; URL https://support.microsoft.com/contactus verified 200 2026-10-03"
   },
   {
     "id": "paypal",
@@ -132,7 +132,7 @@
       "https://www.paypal.com/us/cshelp/contact-us"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q483959) fetched 2026-10-03; URL https://www.paypal.com/us/cshelp/contact-us verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (paypal.com 200); Wikidata P856 (Q483959) agrees: paypal.com; URL https://www.paypal.com/us/cshelp/contact-us verified 200 2026-10-03"
   },
   {
     "id": "netflix",
@@ -148,7 +148,7 @@
       "https://help.netflix.com/contactus"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q907311) fetched 2026-10-03; URL https://help.netflix.com/contactus verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (netflix.com 405); Wikidata P856 (Q907311) agrees: netflix.com; URL https://help.netflix.com/contactus verified 200 2026-10-03"
   },
   {
     "id": "chase",
@@ -163,10 +163,10 @@
       "jpmorganchase.com"
     ],
     "contact_pages": [
-      "https://www.chase.com/digital/resources/privacy-security/security/how-we-protect-you"
+      "https://www.chase.com/digital/customer-service"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q192314) fetched 2026-10-03; URL https://www.chase.com/digital/resources/privacy-security/security/how-we-protect-you verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (chase.com 200, jpmorganchase.com 200); Wikidata P856 (Q192314) agrees: jpmorganchase.com; URL https://www.chase.com/digital/customer-service verified 200 2026-10-03"
   },
   {
     "id": "bank-of-america",
@@ -179,10 +179,11 @@
       "bankofamerica.com"
     ],
     "contact_pages": [
-      "https://www.bankofamerica.com/customer-service/contact-us/"
+      "https://www.bankofamerica.com/customer-service/contact-us/",
+      "https://web.bankofamerica.com/en/security/report-suspicious-activity"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q487907) fetched 2026-10-03; URL https://www.bankofamerica.com/customer-service/contact-us/ verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (bankofamerica.com 200); Wikidata P856 (Q487907) agrees: bankofamerica.com; URL https://www.bankofamerica.com/customer-service/contact-us/ verified 200 2026-10-03; URL https://web.bankofamerica.com/en/security/report-suspicious-activity verified 404 2026-10-03"
   },
   {
     "id": "wells-fargo",
@@ -198,7 +199,7 @@
       "https://www.wellsfargo.com/help/contact-us/"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q744149) fetched 2026-10-03; URL https://www.wellsfargo.com/help/contact-us/ verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (wellsfargo.com 200); Wikidata P856 (Q744149) agrees: wellsfargo.com; URL https://www.wellsfargo.com/help/contact-us/ verified 200 2026-10-03"
   },
   {
     "id": "citi",
@@ -209,13 +210,14 @@
     ],
     "wikidata": "Q219508",
     "official_domains": [
-      "citibnqa.com"
+      "citi.com",
+      "citibank.com"
     ],
     "contact_pages": [
-      "https://www.citi.com/customer-service/contact-us"
+      "https://www.citi.com/credit-cards/citi-contact-us"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q219508) fetched 2026-10-03; URL https://www.citi.com/customer-service/contact-us verified 403 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (citi.com 403, citibank.com 403); Wikidata P856 (Q219508) lists citibnqa.com, NOT used (not the organization's consumer domain); URL https://www.citi.com/credit-cards/citi-contact-us verified 403 2026-10-03"
   },
   {
     "id": "capital-one",
@@ -231,7 +233,7 @@
       "https://www.capitalone.com/support-center/contact-us/"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q1034654) fetched 2026-10-03; URL https://www.capitalone.com/support-center/contact-us/ verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (capitalone.com 200); Wikidata P856 (Q1034654) agrees: capitalone.com; URL https://www.capitalone.com/support-center/contact-us/ verified 200 2026-10-03"
   },
   {
     "id": "irs",
@@ -247,7 +249,7 @@
       "https://www.irs.gov/help/telephone-assistance"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q973587) fetched 2026-10-03; URL https://www.irs.gov/help/telephone-assistance verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (irs.gov 200); Wikidata P856 (Q973587) agrees: irs.gov; URL https://www.irs.gov/help/telephone-assistance verified 200 2026-10-03"
   },
   {
     "id": "ssa",
@@ -257,13 +259,14 @@
     ],
     "wikidata": "Q2824618",
     "official_domains": [
-      "ssa.gov"
+      "ssa.gov",
+      "socialsecurity.gov"
     ],
     "contact_pages": [
       "https://www.ssa.gov/agency/contact/"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q2824618) fetched 2026-10-03; URL https://www.ssa.gov/agency/contact/ verified 403 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (ssa.gov 403, socialsecurity.gov 403); Wikidata P856 (Q2824618) agrees: ssa.gov; URL https://www.ssa.gov/agency/contact/ verified 403 2026-10-03"
   },
   {
     "id": "medicare",
@@ -274,13 +277,14 @@
     ],
     "wikidata": "Q5060058",
     "official_domains": [
+      "medicare.gov",
       "cms.gov"
     ],
     "contact_pages": [
       "https://www.medicare.gov/talk-to-someone"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q5060058) fetched 2026-10-03; URL https://www.medicare.gov/talk-to-someone verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (medicare.gov 200, cms.gov 200); Wikidata P856 (Q5060058) agrees: cms.gov; URL https://www.medicare.gov/talk-to-someone verified 200 2026-10-03"
   },
   {
     "id": "ezpass",
@@ -291,13 +295,14 @@
     ],
     "wikidata": "Q800074",
     "official_domains": [
-      "e-zpassiag.com"
+      "e-zpassiag.com",
+      "e-zpassgroup.org"
     ],
     "contact_pages": [
-      "https://www.e-zpassiag.com/contact-us"
+      "https://www.e-zpassgroup.org/index.php"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q800074) fetched 2026-10-03; URL https://www.e-zpassiag.com/contact-us verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (e-zpassiag.com 200, e-zpassgroup.org 200); Wikidata P856 (Q800074) agrees: e-zpassiag.com; URL https://www.e-zpassgroup.org/index.php verified 200 2026-10-03"
   },
   {
     "id": "sunpass",
@@ -314,7 +319,7 @@
       "https://www.sunpass.com/en/support/contactSunPass.shtml"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q7638154) fetched 2026-10-03; URL https://www.sunpass.com/en/support/contactSunPass.shtml verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (sunpass.com 200); Wikidata P856 (Q7638154) agrees: sunpass.com; URL https://www.sunpass.com/en/support/contactSunPass.shtml verified 200 2026-10-03"
   },
   {
     "id": "fastrak",
@@ -331,7 +336,7 @@
       "https://www.bayareafastrak.org/en/support/contact-us.shtml"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q806096) fetched 2026-10-03; URL https://www.bayareafastrak.org/en/support/contact-us.shtml verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (bayareafastrak.org 200); Wikidata P856 (Q806096): none; URL https://www.bayareafastrak.org/en/support/contact-us.shtml verified 200 2026-10-03"
   },
   {
     "id": "coinbase",
@@ -347,7 +352,7 @@
       "https://help.coinbase.com/en/contact-us"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q16972754) fetched 2026-10-03; URL https://help.coinbase.com/en/contact-us verified 403 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (coinbase.com 403); Wikidata P856 (Q16972754) agrees: coinbase.com; URL https://help.coinbase.com/en/contact-us verified 403 2026-10-03"
   },
   {
     "id": "venmo",
@@ -360,10 +365,10 @@
       "venmo.com"
     ],
     "contact_pages": [
-      "https://help.venmo.com/hc/en-us/articles/217532217-Contact-Venmo"
+      "https://help.venmo.com/"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q24839341) fetched 2026-10-03; URL https://help.venmo.com/hc/en-us/articles/217532217-Contact-Venmo verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (venmo.com 200); Wikidata P856 (Q24839341) agrees: venmo.com; URL https://help.venmo.com/ verified 200 2026-10-03"
   },
   {
     "id": "zelle",
@@ -374,13 +379,14 @@
     ],
     "wikidata": "Q30295146",
     "official_domains": [
-      "earlywarning.com"
+      "zelle.com",
+      "zellepay.com"
     ],
     "contact_pages": [
-      "https://www.zellepay.com/contact-us"
+      "https://www.zelle.com/contact-us"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q30295146) fetched 2026-10-03; URL https://www.zellepay.com/contact-us verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (zelle.com 200, zellepay.com 200); Wikidata P856 (Q30295146) lists earlywarning.com, NOT used (not the organization's consumer domain); URL https://www.zelle.com/contact-us verified 200 2026-10-03"
   },
   {
     "id": "geek-squad",
@@ -390,13 +396,14 @@
     ],
     "wikidata": "Q3100073",
     "official_domains": [
-      "geeksquad.com"
+      "geeksquad.com",
+      "bestbuy.com"
     ],
     "contact_pages": [
       "https://www.bestbuy.com/site/services/geek-squad/pcmcat138100050018.c"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q3100073) fetched 2026-10-03; URL https://www.bestbuy.com/site/services/geek-squad/pcmcat138100050018.c verified ERROR 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (geeksquad.com ERROR, bestbuy.com ERROR); Wikidata P856 (Q3100073) agrees: geeksquad.com; URL https://www.bestbuy.com/site/services/geek-squad/pcmcat138100050018.c verified ERROR 2026-10-03"
   },
   {
     "id": "best-buy",
@@ -412,7 +419,7 @@
       "https://www.bestbuy.com/site/help-topics/contact-us/pcmcat204400050019.c"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q533415) fetched 2026-10-03; URL https://www.bestbuy.com/site/help-topics/contact-us/pcmcat204400050019.c verified ERROR 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (bestbuy.com ERROR); Wikidata P856 (Q533415) agrees: bestbuy.com; URL https://www.bestbuy.com/site/help-topics/contact-us/pcmcat204400050019.c verified ERROR 2026-10-03"
   },
   {
     "id": "norton",
@@ -423,13 +430,13 @@
     ],
     "wikidata": "Q677085",
     "official_domains": [
-      "nortonlifelock.com"
+      "norton.com"
     ],
     "contact_pages": [
       "https://support.norton.com/sp/en/us/home/current/contact"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q677085) fetched 2026-10-03; URL https://support.norton.com/sp/en/us/home/current/contact verified 200 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (norton.com 200); Wikidata P856 (Q677085) lists nortonlifelock.com, NOT used (not the organization's consumer domain); URL https://support.norton.com/sp/en/us/home/current/contact verified 200 2026-10-03"
   },
   {
     "id": "mcafee",
@@ -445,6 +452,6 @@
       "https://www.mcafee.com/support/contact/"
     ],
     "known_sms_shortcodes": [],
-    "source_notes": "domains from Wikidata P856 (Q16876633) fetched 2026-10-03; URL https://www.mcafee.com/support/contact/ verified ERROR 2026-10-03"
+    "source_notes": "official domains hand-checked 2026-10-03 (mcafee.com ERROR); Wikidata P856 (Q16876633): none; URL https://www.mcafee.com/support/contact/ verified ERROR 2026-10-03"
   }
 ]

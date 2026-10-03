@@ -9,7 +9,7 @@ export function Footer() {
           Callback helps you check. It can be wrong, and it does not replace your personal judgment.
         </p>
         <p className="text-[11px] leading-relaxed max-w-xl mx-auto">
-          Built for <strong className="text-slate-700 dark:text-slate-200">ForgeHacks Online 2026</strong> (AI + Cybersecurity Track) with AI coding agents under John Tewolde&apos;s direction. Primary verification uses deterministic public suffix math, RDAP, and Wikidata P856 records.
+          Built for <strong className="text-slate-700 dark:text-slate-200">ForgeHacks Online 2026</strong> (AI + Cybersecurity Track) with AI coding agents under John Tewolde&apos;s direction. Verdicts come from fixed rules: a hand-checked list of official channels, domain checks and RDAP, not the AI.
         </p>
         <div className="pt-2 flex justify-center items-center gap-4 text-[11px]">
           <Link href="/how-it-works" className="hover:underline">
@@ -17,12 +17,12 @@ export function Footer() {
           </Link>
           <span>·</span>
           <a
-            href="https://policies.google.com/terms"
+            href="https://ai.google.dev/gemini-api/terms"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline"
           >
-            Gemini Terms
+            Gemini API Terms
           </a>
           <span>·</span>
           <a

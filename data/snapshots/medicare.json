@@ -2,6 +2,7 @@
   "org_id": "medicare",
   "org_name": "Medicare",
   "official_domains": [
+    "medicare.gov",
     "cms.gov"
   ],
   "contact_pages": [

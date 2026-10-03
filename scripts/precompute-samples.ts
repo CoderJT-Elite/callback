@@ -1,7 +1,11 @@
 import fs from "fs";
 import path from "path";
+import { loadLocalEnv } from "./loadEnv";
 import { runPipeline } from "../lib/pipeline";
+
 import { SSEEventData } from "../lib/types";
+
+loadLocalEnv();
 
 export interface SampleDefinition {
   id: string;

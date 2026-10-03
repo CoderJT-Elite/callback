@@ -21,7 +21,7 @@ Use this guide to record the official ForgeHacks 2026 demo video smoothly.
 3. Open a second tab at `http://localhost:3000/how-it-works`.
 4. Copy the test paste snippet to your clipboard:
    ```text
-   USPS: Action required. Package delivery pending fee payment of $1.99 at usps-redelivery.xyz. Call 888-555-0142.
+   USPS: Your package #US9402283 could not be delivered due to an incorrect address. Pay $1.99 redelivery fee within 24 hours at usps-redelivery-notice.xyz to avoid return.
    ```
 
 ---

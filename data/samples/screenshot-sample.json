@@ -19,8 +19,40 @@
       "event": "step",
       "data": {
         "id": "extract",
-        "label": "Deterministic extraction of contact points",
+        "label": "AI extracted contact points and claimed sender",
         "status": "ok"
+      }
+    },
+    {
+      "event": "extraction",
+      "data": {
+        "claimed_sender": {
+          "name": "USPS",
+          "kind": "government",
+          "evidence_quote": "USPS Notification"
+        },
+        "asks": [
+          "Update billing information"
+        ],
+        "urgency_quotes": [],
+        "payment": {
+          "method": null,
+          "quote": null
+        },
+        "phones": [],
+        "urls": [
+          "https://usps-address-update.xyz",
+          "usps-address-update.xyz"
+        ],
+        "emails": [],
+        "handles": [],
+        "is_screenshot_text": null,
+        "dropped_hallucinations": {
+          "phones": [],
+          "urls": [],
+          "emails": [],
+          "invalid_sender_quote": false
+        }
       }
     },
     {
@@ -70,6 +102,34 @@
       }
     },
     {
+      "event": "evidence",
+      "data": {
+        "id": "E2",
+        "kind": "url",
+        "status": "fail",
+        "text": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)",
+        "source": {
+          "url": "usps-address-update.xyz",
+          "rule_id": "RULE_LOOKALIKE_DOMAIN"
+        },
+        "meta": {
+          "domain": "usps-address-update.xyz",
+          "is_official": false,
+          "lookalike_score": 0.85,
+          "age_days": null
+        }
+      }
+    },
+    {
+      "event": "step",
+      "data": {
+        "id": "check_url_E2",
+        "label": "Checked link: usps-address-update.xyz",
+        "status": "fail",
+        "detail": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)"
+      }
+    },
+    {
       "event": "verdict",
       "data": {
         "type": "DOESNT_MATCH",
@@ -102,13 +162,19 @@
       "data": {
         "sentences": [
           {
-            "text": "The link directs to usps-address-update.xyz, which does not belong to USPS [E1].",
+            "text": "The link provided in the message is not an official USPS address [E1].",
             "cites": [
               "E1"
             ]
+          },
+          {
+            "text": "The domain is an unregistered lookalike that only mimics the brand name [E2].",
+            "cites": [
+              "E2"
+            ]
           }
         ],
-        "mode": "template",
+        "mode": "llm",
         "dropped_count": 0
       }
     },
@@ -118,13 +184,13 @@
         "id": "explanation",
         "label": "Generated evidence-backed explanation",
         "status": "ok",
-        "detail": "1 cited sentences (template)"
+        "detail": "2 cited sentences (llm)"
       }
     },
     {
       "event": "done",
       "data": {
-        "ms": 234
+        "ms": 2712
       }
     }
   ],
@@ -133,9 +199,11 @@
       "claimed_sender": {
         "name": "USPS",
         "kind": "government",
-        "evidence_quote": "USPS"
+        "evidence_quote": "USPS Notification"
       },
-      "asks": [],
+      "asks": [
+        "Update billing information"
+      ],
       "urgency_quotes": [],
       "payment": {
         "method": null,
@@ -143,10 +211,18 @@
       },
       "phones": [],
       "urls": [
-        "https://usps-address-update.xyz"
+        "https://usps-address-update.xyz",
+        "usps-address-update.xyz"
       ],
       "emails": [],
-      "handles": []
+      "handles": [],
+      "is_screenshot_text": null,
+      "dropped_hallucinations": {
+        "phones": [],
+        "urls": [],
+        "emails": [],
+        "invalid_sender_quote": false
+      }
     },
     "resolved_org": {
       "id": "usps",
@@ -159,7 +235,7 @@
         "https://www.usps.com/help/contact-us.htm"
       ],
       "source": "curated",
-      "source_note": "domains from Wikidata P856 (Q668687) fetched 2026-10-03; URL https://www.usps.com/help/contact-us.htm verified 200 2026-10-03"
+      "source_note": "official domains hand-checked 2026-10-03 (usps.com 200); Wikidata P856 (Q668687) agrees: usps.com; URL https://www.usps.com/help/contact-us.htm verified 200 2026-10-03"
     },
     "evidences": [
       {
@@ -169,6 +245,22 @@
         "text": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)",
         "source": {
           "url": "https://usps-address-update.xyz",
+          "rule_id": "RULE_LOOKALIKE_DOMAIN"
+        },
+        "meta": {
+          "domain": "usps-address-update.xyz",
+          "is_official": false,
+          "lookalike_score": 0.85,
+          "age_days": null
+        }
+      },
+      {
+        "id": "E2",
+        "kind": "url",
+        "status": "fail",
+        "text": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)",
+        "source": {
+          "url": "usps-address-update.xyz",
           "rule_id": "RULE_LOOKALIKE_DOMAIN"
         },
         "meta": {
@@ -198,13 +290,19 @@
     "explanation": {
       "sentences": [
         {
-          "text": "The link directs to usps-address-update.xyz, which does not belong to USPS [E1].",
+          "text": "The link provided in the message is not an official USPS address [E1].",
           "cites": [
             "E1"
           ]
+        },
+        {
+          "text": "The domain is an unregistered lookalike that only mimics the brand name [E2].",
+          "cites": [
+            "E2"
+          ]
         }
       ],
-      "mode": "template",
+      "mode": "llm",
       "dropped_count": 0
     },
     "steps": [
@@ -216,7 +314,7 @@
       },
       {
         "id": "extract",
-        "label": "Deterministic extraction of contact points",
+        "label": "AI extracted contact points and claimed sender",
         "status": "ok"
       },
       {
@@ -238,6 +336,12 @@
         "detail": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)"
       },
       {
+        "id": "check_url_E2",
+        "label": "Checked link: usps-address-update.xyz",
+        "status": "fail",
+        "detail": "Link \"usps-address-update.xyz\" is NOT an official USPS address · Contains brand name token \"usps\" in domain \"usps-address-update.xyz\" (lookalike score 0.85) · unregistered lookalike domain (RDAP)"
+      },
+      {
         "id": "verdict",
         "label": "Verdict: DOESN'T MATCH THE REAL USPS",
         "status": "fail",
@@ -247,7 +351,7 @@
         "id": "explanation",
         "label": "Generated evidence-backed explanation",
         "status": "ok",
-        "detail": "1 cited sentences (template)"
+        "detail": "2 cited sentences (llm)"
       }
     ]
   }

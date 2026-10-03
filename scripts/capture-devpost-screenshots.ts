@@ -2,6 +2,8 @@ import { chromium } from "playwright";
 import fs from "fs";
 import path from "path";
 
+const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
 async function capture() {
   const outDir = path.resolve(process.cwd(), "docs/devpost");
   if (!fs.existsSync(outDir)) {
@@ -22,7 +24,7 @@ async function capture() {
     });
 
     console.log(`Capturing for ${vp.name} (${vp.width}x${vp.height})...`);
-    await page.goto("http://localhost:3000/");
+    await page.goto(`${BASE_URL}/`);
 
     // 0. Landing hero state
     await page.screenshot({
@@ -84,7 +86,7 @@ async function capture() {
     });
 
     // 7. How it works page
-    await page.goto("http://localhost:3000/how-it-works");
+    await page.goto(`${BASE_URL}/how-it-works`);
     await page.screenshot({
       path: path.join(outDir, `07-how-it-works-${vp.name}.png`),
       fullPage: true,

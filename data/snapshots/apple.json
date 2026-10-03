@@ -2,15 +2,24 @@
   "org_id": "apple",
   "org_name": "Apple",
   "official_domains": [
-    "apple.com"
+    "apple.com",
+    "icloud.com"
   ],
   "contact_pages": [
     {
-      "url": "https://support.apple.com/contact",
+      "url": "https://www.apple.com/contact/",
       "fetched_at": "2026-10-03",
       "status": 200,
-      "text_excerpt": "Contact Apple Support Update or restore iOS Billing and subscriptions Forgot passcode Get the help you need iPhone Support Mac laptops iPad Support Apple Account App Store More products Get the Apple Support app You can get personalized help with all your Apple products in the Apple Support app. Ask questions over chat, start a repair, watch videos, and more. Download the app Get help with purchasesCheck order status or find out about Apple Trade In. Buy an AppleCare plan or shop for products and accessories. See sales support options Connect with supportHere’s where to find the Apple Support phone number for your country or region. Contact us More topics Mobile carriers Check your service and support coverage Lost or stolen iPhone, iPad, or iPod touch Lost or stolen Mac",
-      "phones": []
+      "text_excerpt": "Contacting Apple Sales and Product Inquiries Apple Online Store Apple.com is a convenient place to purchase Apple products and accessories from Apple and other manufacturers. You can buy online or call 1-800-MY-APPLE (1-800-692-7753). You can get information about an order you placed on the Apple Online Store through the Order Status page. If you prefer, you can also get order status or make changes by phone at 1-800-692-7753. Shop with SignTime ASL Support American Sign Language (ASL) interpreters are available for all your online shopping needs, right in your web browser. Connect to an interpreter Apple Retail Stores Experience the digital lifestyle at any of the Apple Retail Stores around the country. Find store hours and contact information for all locations. Get Financing for You, Your Business, or Your School Apple Financial Services offers financing on Apple products for consumers, educational institutions, and businesses. Speak with your Apple representative to learn more. Find Consultants Visit our Apple Consultants Network page to find a consultant in the U.S. or Canada. How to Buy for Business If you are a business or professional user, visit the Apple Store for Business or call 1–800–854–3680. Corporate and Government Sales: Apple Enterprise Sales (877) 412–7753 Apple Government Sales (877) 418–2573 How to Buy for Education If you are a student or teacher, visit the Apple Store for Education or call 1–800–692–7753. If you are buying on behalf of an educational ins",
+      "phones": [
+        "+18006927753",
+        "+18008543680",
+        "+18774127753",
+        "+18774182573",
+        "+18008002775",
+        "+18005389696",
+        "+14089961010"
+      ]
     }
   ]
 }

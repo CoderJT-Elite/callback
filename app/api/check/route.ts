@@ -6,6 +6,9 @@ import { SSEEventData } from "@/lib/types";
 export const maxDuration = 60;
 export const runtime = "nodejs";
 
+const CHECK_DEADLINE_MS = 25000;
+const ALLOWED_IMAGE_TYPES = new Set(["image/png", "image/jpeg", "image/webp"]);
+
 export async function POST(req: NextRequest) {
   // 1. IP extraction & Rate limiting
   const ip =
@@ -80,6 +83,13 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  if (imageBuffer && !ALLOWED_IMAGE_TYPES.has(mimeType)) {
+    return new Response(
+      JSON.stringify({ error: "Screenshots must be PNG, JPEG or WebP." }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
   if (!text && !imageBuffer) {
     return new Response(
       JSON.stringify({ error: "Please enter a message text or upload a screenshot to check." }),
@@ -87,28 +97,40 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 4. Create SSE response stream
+  // 4. Create SSE response stream. The whole check is capped at 25 s; whatever finished by then
+  // has already been streamed, and the client is told the rest was skipped.
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
     async start(controller) {
+      let closed = false;
       const sendEvent = (eventData: SSEEventData) => {
+        if (closed) return;
         const payload = `event: ${eventData.event}\ndata: ${JSON.stringify(eventData.data)}\n\n`;
         controller.enqueue(encoder.encode(payload));
       };
 
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      const deadline = new Promise<"timeout">(resolve => {
+        timer = setTimeout(() => resolve("timeout"), CHECK_DEADLINE_MS);
+      });
+
       try {
-        await runPipeline(text, {
-          imageBuffer,
-          mimeType,
-          onEvent: sendEvent,
-        });
-      } catch (err: unknown) {
-        const msg = err instanceof Error ? err.message : "An unexpected check error occurred.";
-        sendEvent({
-          event: "error",
-          data: { message: msg },
-        });
+        const outcome = await Promise.race([
+          runPipeline(text, { imageBuffer, mimeType, onEvent: sendEvent }).then(() => "done" as const),
+          deadline,
+        ]);
+        if (outcome === "timeout") {
+          sendEvent({
+            event: "error",
+            data: { message: "This check hit the 25-second limit. The steps above finished; the rest were skipped." },
+          });
+        }
+      } catch {
+        // Never send stack traces or internal messages to the client.
+        sendEvent({ event: "error", data: { message: "The check failed unexpectedly. Please try again." } });
       } finally {
+        clearTimeout(timer);
+        closed = true;
         controller.close();
       }
     },

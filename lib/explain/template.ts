@@ -1,5 +1,14 @@
 import { Verdict, Evidence, Explanation, ExplanationSentence } from "../types";
 
+const PAY_LABEL: Record<string, string> = {
+  gift_card: "gift cards",
+  crypto: "cryptocurrency",
+  wire: "wire transfer",
+  p2p: "a peer-to-peer app (Zelle, Venmo, Cash App)",
+  card: "card details",
+  other: "an unusual method",
+};
+
 /**
  * Generates natural plain-English explanation sentences where every sentence
  * cites one or more specific evidence items [E#].
@@ -50,6 +59,11 @@ export function generateTemplateExplanation(
         text: `The link directs to ${ue.meta?.domain || "an external domain"}, which does not belong to ${orgName} [${ue.id}].`,
         cites: [ue.id],
       });
+    } else if (ue.status === "warn") {
+      sentences.push({
+        text: `The link goes to ${ue.meta?.domain || "an external domain"}, but Callback couldn't identify who the message claims to be from, so it can't say whether that domain is theirs [${ue.id}].`,
+        cites: [ue.id],
+      });
     } else if (ue.status === "ok") {
       sentences.push({
         text: `The web link points to ${ue.meta?.domain}, which is a verified official domain for ${orgName} [${ue.id}].`,
@@ -66,6 +80,11 @@ export function generateTemplateExplanation(
         text: `The phone number provided (${pe.meta?.phone}) does not appear on ${orgName}'s official contact directory [${pe.id}].`,
         cites: [pe.id],
       });
+    } else if (pe.status === "warn") {
+      sentences.push({
+        text: `Callback couldn't confirm the phone number ${pe.meta?.phone} because no official ${orgName} page available to it lists phone numbers [${pe.id}].`,
+        cites: [pe.id],
+      });
     } else if (pe.status === "ok") {
       sentences.push({
         text: `The phone number (${pe.meta?.phone}) matches ${orgName}'s verified public support lines [${pe.id}].`,
@@ -77,7 +96,9 @@ export function generateTemplateExplanation(
   // Handle Email evidences
   const emailEvidences = evidences.filter(e => e.kind === "email");
   for (const ee of emailEvidences) {
-    if (ee.status === "fail") {
+    if (ee.status === "warn") {
+      sentences.push({ text: `${ee.text} [${ee.id}]`, cites: [ee.id] });
+    } else if (ee.status === "fail") {
       sentences.push({
         text: `The email address (${ee.meta?.email}) is not from ${orgName}'s verified email domain [${ee.id}].`,
         cites: [ee.id],
@@ -94,7 +115,7 @@ export function generateTemplateExplanation(
   const payEvidence = evidences.find(e => e.kind === "payment");
   if (payEvidence) {
     sentences.push({
-      text: `The message asks for payment via ${payEvidence.meta?.method || "an unusual method"} [${payEvidence.id}], which conflicts with official billing practices.`,
+      text: `The message asks for payment via ${PAY_LABEL[String(payEvidence.meta?.method)] || "an unusual method"}, a method imposters commonly demand [${payEvidence.id}].`,
       cites: [payEvidence.id],
     });
   }

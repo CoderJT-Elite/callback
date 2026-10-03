@@ -145,7 +145,9 @@ export function ResultReceipt({
                     <p className="text-slate-800 dark:text-slate-200">{ev.text}</p>
                     {ev.source?.url && (
                       <p className="text-[11px] text-slate-400 mt-1 truncate">
-                        Receipt source: {ev.source.url}
+                        {ev.kind === "url" && ev.status !== "ok"
+                          ? `Link in the message (not opened): ${ev.source.url}`
+                          : `Source: ${ev.source.url}`}
                       </p>
                     )}
                   </div>

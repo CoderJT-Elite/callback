@@ -6,12 +6,13 @@ import { CuratedOrg, SnapshotData } from "../lib/types";
 import { extractPhones } from "../lib/extract/phones";
 
 const curatedOrgs: CuratedOrg[] = curatedOrgsData as CuratedOrg[];
-const USER_AGENT = "CallbackSecurityBot/1.0 (+https://github.com/CoderJT-Elite/callback; ForgeHacks 2026)";
+const USER_AGENT =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36 CallbackBot/1.0 (+https://github.com/CoderJT-Elite/callback)";
 
 async function fetchPage(url: string): Promise<{ status: number; text: string; phones: string[] }> {
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 6000);
+    const timeout = setTimeout(() => controller.abort(), 12000);
     const res = await fetch(url, {
       signal: controller.signal,
       headers: {

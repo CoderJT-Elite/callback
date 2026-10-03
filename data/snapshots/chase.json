@@ -2,15 +2,23 @@
   "org_id": "chase",
   "org_name": "Chase",
   "official_domains": [
+    "chase.com",
     "jpmorganchase.com"
   ],
   "contact_pages": [
     {
-      "url": "https://www.chase.com/digital/resources/privacy-security/security/how-we-protect-you",
+      "url": "https://www.chase.com/digital/customer-service",
       "fetched_at": "2026-10-03",
       "status": 200,
-      "text_excerpt": "Skip to main contentWELCOME TO The Chase Security CenterOur suite of security tools can help protect your account and give you peace of mindSecurity Center homeSecurity Center homeWhat you can doHow to spot scamsLatest scamsHow you pay mattersHelp safeguard seniorsStudents & young adultsProtect your businessPrivacyReport fraudLet’s work together to help protect your account and give you peace of mind. Know the latest scams happening now and the tools you can use to help protect your accounts.Explore the tools you can use to take actionWhat you can doTools and steps you can take to help strengthen your security.Get startedHow to spot scamsCommon warning signs and red flags to watch for.Spot warning signsThe latest scamsHow today’s sophisticated scams work and how people get pulled in.Review scamsPayment tipsWhat to know before sending money.See tipsHelp safeguard seniorsInformation, resources and tools for older adults and caregivers.Get resourcesStudents/young adultsGuidance for teens, students and parents.Explore tipsProtect your businessResources and tools to help protect your business from fraud and scams.Activate toolsReport fraudWhat to do and how to contact us.Report fraudWe use sophisticated security tools and protections to help safeguard your moneyOur online and mobile banking commitment to youIf you see that money was removed from your checking or savings account through our mobile or online banking bill pay or transfer services and you didn’t authorize the transact",
-      "phones": []
+      "text_excerpt": "Skip to main contentWelcome to Customer ServiceWe'll help you find a solution.Customer ServiceCustomer ServicePrivacy and securityTerms of useSocial media termsAccessibilityCustomer ServiceOverviewSelf-service actionsGet help with your accountFAQsWatch and learnStill have questions?Self-service actionsGet the banking and investing help you need with Chase and J.P. Morgan Customer Service. We'll help you find answers to your questions today!Make a paymentOrder checksManage account alertsReplace a lost/damaged cardDispute a chargeReset username/passwordFind account/routing numberReport fraudPayment supportSearch more topicsGet help with your accountWe've got tools and information to guide you. Credit CardsPersonal BankingInvesting & RetirementChase Private ClientAuto LoansHome LendingCommercial BankingBusiness BankingFrequently Asked QuestionsCredit CardCard Customer Service:1-800-432-3117 Answers to common questions about Chase credit cards.See FAQs, about Credit CardPersonal BankingPersonal Banking Customer Service:1-800-935-9935 Answers about checking and savings accounts, and debit cards.See FAQs, about Personal BankingAuto LoansAuto Customer Service:1-800-336-6675 Answers about auto loans and leases.See FAQs, about Auto LoansHome LendingHome Lending Customer Service:1-800-848-9136 Answers about mortgage loans and home equity lines.See FAQs, about home lendingInvesting & RetirementJ.P. Morgan Wealth ManagementCustomer Service:1-800-392-5749 Answers about investing and retir",
+      "phones": [
+        "+18004323117",
+        "+18009359935",
+        "+18003366675",
+        "+18008489136",
+        "+18003925749",
+        "+13183403308"
+      ]
     }
   ]
 }

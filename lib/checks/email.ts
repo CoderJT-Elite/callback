@@ -47,6 +47,20 @@ export function checkEmail(
     };
   }
 
+  if (!org) {
+    const evidence: Evidence = {
+      id: evidenceId,
+      kind: "email",
+      status: "warn",
+      text: freemail
+        ? `Email address "${email}" is a free consumer address; the sender wasn't identified, so it can't be compared to an official domain.`
+        : `Email address "${email}" is on ${regDomain}; the sender wasn't identified, so it can't be compared to an official domain.`,
+      source: { rule_id: "RULE_EMAIL_NO_ORG" },
+      meta: { email, domain: emailDomain, is_official: false, is_freemail: freemail },
+    };
+    return { email, domain: emailDomain, is_official: false, is_freemail: freemail, evidence };
+  }
+
   if (freemail) {
     const evidence: Evidence = {
       id: evidenceId,

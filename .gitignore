@@ -19,3 +19,4 @@ eval/cache/
 playwright-report/
 test-results/
 lighthouse-report.json
+tsconfig.tsbuildinfo

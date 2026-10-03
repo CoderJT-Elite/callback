@@ -85,7 +85,9 @@ export async function checkUrl(
   }
 
   const details = [
-    `Link "${domain || rawUrl}" is NOT an official ${orgName} address`,
+    org
+      ? `Link "${domain || rawUrl}" is NOT an official ${orgName} address`
+      : `Link goes to "${domain || rawUrl}" (sender not identified, so it can't be compared to an official domain)`,
     lookalikeScore >= 0.7 ? `${lookalikeReason} (lookalike score ${lookalikeScore})` : null,
     rdapNote,
   ]
@@ -95,7 +97,8 @@ export async function checkUrl(
   const evidence: Evidence = {
     id: evidenceId,
     kind: "url",
-    status: "fail",
+    // Without an identified organization there's nothing to compare against: report, don't accuse.
+    status: org ? "fail" : "warn",
     text: details,
     source: {
       url: finalUrl,

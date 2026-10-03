@@ -5,118 +5,69 @@ import { extractEmails } from "./emails";
 import { extractPayment } from "./payments";
 import { extractUrgencyQuotes } from "./urgency";
 
-// Common organizations to detect in keyless / fallback mode
-const COMMON_ORG_PATTERNS: Array<{ name: string; kind: ClaimedSender["kind"]; patterns: RegExp[] }> = [
-  {
-    name: "USPS",
-    kind: "government",
-    patterns: [/\busps\b/i, /\bunited states postal service\b/i, /\bpostal service\b/i],
-  },
-  {
-    name: "UPS",
-    kind: "company",
-    patterns: [/\bups\b/i, /\bunited parcel service\b/i],
-  },
-  {
-    name: "FedEx",
-    kind: "company",
-    patterns: [/\bfedex\b/i, /\bfederal express\b/i],
-  },
-  {
-    name: "DHL",
-    kind: "company",
-    patterns: [/\bdhl\b/i],
-  },
-  {
-    name: "Amazon",
-    kind: "company",
-    patterns: [/\bamazon\b/i],
-  },
-  {
-    name: "Apple",
-    kind: "company",
-    patterns: [/\bapple\b/i, /\bicloud\b/i],
-  },
-  {
-    name: "PayPal",
-    kind: "company",
-    patterns: [/\bpaypal\b/i],
-  },
-  {
-    name: "Netflix",
-    kind: "company",
-    patterns: [/\bnetflix\b/i],
-  },
-  {
-    name: "Chase",
-    kind: "company",
-    patterns: [/\bchase(?:\s+bank)?\b/i, /\bjpmorgan\b/i],
-  },
-  {
-    name: "Bank of America",
-    kind: "company",
-    patterns: [/\bbank of america\b/i, /\bbofa\b/i],
-  },
-  {
-    name: "Wells Fargo",
-    kind: "company",
-    patterns: [/\bwells fargo\b/i],
-  },
-  {
-    name: "Internal Revenue Service",
-    kind: "government",
-    patterns: [/\birs\b/i, /\binternal revenue service\b/i],
-  },
-  {
-    name: "Social Security Administration",
-    kind: "government",
-    patterns: [/\bssa\b/i, /\bsocial security(?:\s+administration)?\b/i],
-  },
-  {
-    name: "E-ZPass",
-    kind: "government",
-    patterns: [/\be-?zpass\b/i, /\btoll(?:s)?\s+(?:services?|enforcement|violation)\b/i],
-  },
-  {
-    name: "Geek Squad",
-    kind: "company",
-    patterns: [/\bgeek squad\b/i, /\bbest buy\b/i],
-  },
-];
+import { getAllCuratedOrgs } from "../entity/curated";
+
+const GOVERNMENT_IDS = new Set(["usps", "irs", "ssa", "medicare"]);
+
+const PERSON_PATTERN =
+  /\b(?:mom|mum|mommy|mama|dad|daddy|papa|grandma|grandpa|granny|grandson|granddaughter|nephew|niece|son|daughter|boss)\b|\bnew (?:phone )?number\b/i;
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 /**
- * Deterministic sender detection for keyless fallback.
+ * Patterns for every curated organization name and alias. Single words match only as written
+ * or in all caps ("Chase"/"CHASE", not "chase", which is usually a verb; "Apple", not "apple").
+ * Multi-word names match case-insensitively.
+ */
+const ORG_PATTERNS: Array<{ name: string; kind: ClaimedSender["kind"]; pattern: RegExp }> =
+  getAllCuratedOrgs().flatMap(org =>
+    [org.name, ...org.aliases].flatMap(alias => {
+      const kind: ClaimedSender["kind"] = GOVERNMENT_IDS.has(org.id) ? "government" : "company";
+      const escaped = escapeRegExp(alias);
+      const pattern = /\s/.test(alias)
+        ? new RegExp(`\\b${escaped}\\b`, "i")
+        : new RegExp(`\\b(?:${escaped}|${escapeRegExp(alias.toUpperCase())})\\b`);
+      return [{ name: org.name, kind, pattern }];
+    })
+  );
+
+/**
+ * Deterministic sender detection for keyless fallback: the curated dictionary (name and alias,
+ * word-boundary), earliest mention wins; family/new-number wording means the personal path.
  */
 export function detectSenderFallback(text: string): ClaimedSender {
-  // Check for person patterns (e.g. "Hi Mom, I lost my phone", "Hey Dad, new number")
-  const personMatch = text.match(/\b(?:mom|dad|grandma|grandpa|son|daughter|boss)\b/i);
-  if (personMatch) {
-    return {
-      name: personMatch[0],
-      kind: "person",
-      evidence_quote: personMatch[0],
-    };
-  }
-
-  // Check known organization patterns
-  for (const org of COMMON_ORG_PATTERNS) {
-    for (const pattern of org.patterns) {
-      const match = pattern.exec(text);
-      if (match) {
-        return {
-          name: org.name,
-          kind: org.kind,
-          evidence_quote: match[0],
-        };
-      }
+  let best: { name: string; kind: ClaimedSender["kind"]; quote: string; index: number } | null = null;
+  for (const org of ORG_PATTERNS) {
+    const match = org.pattern.exec(text);
+    if (!match) continue;
+    if (!best || match.index < best.index || (match.index === best.index && match[0].length > best.quote.length)) {
+      best = { name: org.name, kind: org.kind, quote: match[0], index: match.index };
     }
   }
 
-  return {
-    name: null,
-    kind: "unknown",
-    evidence_quote: null,
-  };
+  const personMatch = text.match(PERSON_PATTERN);
+  if (personMatch && (!best || (personMatch.index ?? 0) < best.index)) {
+    return { name: personMatch[0], kind: "person", evidence_quote: personMatch[0] };
+  }
+
+  if (best) {
+    return { name: best.name, kind: best.kind, evidence_quote: best.quote };
+  }
+
+  return { name: null, kind: "unknown", evidence_quote: null };
+}
+
+/** "https://www.x.com/a/" and "x.com/a" are the same link; keep the first spelling seen. */
+function dedupeUrls(urls: string[]): string[] {
+  const seen = new Set<string>();
+  return urls.filter(u => {
+    const key = u.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/+$/, "");
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 /**
@@ -248,7 +199,7 @@ export function mergeWithAntiHallucination(
     urgency_quotes: urgencyQuotes,
     payment,
     phones: Array.from(validPhones),
-    urls: Array.from(validUrls),
+    urls: dedupeUrls(Array.from(validUrls)),
     emails: Array.from(validEmails),
     handles: llmExtraction.handles || [],
     is_screenshot_text: llmExtraction.is_screenshot_text || null,

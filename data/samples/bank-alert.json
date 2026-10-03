@@ -19,8 +19,41 @@
       "event": "step",
       "data": {
         "id": "extract",
-        "label": "Deterministic extraction of contact points",
+        "label": "AI extracted contact points and claimed sender",
         "status": "ok"
+      }
+    },
+    {
+      "event": "extraction",
+      "data": {
+        "claimed_sender": {
+          "name": "Wells Fargo",
+          "kind": "company",
+          "evidence_quote": "Wells Fargo Alert:"
+        },
+        "asks": [
+          "Call our fraud prevention line immediately at 888-555-0142 to secure your account."
+        ],
+        "urgency_quotes": [
+          "immediately"
+        ],
+        "payment": {
+          "method": null,
+          "quote": null
+        },
+        "phones": [
+          "+18885550142"
+        ],
+        "urls": [],
+        "emails": [],
+        "handles": [],
+        "is_screenshot_text": null,
+        "dropped_hallucinations": {
+          "phones": [],
+          "urls": [],
+          "emails": [],
+          "invalid_sender_quote": false
+        }
       }
     },
     {
@@ -71,6 +104,18 @@
       }
     },
     {
+      "event": "evidence",
+      "data": {
+        "id": "E2",
+        "kind": "urgency",
+        "status": "warn",
+        "text": "Contains artificial urgency phrases: \"immediately\". High urgency is standard in imposter scams to force hurried decisions.",
+        "source": {
+          "rule_id": "RULE_URGENCY_CUES"
+        }
+      }
+    },
+    {
       "event": "verdict",
       "data": {
         "type": "DOESNT_MATCH",
@@ -103,13 +148,19 @@
       "data": {
         "sentences": [
           {
-            "text": "The phone number provided (+18885550142) does not appear on Wells Fargo's official contact directory [E1].",
+            "text": "The phone number provided in the message is not listed on official Wells Fargo pages [E1].",
             "cites": [
               "E1"
             ]
+          },
+          {
+            "text": "In addition, the message uses artificial urgency phrases like immediately to force hurried decisions [E2].",
+            "cites": [
+              "E2"
+            ]
           }
         ],
-        "mode": "template",
+        "mode": "llm",
         "dropped_count": 0
       }
     },
@@ -119,13 +170,13 @@
         "id": "explanation",
         "label": "Generated evidence-backed explanation",
         "status": "ok",
-        "detail": "1 cited sentences (template)"
+        "detail": "2 cited sentences (llm)"
       }
     },
     {
       "event": "done",
       "data": {
-        "ms": 377
+        "ms": 2384
       }
     }
   ],
@@ -134,10 +185,14 @@
       "claimed_sender": {
         "name": "Wells Fargo",
         "kind": "company",
-        "evidence_quote": "Wells Fargo"
+        "evidence_quote": "Wells Fargo Alert:"
       },
-      "asks": [],
-      "urgency_quotes": [],
+      "asks": [
+        "Call our fraud prevention line immediately at 888-555-0142 to secure your account."
+      ],
+      "urgency_quotes": [
+        "immediately"
+      ],
       "payment": {
         "method": null,
         "quote": null
@@ -147,7 +202,14 @@
       ],
       "urls": [],
       "emails": [],
-      "handles": []
+      "handles": [],
+      "is_screenshot_text": null,
+      "dropped_hallucinations": {
+        "phones": [],
+        "urls": [],
+        "emails": [],
+        "invalid_sender_quote": false
+      }
     },
     "resolved_org": {
       "id": "wells-fargo",
@@ -160,7 +222,7 @@
         "https://www.wellsfargo.com/help/contact-us/"
       ],
       "source": "curated",
-      "source_note": "domains from Wikidata P856 (Q744149) fetched 2026-10-03; URL https://www.wellsfargo.com/help/contact-us/ verified 200 2026-10-03"
+      "source_note": "official domains hand-checked 2026-10-03 (wellsfargo.com 200); Wikidata P856 (Q744149) agrees: wellsfargo.com; URL https://www.wellsfargo.com/help/contact-us/ verified 200 2026-10-03"
     },
     "evidences": [
       {
@@ -178,6 +240,15 @@
           "phone": "+18885550142",
           "is_listed": false,
           "official_phone": "+18008693557"
+        }
+      },
+      {
+        "id": "E2",
+        "kind": "urgency",
+        "status": "warn",
+        "text": "Contains artificial urgency phrases: \"immediately\". High urgency is standard in imposter scams to force hurried decisions.",
+        "source": {
+          "rule_id": "RULE_URGENCY_CUES"
         }
       }
     ],
@@ -200,13 +271,19 @@
     "explanation": {
       "sentences": [
         {
-          "text": "The phone number provided (+18885550142) does not appear on Wells Fargo's official contact directory [E1].",
+          "text": "The phone number provided in the message is not listed on official Wells Fargo pages [E1].",
           "cites": [
             "E1"
           ]
+        },
+        {
+          "text": "In addition, the message uses artificial urgency phrases like immediately to force hurried decisions [E2].",
+          "cites": [
+            "E2"
+          ]
         }
       ],
-      "mode": "template",
+      "mode": "llm",
       "dropped_count": 0
     },
     "steps": [
@@ -218,7 +295,7 @@
       },
       {
         "id": "extract",
-        "label": "Deterministic extraction of contact points",
+        "label": "AI extracted contact points and claimed sender",
         "status": "ok"
       },
       {
@@ -249,7 +326,7 @@
         "id": "explanation",
         "label": "Generated evidence-backed explanation",
         "status": "ok",
-        "detail": "1 cited sentences (template)"
+        "detail": "2 cited sentences (llm)"
       }
     ]
   }

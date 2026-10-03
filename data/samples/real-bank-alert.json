@@ -19,8 +19,44 @@
       "event": "step",
       "data": {
         "id": "extract",
-        "label": "Deterministic extraction of contact points",
+        "label": "AI extracted contact points and claimed sender",
         "status": "ok"
+      }
+    },
+    {
+      "event": "extraction",
+      "data": {
+        "claimed_sender": {
+          "name": "Wells Fargo",
+          "kind": "company",
+          "evidence_quote": "Wells Fargo"
+        },
+        "asks": [
+          "Reply YES or NO to confirm or deny the transaction",
+          "Visit customer service URL or call phone number"
+        ],
+        "urgency_quotes": [
+          "Fraud alert!"
+        ],
+        "payment": {
+          "method": null,
+          "quote": null
+        },
+        "phones": [
+          "+18008693557"
+        ],
+        "urls": [
+          "https://www.wellsfargo.com/help/contact-us/"
+        ],
+        "emails": [],
+        "handles": [],
+        "is_screenshot_text": null,
+        "dropped_hallucinations": {
+          "phones": [],
+          "urls": [],
+          "emails": [],
+          "invalid_sender_quote": false
+        }
       }
     },
     {
@@ -95,6 +131,18 @@
         "label": "Checked phone: +18008693557",
         "status": "ok",
         "detail": "Phone +18008693557 matches official Wells Fargo support line."
+      }
+    },
+    {
+      "event": "evidence",
+      "data": {
+        "id": "E3",
+        "kind": "urgency",
+        "status": "warn",
+        "text": "Contains artificial urgency phrases: \"Fraud alert!\". High urgency is standard in imposter scams to force hurried decisions.",
+        "source": {
+          "rule_id": "RULE_URGENCY_CUES"
+        }
       }
     },
     {
@@ -130,19 +178,25 @@
       "data": {
         "sentences": [
           {
-            "text": "The web link points to wellsfargo.com, which is a verified official domain for Wells Fargo [E1].",
+            "text": "The message contains a link to wellsfargo.com which is an official Wells Fargo domain [E1].",
             "cites": [
               "E1"
             ]
           },
           {
-            "text": "The phone number (+18008693557) matches Wells Fargo's verified public support lines [E2].",
+            "text": "The phone number +18008693557 matches the official Wells Fargo support line [E2].",
             "cites": [
               "E2"
             ]
+          },
+          {
+            "text": "Although these channels match public records, please remember to avoid sharing sensitive information [E3].",
+            "cites": [
+              "E3"
+            ]
           }
         ],
-        "mode": "template",
+        "mode": "llm",
         "dropped_count": 0
       }
     },
@@ -152,13 +206,13 @@
         "id": "explanation",
         "label": "Generated evidence-backed explanation",
         "status": "ok",
-        "detail": "2 cited sentences (template)"
+        "detail": "3 cited sentences (llm)"
       }
     },
     {
       "event": "done",
       "data": {
-        "ms": 467
+        "ms": 2751
       }
     }
   ],
@@ -169,8 +223,13 @@
         "kind": "company",
         "evidence_quote": "Wells Fargo"
       },
-      "asks": [],
-      "urgency_quotes": [],
+      "asks": [
+        "Reply YES or NO to confirm or deny the transaction",
+        "Visit customer service URL or call phone number"
+      ],
+      "urgency_quotes": [
+        "Fraud alert!"
+      ],
       "payment": {
         "method": null,
         "quote": null
@@ -182,7 +241,14 @@
         "https://www.wellsfargo.com/help/contact-us/"
       ],
       "emails": [],
-      "handles": []
+      "handles": [],
+      "is_screenshot_text": null,
+      "dropped_hallucinations": {
+        "phones": [],
+        "urls": [],
+        "emails": [],
+        "invalid_sender_quote": false
+      }
     },
     "resolved_org": {
       "id": "wells-fargo",
@@ -195,7 +261,7 @@
         "https://www.wellsfargo.com/help/contact-us/"
       ],
       "source": "curated",
-      "source_note": "domains from Wikidata P856 (Q744149) fetched 2026-10-03; URL https://www.wellsfargo.com/help/contact-us/ verified 200 2026-10-03"
+      "source_note": "official domains hand-checked 2026-10-03 (wellsfargo.com 200); Wikidata P856 (Q744149) agrees: wellsfargo.com; URL https://www.wellsfargo.com/help/contact-us/ verified 200 2026-10-03"
     },
     "evidences": [
       {
@@ -229,6 +295,15 @@
           "is_listed": true,
           "url": "https://www.wellsfargo.com/help/contact-us/"
         }
+      },
+      {
+        "id": "E3",
+        "kind": "urgency",
+        "status": "warn",
+        "text": "Contains artificial urgency phrases: \"Fraud alert!\". High urgency is standard in imposter scams to force hurried decisions.",
+        "source": {
+          "rule_id": "RULE_URGENCY_CUES"
+        }
       }
     ],
     "verdict": {
@@ -250,19 +325,25 @@
     "explanation": {
       "sentences": [
         {
-          "text": "The web link points to wellsfargo.com, which is a verified official domain for Wells Fargo [E1].",
+          "text": "The message contains a link to wellsfargo.com which is an official Wells Fargo domain [E1].",
           "cites": [
             "E1"
           ]
         },
         {
-          "text": "The phone number (+18008693557) matches Wells Fargo's verified public support lines [E2].",
+          "text": "The phone number +18008693557 matches the official Wells Fargo support line [E2].",
           "cites": [
             "E2"
           ]
+        },
+        {
+          "text": "Although these channels match public records, please remember to avoid sharing sensitive information [E3].",
+          "cites": [
+            "E3"
+          ]
         }
       ],
-      "mode": "template",
+      "mode": "llm",
       "dropped_count": 0
     },
     "steps": [
@@ -274,7 +355,7 @@
       },
       {
         "id": "extract",
-        "label": "Deterministic extraction of contact points",
+        "label": "AI extracted contact points and claimed sender",
         "status": "ok"
       },
       {
@@ -311,7 +392,7 @@
         "id": "explanation",
         "label": "Generated evidence-backed explanation",
         "status": "ok",
-        "detail": "2 cited sentences (template)"
+        "detail": "3 cited sentences (llm)"
       }
     ]
   }
