@@ -7,7 +7,7 @@ be from, looks up that organization's official channels from sources the scammer
 and shows, with receipts, whether the phone number, link and email in the message really belong to
 them.
 
-- **Live app:** `LIVE_URL_TBD`
+- **Live app:** https://callback-lac.vercel.app
 - **Demo video:** `VIDEO_URL_TBD`
 - **Track:** AI + Cybersecurity, ForgeHacks Online 2026
 
