@@ -9,6 +9,12 @@ if (!fs.existsSync(OUT_DIR)) {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 }
 
+
+async function focusResult(page: import("playwright").Page) {
+  await page.evaluate(() => document.querySelector("article")?.scrollIntoView({ block: "start" }));
+  await page.waitForTimeout(400);
+}
+
 async function run() {
   console.log("=== Generating Devpost Gallery Images ===");
   const browser = await chromium.launch();
@@ -30,7 +36,8 @@ async function run() {
   // Image 2: Mismatch Verdict
   console.log("2. Capturing 02-mismatch-verdict-1600x900.png...");
   await page.getByRole("button", { name: /Package delivery/i }).click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(2500);
+  await focusResult(page);
   await page.screenshot({
     path: path.join(OUT_DIR, "02-mismatch-verdict-1600x900.png"),
   });
@@ -38,7 +45,8 @@ async function run() {
   // Image 3: Match Verdict
   console.log("3. Capturing 03-match-verdict-1600x900.png...");
   await page.getByRole("button", { name: /Real bank alert/i }).click();
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(2500);
+  await focusResult(page);
   await page.screenshot({
     path: path.join(OUT_DIR, "03-match-verdict-1600x900.png"),
   });
@@ -53,6 +61,9 @@ async function run() {
   if (await incidentBtn.isVisible()) {
     await incidentBtn.click();
     await page.waitForTimeout(1000);
+    await incidentBtn.scrollIntoViewIfNeeded();
+    await page.evaluate(() => window.scrollBy(0, 360));
+    await page.waitForTimeout(300);
   }
   await page.screenshot({
     path: path.join(OUT_DIR, "04-incident-response-1600x900.png"),
@@ -196,8 +207,8 @@ async function run() {
       }
       .card-stamp {
         position: absolute;
-        top: 28px;
-        right: 28px;
+        top: -30px;
+        right: 20px;
         border: 3.5px solid var(--stamp-red);
         color: var(--stamp-red);
         font-family: 'IBM Plex Mono', monospace;
@@ -257,11 +268,11 @@ async function run() {
         <div class="stat-strip">
           <div class="stat-item">
             <div class="stat-val">$3.5B</div>
-            <div class="stat-lbl">FTC imposter scam losses</div>
+            <div class="stat-lbl">FTC imposter scam losses, 2025</div>
           </div>
           <div class="stat-item">
-            <div class="stat-val" style="color: var(--pine);">0.0%</div>
-            <div class="stat-lbl">False alarms on legit alerts</div>
+            <div class="stat-val" style="color: var(--pine);">0 of 15</div>
+            <div class="stat-lbl">legit test messages flagged (synthetic)</div>
           </div>
           <div class="stat-item">
             <div class="stat-val" style="color: var(--ink);">7 Rules</div>
@@ -273,19 +284,19 @@ async function run() {
         <div class="card-preview">
           <div class="card-stamp">DOESN'T MATCH</div>
           <div class="card-title">INCOMING TEXT · CLAIMED SENDER: USPS</div>
-          <div class="card-msg">"USPS: Action required. Package delivery pending fee payment of $1.99 at usps-redelivery.xyz"</div>
+          <div class="card-msg">"USPS: Your package #US9402283 could not be delivered. Pay $1.99 redelivery fee within 24 hours at usps-redelivery-notice.xyz"</div>
           <div class="ledger">
             <div class="ledger-row row-err">
-              <span>[E1] Link: usps-redelivery.xyz</span>
-              <span>✗ FAKE</span>
+              <span>[E1] Link: usps-redelivery-notice.xyz</span>
+              <span>✗ NOT OFFICIAL</span>
             </div>
             <div class="ledger-row row-err">
-              <span>[E2] Domain age: 14 days old</span>
-              <span>✗ LOOKALIKE</span>
+              <span>[E2] Payment demand: $1.99 fee</span>
+              <span>! FLAGGED</span>
             </div>
             <div class="ledger-row row-ok">
-              <span>[E3] Real portal: tools.usps.com</span>
-              <span>✓ VERIFIED</span>
+              <span>Real USPS: usps.com · 1-800-275-8777</span>
+              <span>✓ DO THIS</span>
             </div>
           </div>
         </div>
@@ -446,8 +457,8 @@ async function run() {
       }
       .stamp-overlay {
         position: absolute;
-        top: 36px;
-        right: 36px;
+        top: -40px;
+        right: 28px;
         border: 4px solid var(--stamp-red);
         color: var(--stamp-red);
         font-family: 'IBM Plex Mono', monospace;
@@ -508,7 +519,7 @@ async function run() {
     <div class="content-grid">
       <div>
         <h1 class="headline">Don't trust the number in the message. Callback finds the real one.</h1>
-        <p class="subhead">Ground-truth verification against official directories and Wikidata records with deterministic receipts.</p>
+        <p class="subhead">Checks a message's phone, link and email against the sender's real contact channels, and shows the evidence.</p>
         <div class="badges-row">
           <div class="badge">✓ Fixed 7-Rule Engine</div>
           <div class="badge">✓ 27 Curated US Institutions</div>
@@ -519,15 +530,15 @@ async function run() {
         <div class="footer-strip">
           <div class="stat-block">
             <div class="stat-big">$3.5 Billion</div>
-            <div class="stat-desc">FTC imposter scam losses (June 2026)</div>
+            <div class="stat-desc">FTC imposter scam losses, 2025</div>
           </div>
           <div class="stat-block">
-            <div class="stat-big" style="color: var(--pine);">0.0%</div>
-            <div class="stat-desc">False alarm rate on legit alerts</div>
+            <div class="stat-big" style="color: var(--pine);">0 of 15</div>
+            <div class="stat-desc">legit test messages flagged (our synthetic set)</div>
           </div>
           <div class="stat-block">
-            <div class="stat-big" style="color: var(--ink);">100%</div>
-            <div class="stat-desc">Cited receipts for every verdict</div>
+            <div class="stat-big" style="color: var(--ink);">7 rules</div>
+            <div class="stat-desc">decide the verdict. The AI never does</div>
           </div>
         </div>
       </div>
@@ -536,20 +547,20 @@ async function run() {
           <div class="stamp-overlay">DOESN'T MATCH</div>
           <div class="receipt-tag">SUSPICIOUS SMS · CLAIMED SENDER: USPS</div>
           <div class="msg-box">
-            "USPS: Action required. Package delivery pending fee payment of $1.99 at usps-redelivery.xyz"
+            "USPS: Your package #US9402283 could not be delivered. Pay $1.99 redelivery fee within 24 hours at usps-redelivery-notice.xyz"
           </div>
           <div class="ledger-list">
             <div class="ledger-entry entry-bad">
-              <span>[E1] Link: usps-redelivery.xyz</span>
-              <span>✗ FAKE LOOKALIKE</span>
+              <span>[E1] Link: usps-redelivery-notice.xyz</span>
+              <span>✗ NOT OFFICIAL</span>
             </div>
             <div class="ledger-entry entry-bad">
-              <span>[E2] RDAP Age: 14 days old</span>
-              <span>✗ UNREGISTERED BRAND</span>
+              <span>[E2] Payment demand: $1.99 fee</span>
+              <span>! FLAGGED</span>
             </div>
             <div class="ledger-entry entry-good">
-              <span>[E3] Real Portal: tools.usps.com</span>
-              <span>✓ VERIFIED CHANNEL</span>
+              <span>Real USPS: usps.com · 1-800-275-8777</span>
+              <span>✓ DO THIS INSTEAD</span>
             </div>
           </div>
         </div>

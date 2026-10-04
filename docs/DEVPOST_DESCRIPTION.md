@@ -19,7 +19,7 @@ Instead of asking an LLM to guess whether a message "sounds like a scam", **Call
 ---
 
 ## What It Does
-Paste a suspicious text or email, or drop a screenshot. Callback executes an automated, five-stage verification pipeline:
+Paste a suspicious text or email, or drop a screenshot. Callback runs a six-step check:
 
 1. **Claims Extraction:** Gemini (`gemini-3.5-flash-lite`) extracts the claimed organization, phone numbers, links, emails, and payment cues into strict JSON schema format. Every extracted entity is re-validated with local regexes; any hallucinated entity not present in the original input is immediately dropped.
 2. **Independent Directory Lookup:** Callback looks up official domains and verified contact pages from a curated, hand-checked registry of 27 commonly impersonated US organizations (financial institutions, couriers, government agencies, tech utilities). For unlisted entities, it queries Wikidata (property P856) with strict validation guards (blocking freshly registered domains under 365 days old).
@@ -36,8 +36,8 @@ Paste a suspicious text or email, or drop a screenshot. Callback executes an aut
 
 ## How We Built It
 - **Frontend & App Framework:** Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS. Designed with a clean editorial aesthetic (Newsreader serif, IBM Plex Sans, IBM Plex Mono, warm archival paper `#F3EEE4`, and rubber-stamp verdicts).
-- **Verification Engine:** Pure TypeScript deterministic rule engine (`lib/engine/rules.ts`) executing rules 1 through 7 with strict short-circuit logic.
-- **SSRF-Guarded Network Security:** Custom `safeFetch.ts` enforcing `HEAD` requests only, blocking loopback (`127.0.0.1`), RFC 1918 private subnets (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`), link-local addresses, and AWS/GCP cloud metadata IP (`169.254.169.254`) across all redirects.
+- **Verification Engine:** Pure TypeScript deterministic rule engine (`lib/verdict/rules.ts`) executing rules 1 through 7 with strict short-circuit logic.
+- **SSRF-Guarded Network Security:** Custom `lib/net/safeFetch.ts` enforcing `HEAD` requests only, blocking loopback (`127.0.0.1`), RFC 1918 private subnets (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`), link-local addresses, and AWS/GCP cloud metadata IP (`169.254.169.254`) across all redirects.
 - **Multimodal AI Integration:** Google Gemini (`gemini-3.5-flash-lite`) configured with structured JSON schemas. If the Gemini API key is missing or quota is exhausted, the engine cleanly degrades to offline deterministic mode and notes this in the trace.
 - **Testing & Verification:** Comprehensive automated test suite with Vitest (unit tests for rules, extractors, and safe fetch) and Playwright (end-to-end browser and screenshot capture).
 - **Video Production:** Animated demo video engineered entirely in code using **HyperFrames** (GSAP timelines, programmatic motion graphics, deterministic frame rendering).
@@ -47,7 +47,7 @@ Paste a suspicious text or email, or drop a screenshot. Callback executes an aut
 ## Challenges We Ran Into
 - **Unreliable "Official" Web Data:** During early testing, we discovered that open community databases like Wikidata contained a 45-day-old malicious lookalike domain listed under Citigroup's official record. Trusting open data blindly would have marked real Citi fraud alerts as scams while legitimizing fake domains. We solved this by creating a hand-checked registry of 27 top US institutions and enforcing strict RDAP age guards (requiring Wikidata domains to be registered for >365 days).
 - **Defensive Contact Pages:** Major targets like Amazon, SSA, and Coinbase aggressively hide direct phone numbers behind interactive help centers or block automated HTTP crawlers with bot protection. Instead of guessing or making assumptions, Callback follows an honest fallback: if a phone number cannot be independently confirmed on the official site, it returns `CAN'T VERIFY` rather than asserting false confidence.
-- **Hallucination Control in AI Explanations:** Early prompts occasionally hallucinated security advice not backed by data. We implemented an evidence-tag parser: every sentence produced by the LLM must cite an evidence code like `[E1]`; any sentence lacking a valid citation is discarded. In testing, 74 of 80 generated explanation sentences were preserved while 5 uncited claims were eliminated.
+- **Hallucination Control in AI Explanations:** Free-form AI explanations can say things the evidence doesn't support. We added an evidence-tag parser: every sentence produced by the LLM must cite an evidence code like `[E1]`; any sentence lacking a valid citation is discarded. In testing, 74 of 80 generated explanation sentences were preserved while 5 uncited claims were eliminated.
 
 ---
 
@@ -58,13 +58,13 @@ We conducted a controlled evaluation comparing **Gemini Alone** against **Callba
 |---|:---:|:---:|
 | **Scam Detection** | 20 / 20 (100%) | 15 / 20 (75%) |
 | **False Alarms on Legit Messages** | 1 / 15 (6.7% false positive) | **0 / 15 (0.0% false positive)** |
-| **Receipt Verification** | 0% (unverifiable opinion) | **100% verified directory receipts** |
+| **Evidence shown with the verdict** | None | A numbered check with its source for every verdict |
 | **Cited Explanation Sentences Kept** | N/A | **92.5%** (74 of 80 sentences kept, 5 uncited dropped) |
 | **Abstention on Ambiguity** | 0% (always guesses) | **28.6%** (honestly answered "Can't verify") |
 
 *Source: `eval/results/summary.md` (synthetic benchmark).*
 
-**Key Takeaway:** Chatbots are trained to sound helpful and confident, leading to false alarms on real bank notices and hallucinated justifications. When a user is deciding whether to cancel their credit card or call their bank, an honest receipt and an honest "can't verify" are vastly safer than a confident guess.
+**Key Takeaway:** On our small synthetic set, plain Gemini caught more scams than Callback but also called one legitimate message a scam and showed no evidence. Callback caught fewer, accused no legitimate message, and said "can't verify" when it wasn't sure. For someone deciding which number to call, we think the evidence matters more than a confident guess. This is 35 messages we wrote, so it is a demonstration, not a measurement of real-world accuracy.
 
 ---
 

@@ -4,12 +4,12 @@ import { Footer } from "@/components/Footer";
 import { RuleTable } from "@/components/RuleTable";
 
 const STAGES = [
-  { n: "1", t: "Input", a: "Message or screenshot", b: "Links never opened" },
-  { n: "2", t: "Reading", a: "Gemini + regex re-scan", b: "Invented items dropped" },
-  { n: "3", t: "Grounding", a: "Checked list, Wikidata", b: "Never from the message" },
-  { n: "4", t: "Receipts", a: "Official pages, domain age", b: "Phone vs. contact page" },
+  { n: "1", t: "Input", a: "Message or screenshot", b: "Links not opened" },
+  { n: "2", t: "Reading", a: "Gemini + regex re-scan", b: "Fakes dropped" },
+  { n: "3", t: "Grounding", a: "Checked list, Wikidata", b: "Not from message" },
+  { n: "4", t: "Receipts", a: "Official pages, age", b: "Phone vs. page" },
   { n: "5", t: "Verdict", a: "Seven fixed rules", b: "No AI judgment" },
-  { n: "6", t: "Explanation", a: "Gemini, cites [E#]", b: "Uncited lines dropped" },
+  { n: "6", t: "Explanation", a: "Gemini, cites [E#]", b: "Uncited dropped" },
 ];
 
 export default function HowItWorksPage() {

@@ -571,3 +571,16 @@ Citi alert -> MATCHES; GIF upload rejected. Mobile (375 px): no horizontal scrol
 - **GitHub:** public repo https://github.com/CoderJT-Elite/callback pushed (key check: no `.env.local` tracked, no key string in history).
 - **Vercel: deployed** after re-login via CLI device flow: https://callback-lac.vercel.app (production, `GEMINI_MODEL=gemini-3.5-flash-lite` set, Vercel Authentication turned off so it is public). **No `GEMINI_API_KEY` yet** (John's to add), so the live site runs rules-only. Smoke test: home, how-it-works, OG image 200; a Chase scam paste returns DOESN'T MATCH.
 - **the build agent prompt** for the video and submission package: `.agents/BUILD_AGENT_GOAL_SUBMISSION_PACKAGE_VIDEO_2026-10-03.md` (HyperFrames, footage slots, gallery, packet).
+
+## Verification of the build agent's submission package (the review pass, 2026-10-03)
+the build agent added `video/` (HyperFrames project, captures, slots, footage guide), gallery images, stress test, competitor sweep, gap analysis and a submission packet in commit `0953c66`/`3f9ad2a`. Scope was respected (nothing changed outside `video/`, `docs/`, README, `.agents/`; no key in files or history; footage folder empty). Content was **not** all reliable. Found and fixed:
+
+| Problem found | Fix |
+|---|---|
+| `docs/COMPETITORS.md` cited an arXiv number that is a math paper, a patent about security playbooks, a patent and an ACM DOI that don't resolve, and omitted every consumer scam-checker app | Rewritten from 12 real searches with sourced entries; says "did not find" instead of "none exists" |
+| `docs/GAPS_AND_NEXT_STEPS.md` had unsourced coverage %, toll-growth and token-price figures, wrong rule numbers, 3-hop redirects | Rewritten with Sourced / From our code / Inferred labels |
+| `docs/STRESS_TEST.md`: wrong Node version, wrong file path, redirects "3" (really 5), timeout 3500 (really 3000), "0 high vulnerabilities" (npm audit: 1 high postcss), security headers "verified" (only HSTS present), "immune" to prompt injection | Corrected; added note that verdicts weren't scored and all 27 genuine cases were CAN'T VERIFY keyless |
+| Video showed an **invented 7-rule list** that is not our rules, a mock verdict receipt with evidence ids that don't exist, a fabricated chatbot reply, "one-click export" (not a feature), an empty `/report` clip, a frozen 00:00 timer, captions saying the false-alarm was "a real bank alert" (it was a payment receipt), "fundamentally different", "modeled on government warnings" | All fixed in the 16:9 and 9:16 compositions, `docs/VIDEO_SCRIPT.md`, real `/report` still captured, timer now ticks; both videos re-rendered |
+| `DEVPOST_DESCRIPTION.md`: wrong file path, "five-stage" for six steps, "100% verified directory receipts", chatbot generalization, an invented "early prompts hallucinated" anecdote | Corrected |
+| Gallery: how-it-works diagram labels overlapped (our page bug), verdict images cropped mid-scroll | Labels shortened; capture script now frames the verdict card; gallery regenerated |
+| Audio track is silence (`-91 dB`) | Expected: John's voice-over goes in the slots; no music shipped |

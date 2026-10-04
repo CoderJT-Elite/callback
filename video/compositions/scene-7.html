@@ -122,13 +122,13 @@
             <div id="s7-rules-card" class="ledger-card">
               <div class="box-title">FIXED RULE ENGINE (FIRST MATCH DECIDES)</div>
               <div style="display: flex; flex-direction: column; gap: 7px;">
-                <div class="rule-row" style="border-left: 3px solid #C23B22;">Rule 1: Hard Red Flags (Gift card / crypto / wire ask) → DOESN'T MATCH</div>
-                <div class="rule-row" style="border-left: 3px solid #C23B22;">Rule 2: Freemail Impersonation (@gmail claiming Bank) → DOESN'T MATCH</div>
-                <div class="rule-row" style="border-left: 3px solid #C23B22;">Rule 3: Strong Mismatch (Lookalike / foreign domain) → DOESN'T MATCH</div>
-                <div class="rule-row" style="border-left: 3px solid #96640A;">Rule 4: Personal Message (No organization claimed) → NO_ORG</div>
-                <div class="rule-row" style="border-left: 3px solid #1F6A4B;">Rule 5: All Official Match (Verified domain & phone) → MATCHES</div>
-                <div class="rule-row" style="border-left: 3px solid #1F6A4B;">Rule 6: Official Domain Only (Link confirmed) → MATCHES</div>
-                <div class="rule-row" style="border-left: 3px solid #4A4A48;">Rule 7: Fallback Default (Unverified contact points) → CAN'T VERIFY</div>
+                <div class="rule-row" style="border-left: 3px solid #4A4A48;">Rule 1: Organization named but not found → CAN'T VERIFY</div>
+                <div class="rule-row" style="border-left: 3px solid #96640A;">Rule 2: Sender claims to be a person → NO ORGANIZATION CLAIMED</div>
+                <div class="rule-row" style="border-left: 3px solid #C23B22;">Rule 3: Unofficial link or email, lookalike domain, gift card or crypto ask → DOESN'T MATCH</div>
+                <div class="rule-row" style="border-left: 3px solid #C23B22;">Rule 4: Phone number not on the official contact pages → DOESN'T MATCH</div>
+                <div class="rule-row" style="border-left: 3px solid #1F6A4B;">Rule 5: Every contact point checks out, nothing flagged → MATCHES</div>
+                <div class="rule-row" style="border-left: 3px solid #4A4A48;">Rule 6: Nothing in the message to check → CAN'T VERIFY</div>
+                <div class="rule-row" style="border-left: 3px solid #4A4A48;">Rule 7: Evidence partial or inconclusive → CAN'T VERIFY</div>
               </div>
             </div>
           </div>

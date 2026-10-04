@@ -269,9 +269,9 @@
           </div>
           <div style="display: flex; flex-direction: column; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 16px;">
             <div>[E1] Link: <code>usps-redelivery-notice.xyz</code> ✗</div>
-            <div>[E2] Lookalike brand score: Impersonates USPS ✗</div>
-            <div>[E3] RDAP registration: Not registered ✗</div>
-            <div style="color: var(--pine); font-weight: 700;">[E4] Real portal: tools.usps.com ✓</div>
+            <div>[E2] Payment demand: $1.99 redelivery fee !</div>
+            <div>[E3] Urgency: "within 24 hours" !</div>
+            <div style="color: var(--pine); font-weight: 700;">Do this instead: usps.com · 1-800-275-8777</div>
           </div>
         </div>
         <div style="text-align: center;">
@@ -351,11 +351,11 @@
           </div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">
-          <div style="padding: 8px; border-left: 4px solid var(--stamp);">Rule 1: Hard Red Flags → DOESN'T MATCH</div>
-          <div style="padding: 8px; border-left: 4px solid var(--stamp);">Rule 2: Freemail Impersonation → DOESN'T MATCH</div>
-          <div style="padding: 8px; border-left: 4px solid var(--stamp);">Rule 3: Strong Mismatch → DOESN'T MATCH</div>
-          <div style="padding: 8px; border-left: 4px solid var(--pine);">Rule 5: All Official Match → MATCHES</div>
-          <div style="padding: 8px; border-left: 4px solid var(--graphite);">Rule 7: Fallback Default → CAN'T VERIFY</div>
+          <div style="padding: 8px; border-left: 4px solid var(--stamp);">Rule 1: Org named but not found → CAN'T VERIFY</div>
+          <div style="padding: 8px; border-left: 4px solid var(--stamp);">Rule 2: Sender is a person → NO ORGANIZATION</div>
+          <div style="padding: 8px; border-left: 4px solid var(--stamp);">Rule 3: Unofficial link, lookalike or gift-card ask → DOESN'T MATCH</div>
+          <div style="padding: 8px; border-left: 4px solid var(--pine);">Rule 5: Every contact point checks out → MATCHES</div>
+          <div style="padding: 8px; border-left: 4px solid var(--graphite);">Rule 7: Evidence partial → CAN'T VERIFY</div>
         </div>
       </div>
 
@@ -454,14 +454,14 @@
         { start: 13.7, text: "When you receive a text like this, how do you verify it?" },
         { start: 18.2, text: "The standard advice is: 'contact the company yourself.'" },
         { start: 23.0, text: "But when people paste suspicious messages into an AI chatbot," },
-        { start: 27.7, text: "the model only guesses based on grammar and tone." },
-        { start: 31.2, text: "Scammers use AI too, so tone proves nothing. Meet Callback." },
+        { start: 27.7, text: "you get a verdict, but nothing you can check." },
+        { start: 31.2, text: "Scammers use AI too, so good grammar proves nothing. Meet Callback." },
         { start: 34.5, text: "Instead of guessing, Callback runs a live investigation." },
         { start: 38.7, text: "We paste the message and click Check it." },
         { start: 42.0, text: "Callback resolves who the message claims to be—the US Postal Service—" },
         { start: 47.0, text: "from a curated list of official organizations, never from the message itself." },
         { start: 51.4, text: "It compares the message's link against the real domain, usps.com." },
-        { start: 55.7, text: "The link isn't official, contains a lookalike brand name, and isn't in RDAP." },
+        { start: 55.7, text: "The link isn't official, contains the brand name, and the domain isn't registered." },
         { start: 60.2, text: "The verdict stamp lands: DOESN'T MATCH." },
         { start: 64.5, text: "Callback doesn't just cry scam on everything." },
         { start: 68.4, text: "When you receive a real fraud alert from your bank—like Wells Fargo—" },
@@ -473,15 +473,15 @@
         { start: 95.0, text: "Our extraction guard re-scans the text and drops anything the AI hallucinated" },
         { start: 99.7, text: "that wasn't actually present in the original image." },
         { start: 104.5, text: "If someone already clicked the link or replied, panic makes people freeze." },
-        { start: 108.4, text: "Callback's incident panel gives an immediate action checklist" },
-        { start: 113.2, text: "tailored to how they paid, and exports a complete incident summary" },
-        { start: 117.4, text: "with exact timestamps and receipts to paste directly into ReportFraud.ftc.gov." },
-        { start: 122.5, text: "Here is what makes Callback fundamentally different: the AI never decides the verdict." },
+        { start: 108.4, text: "Callback's incident panel gives a checklist for what to do next" },
+        { start: 113.2, text: "based on how they paid, and downloads an incident summary" },
+        { start: 117.4, text: "with timestamps and receipts to paste into a ReportFraud.ftc.gov report." },
+        { start: 122.5, text: "Here is what makes Callback different: the AI never decides the verdict." },
         { start: 127.0, text: "Gemini is used only to read messy text and draft plain-English explanations" },
         { start: 131.7, text: "where every single sentence must cite an evidence receipt like E1 or it is dropped." },
         { start: 136.2, text: "Seven fixed deterministic rules decide whether the channels match." },
-        { start: 140.5, text: "We tested this on 35 synthetic messages modeled on government warnings." },
-        { start: 144.7, text: "Gemini alone flagged all 20 scams, but it also falsely flagged a real bank alert" },
+        { start: 140.5, text: "We tested this on 35 synthetic messages that we wrote." },
+        { start: 144.7, text: "Gemini alone flagged all 20 scams, but it also called a real payment receipt a scam" },
         { start: 149.2, text: "and gave no evidence. Callback caught 15 scams with zero false alarms," },
         { start: 153.2, text: "cited evidence on 74 out of 80 sentences, and answered 'can't verify' on 28.6%." },
         { start: 158.5, text: "Callback is honest about its limits. It focuses on US numbers and 27 curated orgs." },

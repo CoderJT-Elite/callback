@@ -30,12 +30,12 @@
   Right: Chatbot generic response bubble with amber warning icon: `"It looks suspicious because of urgency and grammar..."`
 - **[AUTO]** Graphic overlay with red cross marks:
   `✗ No official channel lookup`
-  `✗ Hallucinates certainty with no proof`
+  `✗ A judgment, not evidence you can check`
   `✗ Scammers now use LLMs to polish text to perfection`
 - **[AUTO]** Wipe transition to Callback logo mark (`app/icon.svg`) and headline:
   `"Don't trust the number in the message. Callback finds the real one."`
 - **[JOHN LIVE]** (Voice-over):
-  > "The standard advice is: 'contact the company yourself.' But when people paste suspicious messages into an AI chatbot, the model only guesses based on grammar and tone. Scammers use AI too, so tone proves nothing. Meet Callback."
+  > "The standard advice is: 'contact the company yourself.' But when people paste suspicious messages into an AI chatbot, you get a verdict but nothing you can check. Scammers use AI too, so tone proves nothing. Meet Callback."
 
 ---
 
@@ -112,7 +112,7 @@
   `"THE AI NEVER DECIDES THE VERDICT."`
 - **[AUTO]** Rule ladder illuminates rules 1 through 7.
 - **[JOHN LIVE]** (Voice-over):
-  > "Here is what makes Callback fundamentally different: the AI never decides the verdict. Gemini is used only to read messy text and draft plain-English explanations where every single sentence must cite an evidence receipt like E1 or it is dropped. Seven fixed, deterministic rules decide whether the channels match."
+  > "Here is what makes Callback different: the AI never decides the verdict. Gemini is used only to read messy text and draft plain-English explanations where every single sentence must cite an evidence receipt like E1 or it is dropped. Seven fixed, deterministic rules decide whether the channels match."
 
 ---
 
@@ -135,7 +135,7 @@
     - Gemini alone: 0.0% (Always forced a guess)
     - Callback: 28.6% (10/35 abstained rather than guessing)
 - **[JOHN LIVE]** (Voice-over):
-  > "We tested this on 35 synthetic messages modeled on government warnings. Gemini alone flagged all 20 scams, but it also falsely flagged a legitimate bank alert and gave no evidence. Callback caught 15 scams with zero false alarms, cited evidence on 74 out of 80 explanation sentences, and answered 'can't verify' on 28.6% rather than guessing."
+  > "We tested this on 35 synthetic messages that we wrote. Gemini alone flagged all 20 scams, but it also called a real payment receipt a scam and gave no evidence. Callback caught 15 scams with zero false alarms, cited evidence on 74 out of 80 explanation sentences, and answered 'can't verify' on 28.6% rather than guessing."
 
 ---
 
