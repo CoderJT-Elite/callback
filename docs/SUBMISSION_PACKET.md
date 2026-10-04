@@ -9,7 +9,7 @@
 
 ## Pre-Submission Quick Checklist (For John on Friday, Oct 9)
 
-- [ ] **1. (Optional) Set Vercel API Key:** If you want live screenshot OCR and AI explanations active on the deployed Vercel site (`https://callback-lac.vercel.app`), add `GEMINI_API_KEY` in Vercel Project Settings → Environment Variables and redeploy. (The app functions smoothly rules-only without it).
+- [x] **1. Set Vercel API Key & Redeploy:** `GEMINI_API_KEY` successfully added to Vercel (Production & Preview secrets) and redeployed. Live screenshot OCR and AI-written explanations are active on `https://callback-lac.vercel.app`.
 - [ ] **2. Record Your Footage (Optional):** Follow `video/FOOTAGE_GUIDE.md` to record your clips (`intro-face.mp4`, `outro-face.mp4`). Drop them into `video/footage/` and run `npm run render` inside `video/`. If you don't record, the pre-rendered master video in `video/out/callback-demo-16x9.mp4` already contains crisp, clearly marked animated cards.
 - [ ] **3. Upload Demo Video:** Upload `video/out/callback-demo-16x9.mp4` to YouTube (set to Unlisted or Public) or Vimeo. Copy the URL.
 - [ ] **4. Copy-Paste Devpost Form:** Fill out the Devpost fields below in order, upload the gallery images from `docs/devpost/gallery/`, and click **Submit**.
