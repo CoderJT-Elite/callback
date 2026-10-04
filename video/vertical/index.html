@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Callback — ForgeHacks 2026 (Vertical 9:16)</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexMono-Regular.ttf') format('truetype'); }
+      @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 700; src: url('assets/fonts/IBMPlexMono-Bold.ttf') format('truetype'); }
+      @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexSans-Regular.ttf') format('truetype'); }
+      @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 600; src: url('assets/fonts/IBMPlexSans-SemiBold.ttf') format('truetype'); }
+      @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 400; src: url('assets/fonts/Newsreader-Regular.ttf') format('truetype'); }
+      @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 600; src: url('assets/fonts/Newsreader-SemiBold.ttf') format('truetype'); }
+
+      :root {
+        --paper: #F3EEE4;
+        --sheet: #FBF8F1;
+        --ink: #1C1A17;
+        --muted: #6B655A;
+        --rule: #D9D1C1;
+        --stamp: #C23B22;
+        --pine: #1F6A4B;
+        --ochre: #96640A;
+        --graphite: #4A4A48;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: 'IBM Plex Sans', sans-serif;
+      }
+
+      #root {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: var(--paper);
+        overflow: hidden;
+      }
+
+      .paper-bg {
+        position: absolute;
+        inset: 0;
+        background-color: var(--paper);
+        background-image: 
+          linear-gradient(to right, rgba(217, 209, 193, 0.25) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(217, 209, 193, 0.25) 1px, transparent 1px);
+        background-size: 32px 32px;
+        pointer-events: none;
+      }
+
+      .top-banner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        border-bottom: 2.5px solid var(--ink);
+        background: var(--sheet);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        z-index: 100;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand-lockup img {
+        width: 44px;
+        height: 44px;
+      }
+
+      .brand-title {
+        font-family: 'Newsreader', serif;
+        font-size: 36px;
+        font-weight: 600;
+      }
+
+      .brand-tag {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .progress-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 10px;
+        background: var(--rule);
+        z-index: 100;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: var(--stamp);
+      }
+
+      .captions-bar {
+        position: absolute;
+        bottom: 30px;
+        left: 40px;
+        right: 40px;
+        min-height: 80px;
+        background: var(--sheet);
+        border: 2px solid var(--ink);
+        box-shadow: 4px 4px 0 var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 28px;
+        z-index: 95;
+        text-align: center;
+      }
+
+      .caption-text {
+        font-family: 'Newsreader', serif;
+        font-size: 26px;
+        line-height: 1.35;
+        font-weight: 500;
+        color: var(--ink);
+      }
+
+      .scene-card {
+        position: absolute;
+        top: 130px;
+        left: 40px;
+        right: 40px;
+        bottom: 130px;
+        background: var(--sheet);
+        border: 2px solid var(--ink);
+        box-shadow: 8px 8px 0 var(--ink);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .rubber-stamp {
+        display: inline-block;
+        border: 4px solid currentColor;
+        outline: 1.5px solid currentColor;
+        outline-offset: 4px;
+        padding: 8px 24px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transform: rotate(-3deg);
+      }
+
+      .stamp-red { color: var(--stamp); }
+      .stamp-green { color: var(--pine); }
+
+      .footage-pip {
+        position: absolute;
+        right: 40px;
+        top: 140px;
+        width: 320px;
+        height: 240px;
+        background: var(--sheet);
+        border: 2px solid var(--ink);
+        box-shadow: 6px 6px 0 var(--ink);
+        z-index: 90;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="vertical"
+      data-width="1080"
+      data-height="1920"
+      data-duration="180"
+    >
+      <div class="paper-bg"></div>
+
+      <!-- Header -->
+      <div id="v-top-bar" class="top-banner">
+        <div class="brand-lockup">
+          <img src="assets/icon.svg" alt="Callback" />
+          <span class="brand-title">Callback</span>
+        </div>
+        <div class="brand-tag">Cybersecurity · ForgeHacks 2026</div>
+      </div>
+
+      <!-- Persistent Audio Bed -->
+      <audio id="v-audio-bed" src="assets/audio/silence-bed.mp3" data-start="0" data-duration="180" data-volume="0.2"></audio>
+
+      <!-- SCENE 1: Hook (0s - 18s) -->
+      <div id="v-scene-1" class="clip scene-card" data-start="0" data-duration="18" data-track-index="1">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--muted); margin-bottom: 12px;">
+            INCOMING SMS · SPOOFED SENDER
+          </div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; border-left: 6px solid var(--stamp); padding-left: 16px; margin-bottom: 30px;">
+            "USPS: Action required. Package delivery pending fee payment of $1.99 at usps-redelivery-notice.xyz..."
+          </div>
+          <div style="font-family: 'Newsreader', serif; font-size: 72px; font-weight: 600; color: var(--stamp); line-height: 1.1;">
+            $3.5 BILLION
+          </div>
+          <div style="font-size: 22px; margin-top: 12px; color: var(--ink);">
+            Imposter scams were nearly <strong>1 in 3</strong> fraud reports to the FTC in 2025.
+          </div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--muted); margin-top: 16px;">
+            Source: Federal Trade Commission, June 2026
+          </div>
+        </div>
+        <div style="font-family: 'Newsreader', serif; font-size: 34px; font-weight: 600; border-top: 2px solid var(--rule); padding-top: 20px;">
+          Don't trust the number in the message. Callback finds the real one.
+        </div>
+      </div>
+
+      <!-- SCENE 2: LLM Problem (18s - 34s) -->
+      <div id="v-scene-2" class="clip scene-card" data-start="18" data-duration="16" data-track-index="1">
+        <div>
+          <div style="font-family: 'Newsreader', serif; font-size: 48px; font-weight: 600; margin-bottom: 20px;">
+            Why Chatbots Fail at Scam Detection
+          </div>
+          <div style="background: var(--paper); border: 1px solid var(--rule); padding: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; margin-bottom: 24px;">
+            Prompt: "Is this a scam?"<br/>
+            Chatbot: "It appears suspicious based on urgency..."
+          </div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px; font-size: 20px;">
+            <li style="color: var(--stamp);">✗ Chatbots guess tone; scammers use AI too</li>
+            <li style="color: var(--stamp);">✗ Zero official directory verification</li>
+            <li style="color: var(--pine);">✓ Callback verifies official channels with receipts</li>
+          </ul>
+        </div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: var(--muted); border-top: 2px solid var(--rule); padding-top: 16px;">
+          Deterministic 7-Rule Engine · Verified Directory
+        </div>
+      </div>
+
+      <!-- SCENE 3: Live USPS Verdict (34s - 64s) -->
+      <div id="v-scene-3" class="clip scene-card" data-start="34" data-duration="30" data-track-index="1">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--muted); margin-bottom: 12px;">
+            LIVE CHECK · USPS REDELIVERY
+          </div>
+          <div id="v-stamp-mismatch" class="rubber-stamp stamp-red" style="margin-bottom: 20px;">
+            ✗ DOESN'T MATCH
+          </div>
+          <div style="font-family: 'Newsreader', serif; font-size: 36px; font-weight: 600; margin-bottom: 16px;">
+            Rule 3: Strong Mismatch Against USPS
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 16px;">
+            <div>[E1] Link: <code>usps-redelivery-notice.xyz</code> ✗</div>
+            <div>[E2] Lookalike brand score: Impersonates USPS ✗</div>
+            <div>[E3] RDAP registration: Not registered ✗</div>
+            <div style="color: var(--pine); font-weight: 700;">[E4] Real portal: tools.usps.com ✓</div>
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <img src="assets/stills/12-vertical-mismatch-verdict.png" style="max-height: 600px; width: auto; border: 1.5px solid var(--ink);" alt="Vertical Verdict" />
+        </div>
+      </div>
+
+      <!-- SCENE 4: Real Bank Alert (64s - 86s) -->
+      <div id="v-scene-4" class="clip scene-card" data-start="64" data-duration="22" data-track-index="1">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--muted); margin-bottom: 12px;">
+            CONTRAST · LEGITIMATE ALERT
+          </div>
+          <div id="v-stamp-match" class="rubber-stamp stamp-green" style="margin-bottom: 20px;">
+            ✓ MATCHES
+          </div>
+          <div style="font-family: 'Newsreader', serif; font-size: 36px; font-weight: 600; margin-bottom: 16px;">
+            Wells Fargo Fraud Alert
+          </div>
+          <div style="font-size: 20px; line-height: 1.5; color: var(--ink);">
+            Callback confirms link is on wellsfargo.com and verifies the phone number against Wells Fargo's official contact page.
+          </div>
+        </div>
+        <div style="padding: 16px; background: var(--paper); border-left: 6px solid var(--pine); font-family: 'IBM Plex Mono', monospace; font-size: 16px;">
+          Verified Phone: 1-800-869-3557 on official directory.<br/>
+          False alarm rate on legit messages: 0.0%
+        </div>
+      </div>
+
+      <!-- SCENE 5: Multimodal Screenshot (86s - 104s) -->
+      <div id="v-scene-5" class="clip scene-card" data-start="86" data-duration="18" data-track-index="1">
+        <div>
+          <div style="font-family: 'Newsreader', serif; font-size: 44px; font-weight: 600; margin-bottom: 16px;">
+            Multimodal Screenshot Reading
+          </div>
+          <div style="font-size: 18px; line-height: 1.5; margin-bottom: 20px;">
+            Drop an image. Gemini vision reads the message into structured data. Our deterministic guard drops anything not present in the image.
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <img src="assets/sample-screenshot.png" style="max-height: 600px; width: auto; border: 1.5px solid var(--ink);" alt="Screenshot" />
+        </div>
+        <div style="padding: 12px; background: var(--paper); font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--muted);">
+          Evidence validator: 74 of 80 explanation sentences kept; 5 uncited dropped.
+        </div>
+      </div>
+
+      <!-- SCENE 6: Incident Response (104s - 122s) -->
+      <div id="v-scene-6" class="clip scene-card" data-start="104" data-duration="18" data-track-index="1">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--muted); margin-bottom: 8px;">
+            RECOVERY TOOLKIT
+          </div>
+          <div style="font-family: 'Newsreader', serif; font-size: 40px; font-weight: 600; margin-bottom: 16px;">
+            "Already clicked, replied or paid?"
+          </div>
+          <div style="font-size: 18px; line-height: 1.5; margin-bottom: 24px;">
+            Instant action checklists by payment type. Download summary (.txt) or print PDF dossier ready to file with ReportFraud.ftc.gov.
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <img src="assets/stills/10-incident-report-view.png" style="max-height: 550px; width: auto; border: 1.5px solid var(--ink);" alt="Incident Dossier" />
+        </div>
+      </div>
+
+      <!-- SCENE 7: Architecture 7 Rules (122s - 140s) -->
+      <div id="v-scene-7" class="clip scene-card" data-start="122" data-duration="18" data-track-index="1">
+        <div>
+          <div style="display: inline-block; background: var(--stamp); color: #fff; padding: 4px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 700; margin-bottom: 12px;">
+            CORE GUARANTEE
+          </div>
+          <div style="font-family: 'Newsreader', serif; font-size: 44px; font-weight: 600; margin-bottom: 16px;">
+            The AI Never Decides the Verdict.
+          </div>
+          <div style="font-size: 18px; line-height: 1.5; color: var(--ink);">
+            Gemini reads text and writes cited explanations [E1]. Seven deterministic rules decide whether contact channels match.
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">
+          <div style="padding: 8px; border-left: 4px solid var(--stamp);">Rule 1: Hard Red Flags → DOESN'T MATCH</div>
+          <div style="padding: 8px; border-left: 4px solid var(--stamp);">Rule 2: Freemail Impersonation → DOESN'T MATCH</div>
+          <div style="padding: 8px; border-left: 4px solid var(--stamp);">Rule 3: Strong Mismatch → DOESN'T MATCH</div>
+          <div style="padding: 8px; border-left: 4px solid var(--pine);">Rule 5: All Official Match → MATCHES</div>
+          <div style="padding: 8px; border-left: 4px solid var(--graphite);">Rule 7: Fallback Default → CAN'T VERIFY</div>
+        </div>
+      </div>
+
+      <!-- SCENE 8: Evaluation (140s - 158s) -->
+      <div id="v-scene-8" class="clip scene-card" data-start="140" data-duration="18" data-track-index="1">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--muted); margin-bottom: 8px;">
+            EVALUATION: 35 SYNTHETIC MESSAGES
+          </div>
+          <div style="font-family: 'Newsreader', serif; font-size: 40px; font-weight: 600; margin-bottom: 20px;">
+            Honest Benchmark Results
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 15px;">
+            <div>• Scams caught: Gemini 20/20 vs Callback 15/20 (75%)</div>
+            <div style="color: var(--pine); font-weight: 700;">• False alarms: Gemini 1/15 vs Callback 0/15 (0.0%)</div>
+            <div>• Cited sentences: Gemini 0% vs Callback 92.5% (74/80)</div>
+            <div>• Honest abstention: Callback 28.6% ("can't verify")</div>
+          </div>
+        </div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); border-top: 1px dashed var(--rule); padding-top: 12px;">
+          Source: eval/results/summary.md · Oct 3, 2026
+        </div>
+      </div>
+
+      <!-- SCENE 9: What Works / What Doesn't (158s - 172s) -->
+      <div id="v-scene-9" class="clip scene-card" data-start="158" data-duration="14" data-track-index="1">
+        <div>
+          <div style="font-family: 'Newsreader', serif; font-size: 40px; font-weight: 600; margin-bottom: 16px;">
+            What Works / What Doesn't
+          </div>
+          <div style="margin-bottom: 16px;">
+            <strong style="color: var(--pine);">Works:</strong> 27 curated US orgs, live official crawls, RDAP domain age, offline fallback.
+          </div>
+          <div>
+            <strong style="color: var(--ochre);">Doesn't:</strong> US numbers and English first; phone checks require crawlable contact pages; abstains on unlisted entities.
+          </div>
+        </div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--muted);">
+          Rubric: "A half-working project is okay. Overstating it isn't."
+        </div>
+      </div>
+
+      <!-- SCENE 10: End Card (172s - 180s) -->
+      <div id="v-scene-10" class="clip scene-card" data-start="172" data-duration="8" data-track-index="1">
+        <div style="text-align: center;">
+          <img src="assets/icon.svg" style="width: 64px; height: 64px; margin-bottom: 12px;" alt="Callback" />
+          <div style="font-family: 'Newsreader', serif; font-size: 52px; font-weight: 600;">Callback</div>
+          <div style="font-family: 'Newsreader', serif; font-size: 22px; font-style: italic; color: var(--muted); margin-bottom: 24px;">
+            "Don't trust the number in the message. Callback finds the real one."
+          </div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; display: flex; flex-direction: column; gap: 8px;">
+            <div>github.com/CoderJT-Elite/callback</div>
+            <div>callback-lac.vercel.app</div>
+          </div>
+        </div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); text-align: center; border-top: 1px dashed var(--rule); padding-top: 12px;">
+          Built for ForgeHacks 2026 by John Tewolde with AI coding agents (an AI coding assistant, the review pass).
+        </div>
+      </div>
+
+      <!-- Picture in picture placeholder for intro -->
+      <div id="v-pip-intro" class="clip footage-pip" data-start="0" data-duration="18" data-track-index="2">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700; color: var(--stamp);">
+          JOHN'S FOOTAGE: INTRO-FACE
+        </div>
+        <div style="font-family: 'Newsreader', serif; font-size: 18px; font-weight: 600;">
+          Intro Facecam (18s)
+        </div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);">
+          video/footage/intro-face.mp4
+        </div>
+      </div>
+
+      <!-- Captions -->
+      <div id="v-captions" class="captions-bar">
+        <div id="v-caption-label" class="caption-text">
+          Callback: Ground-truth imposter scam verification.
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-container">
+        <div id="v-progress-bar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.to("#v-progress-bar", { width: "100%", duration: 180, ease: "none" }, 0);
+
+      const captionLabel = document.getElementById("v-caption-label");
+      const captionsData = [
+        { start: 0.5, text: "This text claims it's from the Postal Service asking for a two-dollar redelivery fee." },
+        { start: 5.2, text: "Is it real? Imposter scams were nearly one in three fraud reports to the FTC in 2025," },
+        { start: 9.2, text: "accounting for 3.5 billion dollars in reported losses." },
+        { start: 13.7, text: "When you receive a text like this, how do you verify it?" },
+        { start: 18.2, text: "The standard advice is: 'contact the company yourself.'" },
+        { start: 23.0, text: "But when people paste suspicious messages into an AI chatbot," },
+        { start: 27.7, text: "the model only guesses based on grammar and tone." },
+        { start: 31.2, text: "Scammers use AI too, so tone proves nothing. Meet Callback." },
+        { start: 34.5, text: "Instead of guessing, Callback runs a live investigation." },
+        { start: 38.7, text: "We paste the message and click Check it." },
+        { start: 42.0, text: "Callback resolves who the message claims to be—the US Postal Service—" },
+        { start: 47.0, text: "from a curated list of official organizations, never from the message itself." },
+        { start: 51.4, text: "It compares the message's link against the real domain, usps.com." },
+        { start: 55.7, text: "The link isn't official, contains a lookalike brand name, and isn't in RDAP." },
+        { start: 60.2, text: "The verdict stamp lands: DOESN'T MATCH." },
+        { start: 64.5, text: "Callback doesn't just cry scam on everything." },
+        { start: 68.4, text: "When you receive a real fraud alert from your bank—like Wells Fargo—" },
+        { start: 72.7, text: "it confirms the link is on wellsfargo.com and verifies the phone number" },
+        { start: 77.0, text: "against Wells Fargo's own contact page. Green stamp: MATCHES." },
+        { start: 81.2, text: "That contrast is critical: false alarms make people ignore real warnings." },
+        { start: 86.5, text: "Callback also reads screenshots. Drop an image of a suspicious text," },
+        { start: 90.2, text: "and Gemini vision reads the message into structured data." },
+        { start: 95.0, text: "Our extraction guard re-scans the text and drops anything the AI hallucinated" },
+        { start: 99.7, text: "that wasn't actually present in the original image." },
+        { start: 104.5, text: "If someone already clicked the link or replied, panic makes people freeze." },
+        { start: 108.4, text: "Callback's incident panel gives an immediate action checklist" },
+        { start: 113.2, text: "tailored to how they paid, and exports a complete incident summary" },
+        { start: 117.4, text: "with exact timestamps and receipts to paste directly into ReportFraud.ftc.gov." },
+        { start: 122.5, text: "Here is what makes Callback fundamentally different: the AI never decides the verdict." },
+        { start: 127.0, text: "Gemini is used only to read messy text and draft plain-English explanations" },
+        { start: 131.7, text: "where every single sentence must cite an evidence receipt like E1 or it is dropped." },
+        { start: 136.2, text: "Seven fixed deterministic rules decide whether the channels match." },
+        { start: 140.5, text: "We tested this on 35 synthetic messages modeled on government warnings." },
+        { start: 144.7, text: "Gemini alone flagged all 20 scams, but it also falsely flagged a real bank alert" },
+        { start: 149.2, text: "and gave no evidence. Callback caught 15 scams with zero false alarms," },
+        { start: 153.2, text: "cited evidence on 74 out of 80 sentences, and answered 'can't verify' on 28.6%." },
+        { start: 158.5, text: "Callback is honest about its limits. It focuses on US numbers and 27 curated orgs." },
+        { start: 162.4, text: "Official phone numbers can only be confirmed where organizations publish them." },
+        { start: 167.2, text: "If an entity is unlisted or blocks scraping, Callback says 'can't verify' instead of guessing." },
+        { start: 172.2, text: "I'm John Tewolde. Callback was built under my direction using an AI coding assistant and the review pass." },
+        { start: 176.2, text: "Try it live at callback-lac.vercel.app. Don't trust the number in the message. Callback finds the real one." }
+      ];
+
+      captionsData.forEach(c => {
+        tl.call(() => {
+          if (captionLabel) captionLabel.textContent = c.text;
+        }, null, c.start);
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["vertical"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

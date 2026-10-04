@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexMono-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 700; src: url('assets/fonts/IBMPlexMono-Bold.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexSans-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 600; src: url('assets/fonts/IBMPlexSans-SemiBold.ttf') format('truetype'); }
+        @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 400; src: url('assets/fonts/Newsreader-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 600; src: url('assets/fonts/Newsreader-SemiBold.ttf') format('truetype'); }
+
+        #root {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 80px;
+          font-family: 'IBM Plex Sans', sans-serif;
+          color: #1C1A17;
+        }
+
+        .ledger-card {
+          background: #FBF8F1;
+          border: 2px solid #1C1A17;
+          box-shadow: 8px 8px 0 #1C1A17;
+          padding: 32px;
+        }
+
+        .inner-container {
+          width: 100%;
+          max-width: 1300px;
+          display: flex;
+          flex-direction: column;
+          gap: 28px;
+        }
+
+        .sms-box {
+          border-left: 8px solid #C23B22;
+        }
+
+        .meta-line {
+          display: flex;
+          justify-content: space-between;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 13px;
+          color: #6B655A;
+          margin-bottom: 12px;
+        }
+
+        .sms-content {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 22px;
+          line-height: 1.4;
+          color: #1C1A17;
+        }
+
+        .stats-grid {
+          display: flex;
+          gap: 32px;
+        }
+
+        .stat-card {
+          flex: 1.2;
+        }
+
+        .callout-card {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .stat-label {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 13px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: #6B655A;
+          margin-bottom: 8px;
+        }
+
+        .stat-number {
+          font-family: 'Newsreader', serif;
+          font-size: 68px;
+          font-weight: 600;
+          color: #C23B22;
+          line-height: 1.1;
+        }
+
+        .stat-sub {
+          font-size: 18px;
+          margin-top: 10px;
+          color: #1C1A17;
+        }
+
+        .source-tag {
+          margin-top: 14px;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 12px;
+          color: #6B655A;
+          border-top: 1px dashed #D9D1C1;
+          padding-top: 8px;
+        }
+
+        .callout-title {
+          font-family: 'Newsreader', serif;
+          font-size: 32px;
+          font-weight: 600;
+          line-height: 1.25;
+          margin-bottom: 12px;
+        }
+
+        .callout-desc {
+          font-size: 16px;
+          color: #6B655A;
+          line-height: 1.5;
+        }
+      </style>
+
+      <div id="root" data-composition-id="scene-1" data-width="1920" data-height="1080">
+        <div class="inner-container">
+          <div id="s1-sms-card" class="ledger-card sms-box">
+            <div class="meta-line">
+              <span>INCOMING SMS · CLAIMED SENDER: USPS</span>
+              <span>TODAY 11:42 AM</span>
+            </div>
+            <div id="s1-sms-body" class="sms-content">
+              "USPS: Action required. Package delivery pending fee payment of $1.99 at usps-redelivery-notice.xyz to avoid return."
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div id="s1-stat-card" class="ledger-card stat-card">
+              <div class="stat-label">FTC Imposter Fraud (2025 Reported Losses)</div>
+              <div id="s1-stat-counter" class="stat-number">$3.5 BILLION</div>
+              <div class="stat-sub">
+                Imposter scams were nearly <strong>1 in 3</strong> fraud reports to the FTC in 2025.
+              </div>
+              <div class="source-tag">
+                Source: Federal Trade Commission Press Release, June 2026
+              </div>
+            </div>
+
+            <div id="s1-callout-card" class="ledger-card callout-card">
+              <div class="callout-title">
+                How do you know if the number or link is real?
+              </div>
+              <div class="callout-desc">
+                Standard advice says: "Find the real number yourself." Callback automates that investigation with receipts.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#s1-sms-card", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.2);
+        tl.fromTo("#s1-stat-card", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.8);
+        tl.fromTo("#s1-callout-card", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 1.4);
+        window.__timelines = window.__timelines || {};
+        window.__timelines["scene-1"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

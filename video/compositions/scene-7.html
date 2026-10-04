@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexMono-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 700; src: url('assets/fonts/IBMPlexMono-Bold.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexSans-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 600; src: url('assets/fonts/IBMPlexSans-SemiBold.ttf') format('truetype'); }
+        @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 400; src: url('assets/fonts/Newsreader-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 600; src: url('assets/fonts/Newsreader-SemiBold.ttf') format('truetype'); }
+
+        #root {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 80px;
+          font-family: 'IBM Plex Sans', sans-serif;
+          color: #1C1A17;
+        }
+
+        .ledger-card {
+          background: #FBF8F1;
+          border: 2px solid #1C1A17;
+          box-shadow: 8px 8px 0 #1C1A17;
+          padding: 32px;
+        }
+
+        .inner-container {
+          width: 100%;
+          max-width: 1400px;
+          display: flex;
+          flex-direction: column;
+          gap: 28px;
+        }
+
+        .scene-header {
+          text-align: center;
+        }
+
+        .guarantee-badge {
+          display: inline-block;
+          background: #C23B22;
+          color: #fff;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 13px;
+          font-weight: 700;
+          padding: 4px 14px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          margin-bottom: 10px;
+        }
+
+        .header-title {
+          font-family: 'Newsreader', serif;
+          font-size: 44px;
+          font-weight: 600;
+        }
+
+        .header-sub {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 14px;
+          color: #6B655A;
+          margin-top: 4px;
+        }
+
+        .architecture-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 36px;
+        }
+
+        .box-title {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 13px;
+          font-weight: 700;
+          color: #6B655A;
+          margin-bottom: 14px;
+        }
+
+        .pipeline-step {
+          padding: 10px;
+          background: #F3EEE4;
+          border: 1px solid #D9D1C1;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 13px;
+        }
+
+        .rule-row {
+          padding: 6px 10px;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 12px;
+        }
+      </style>
+
+      <div id="root" data-composition-id="scene-7" data-width="1920" data-height="1080">
+        <div class="inner-container">
+          <div class="scene-header">
+            <div class="guarantee-badge">CORE SYSTEM GUARANTEE</div>
+            <div id="s7-title" class="header-title">The AI Never Decides the Verdict.</div>
+            <div id="s7-sub" class="header-sub">7 Deterministic Rules · Curated Directory · Cited Explanations Only</div>
+          </div>
+
+          <div class="architecture-grid">
+            <div id="s7-pipe-card" class="ledger-card">
+              <div class="box-title">INVESTIGATION PIPELINE</div>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div class="pipeline-step">1. Input: Message text or raw screenshot</div>
+                <div class="pipeline-step">2. Gemini schema extraction + regex re-scan</div>
+                <div class="pipeline-step">3. Entity resolution: 27 hand-checked US orgs, then Wikidata</div>
+                <div class="pipeline-step">4. Channel checks: RDAP domain age, lookalikes, contact crawl</div>
+                <div class="pipeline-step" style="background: #FBF8F1; border: 2px solid #1C1A17; font-weight: 700; color: #1F6A4B;">5. 7 Fixed Rules determine verdict (NOT the AI)</div>
+                <div class="pipeline-step">6. Gemini explains: every sentence must cite [E#] or dropped</div>
+              </div>
+            </div>
+
+            <div id="s7-rules-card" class="ledger-card">
+              <div class="box-title">FIXED RULE ENGINE (FIRST MATCH DECIDES)</div>
+              <div style="display: flex; flex-direction: column; gap: 7px;">
+                <div class="rule-row" style="border-left: 3px solid #C23B22;">Rule 1: Hard Red Flags (Gift card / crypto / wire ask) → DOESN'T MATCH</div>
+                <div class="rule-row" style="border-left: 3px solid #C23B22;">Rule 2: Freemail Impersonation (@gmail claiming Bank) → DOESN'T MATCH</div>
+                <div class="rule-row" style="border-left: 3px solid #C23B22;">Rule 3: Strong Mismatch (Lookalike / foreign domain) → DOESN'T MATCH</div>
+                <div class="rule-row" style="border-left: 3px solid #96640A;">Rule 4: Personal Message (No organization claimed) → NO_ORG</div>
+                <div class="rule-row" style="border-left: 3px solid #1F6A4B;">Rule 5: All Official Match (Verified domain & phone) → MATCHES</div>
+                <div class="rule-row" style="border-left: 3px solid #1F6A4B;">Rule 6: Official Domain Only (Link confirmed) → MATCHES</div>
+                <div class="rule-row" style="border-left: 3px solid #4A4A48;">Rule 7: Fallback Default (Unverified contact points) → CAN'T VERIFY</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#s7-title", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, 0.2);
+        tl.fromTo("#s7-sub", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, 0.4);
+        tl.fromTo("#s7-pipe-card", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, 0.7);
+        tl.fromTo("#s7-rules-card", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, 1.1);
+        window.__timelines = window.__timelines || {};
+        window.__timelines["scene-7"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

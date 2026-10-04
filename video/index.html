@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Callback — ForgeHacks 2026</title>
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexMono-Regular.ttf') format('truetype'); }
+      @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 700; src: url('assets/fonts/IBMPlexMono-Bold.ttf') format('truetype'); }
+      @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexSans-Regular.ttf') format('truetype'); }
+      @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 600; src: url('assets/fonts/IBMPlexSans-SemiBold.ttf') format('truetype'); }
+      @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 400; src: url('assets/fonts/Newsreader-Regular.ttf') format('truetype'); }
+      @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 600; src: url('assets/fonts/Newsreader-SemiBold.ttf') format('truetype'); }
+
+      :root {
+        --paper: #F3EEE4;
+        --sheet: #FBF8F1;
+        --ink: #1C1A17;
+        --muted: #6B655A;
+        --rule: #D9D1C1;
+        --stamp: #C23B22;
+        --pine: #1F6A4B;
+        --ochre: #96640A;
+        --graphite: #4A4A48;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: 'IBM Plex Sans', sans-serif;
+      }
+
+      #root {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: var(--paper);
+        overflow: hidden;
+      }
+
+      .paper-bg {
+        position: absolute;
+        inset: 0;
+        background-color: var(--paper);
+        background-image: 
+          linear-gradient(to right, rgba(217, 209, 193, 0.25) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(217, 209, 193, 0.25) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+      }
+
+      .top-banner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 72px;
+        border-bottom: 2px solid var(--ink);
+        background: var(--sheet);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 48px;
+        z-index: 100;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand-lockup img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .brand-title {
+        font-family: 'Newsreader', serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .brand-tag {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        padding-left: 12px;
+        border-left: 1px solid var(--rule);
+      }
+
+      .header-meta {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 13px;
+      }
+
+      .time-chip {
+        padding: 4px 12px;
+        background: var(--paper);
+        border: 1px solid var(--ink);
+        font-weight: 600;
+      }
+
+      .progress-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: var(--rule);
+        z-index: 100;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: var(--stamp);
+      }
+
+      .captions-bar {
+        position: absolute;
+        bottom: 24px;
+        left: 80px;
+        right: 80px;
+        min-height: 54px;
+        background: var(--sheet);
+        border: 1.5px solid var(--ink);
+        box-shadow: 4px 4px 0 var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 32px;
+        z-index: 95;
+        text-align: center;
+      }
+
+      .caption-text {
+        font-family: 'Newsreader', serif;
+        font-size: 24px;
+        line-height: 1.3;
+        font-weight: 500;
+        color: var(--ink);
+      }
+
+      .scene-slot {
+        position: absolute;
+        inset: 0;
+      }
+
+      .pip-slot {
+        position: absolute;
+        right: 64px;
+        bottom: 120px;
+        width: 440px;
+        height: 340px;
+        z-index: 90;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-width="1920"
+      data-height="1080"
+      data-duration="180"
+    >
+      <div class="paper-bg"></div>
+
+      <!-- Persistent Header -->
+      <div id="top-bar" class="top-banner">
+        <div class="brand-lockup">
+          <img src="assets/icon.svg" alt="Callback Logo" />
+          <span class="brand-title">Callback</span>
+          <span class="brand-tag">ForgeHacks 2026 · Cybersecurity Track</span>
+        </div>
+        <div class="header-meta">
+          <span id="time-display" class="time-chip">00:00 / 03:00</span>
+          <span>SOLO DEVELOPER: JOHN TEWOLDE</span>
+        </div>
+      </div>
+
+      <!-- Persistent Audio Bed -->
+      <audio id="audio-bed" src="assets/audio/silence-bed.mp3" data-start="0" data-duration="180" data-volume="0.2"></audio>
+
+      <!-- Sub-Compositions: Scenes 1 through 10 -->
+      <div
+        id="scene-1-mount"
+        class="scene-slot"
+        data-composition-id="scene-1"
+        data-composition-src="compositions/scene-1.html"
+        data-start="0"
+        data-duration="18"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <div
+        id="scene-2-mount"
+        class="scene-slot"
+        data-composition-id="scene-2"
+        data-composition-src="compositions/scene-2.html"
+        data-start="18"
+        data-duration="16"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <div
+        id="scene-3-mount"
+        class="scene-slot"
+        data-composition-id="scene-3"
+        data-composition-src="compositions/scene-3.html"
+        data-start="34"
+        data-duration="30"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <div
+        id="scene-4-mount"
+        class="scene-slot"
+        data-composition-id="scene-4"
+        data-composition-src="compositions/scene-4.html"
+        data-start="64"
+        data-duration="22"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <div
+        id="scene-5-mount"
+        class="scene-slot"
+        data-composition-id="scene-5"
+        data-composition-src="compositions/scene-5.html"
+        data-start="86"
+        data-duration="18"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <div
+        id="scene-6-mount"
+        class="scene-slot"
+        data-composition-id="scene-6"
+        data-composition-src="compositions/scene-6.html"
+        data-start="104"
+        data-duration="18"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <div
+        id="scene-7-mount"
+        class="scene-slot"
+        data-composition-id="scene-7"
+        data-composition-src="compositions/scene-7.html"
+        data-start="122"
+        data-duration="18"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <div
+        id="scene-8-mount"
+        class="scene-slot"
+        data-composition-id="scene-8"
+        data-composition-src="compositions/scene-8.html"
+        data-start="140"
+        data-duration="18"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <div
+        id="scene-9-mount"
+        class="scene-slot"
+        data-composition-id="scene-9"
+        data-composition-src="compositions/scene-9.html"
+        data-start="158"
+        data-duration="14"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <div
+        id="scene-10-mount"
+        class="scene-slot"
+        data-composition-id="scene-10"
+        data-composition-src="compositions/scene-10.html"
+        data-start="172"
+        data-duration="8"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+
+      <!-- John's Footage Slot Mounts -->
+      <div
+        id="slot-intro-mount"
+        class="pip-slot"
+        data-composition-id="slot-intro"
+        data-composition-src="compositions/slot-intro.html"
+        data-start="0"
+        data-duration="18"
+        data-track-index="2"
+        data-width="440"
+        data-height="340"
+      ></div>
+
+      <div
+        id="slot-outro-mount"
+        class="pip-slot"
+        data-composition-id="slot-outro"
+        data-composition-src="compositions/slot-outro.html"
+        data-start="172"
+        data-duration="8"
+        data-track-index="2"
+        data-width="440"
+        data-height="340"
+      ></div>
+
+      <!-- Persistent Captions Bar -->
+      <div id="captions-container" class="captions-bar">
+        <div id="caption-label" class="caption-text">
+          Callback: Ground-truth imposter scam verification.
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div id="main-progress-bar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.to("#main-progress-bar", { width: "100%", duration: 180, ease: "none" }, 0);
+
+      const captionLabel = document.getElementById("caption-label");
+      const captionsData = [
+        { start: 0.5, text: "This text claims it's from the Postal Service asking for a two-dollar redelivery fee." },
+        { start: 5.2, text: "Is it real? Imposter scams were nearly one in three fraud reports to the FTC in 2025," },
+        { start: 9.2, text: "accounting for 3.5 billion dollars in reported losses." },
+        { start: 13.7, text: "When you receive a text like this, how do you verify it?" },
+        { start: 18.2, text: "The standard advice is: 'contact the company yourself.'" },
+        { start: 23.0, text: "But when people paste suspicious messages into an AI chatbot," },
+        { start: 27.7, text: "the model only guesses based on grammar and tone." },
+        { start: 31.2, text: "Scammers use AI too, so tone proves nothing. Meet Callback." },
+        { start: 34.5, text: "Instead of guessing, Callback runs a live investigation." },
+        { start: 38.7, text: "We paste the message and click Check it." },
+        { start: 42.0, text: "Callback resolves who the message claims to be—the US Postal Service—" },
+        { start: 47.0, text: "from a curated list of official organizations, never from the message itself." },
+        { start: 51.4, text: "It compares the message's link against the real domain, usps.com." },
+        { start: 55.7, text: "The link isn't official, contains a lookalike brand name, and isn't in RDAP." },
+        { start: 60.2, text: "The verdict stamp lands: DOESN'T MATCH." },
+        { start: 64.5, text: "Callback doesn't just cry scam on everything." },
+        { start: 68.4, text: "When you receive a real fraud alert from your bank—like Wells Fargo—" },
+        { start: 72.7, text: "it confirms the link is on wellsfargo.com and verifies the phone number" },
+        { start: 77.0, text: "against Wells Fargo's own contact page. Green stamp: MATCHES." },
+        { start: 81.2, text: "That contrast is critical: false alarms make people ignore real warnings." },
+        { start: 86.5, text: "Callback also reads screenshots. Drop an image of a suspicious text," },
+        { start: 90.2, text: "and Gemini vision reads the message into structured data." },
+        { start: 95.0, text: "Our extraction guard re-scans the text and drops anything the AI hallucinated" },
+        { start: 99.7, text: "that wasn't actually present in the original image." },
+        { start: 104.5, text: "If someone already clicked the link or replied, panic makes people freeze." },
+        { start: 108.4, text: "Callback's incident panel gives an immediate action checklist" },
+        { start: 113.2, text: "tailored to how they paid, and exports a complete incident summary" },
+        { start: 117.4, text: "with exact timestamps and receipts to paste directly into ReportFraud.ftc.gov." },
+        { start: 122.5, text: "Here is what makes Callback fundamentally different: the AI never decides the verdict." },
+        { start: 127.0, text: "Gemini is used only to read messy text and draft plain-English explanations" },
+        { start: 131.7, text: "where every single sentence must cite an evidence receipt like E1 or it is dropped." },
+        { start: 136.2, text: "Seven fixed deterministic rules decide whether the channels match." },
+        { start: 140.5, text: "We tested this on 35 synthetic messages modeled on government warnings." },
+        { start: 144.7, text: "Gemini alone flagged all 20 scams, but it also falsely flagged a real bank alert" },
+        { start: 149.2, text: "and gave no evidence. Callback caught 15 scams with zero false alarms," },
+        { start: 153.2, text: "cited evidence on 74 out of 80 sentences, and answered 'can't verify' on 28.6%." },
+        { start: 158.5, text: "Callback is honest about its limits. It focuses on US numbers and 27 curated orgs." },
+        { start: 162.4, text: "Official phone numbers can only be confirmed where organizations publish them." },
+        { start: 167.2, text: "If an entity is unlisted or blocks scraping, Callback says 'can't verify' instead of guessing." },
+        { start: 172.2, text: "I'm John Tewolde. Callback was built under my direction using an AI coding assistant and the review pass." },
+        { start: 176.2, text: "Try it live at callback-lac.vercel.app. Don't trust the number in the message. Callback finds the real one." }
+      ];
+
+      captionsData.forEach(c => {
+        tl.call(() => {
+          if (captionLabel) captionLabel.textContent = c.text;
+        }, null, c.start);
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

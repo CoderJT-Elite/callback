@@ -1,0 +1,163 @@
+1
+00:00:00,500 --> 00:00:05,000
+This text claims it's from the Postal Service asking for a two-dollar redelivery fee.
+
+2
+00:00:05,200 --> 00:00:09,000
+Is it real? Imposter scams were nearly one in three fraud reports to the FTC in 2025,
+
+3
+00:00:09,200 --> 00:00:13,500
+accounting for 3.5 billion dollars in reported losses.
+
+4
+00:00:13,700 --> 00:00:17,500
+When you receive a text like this, how do you verify it?
+
+5
+00:00:18,200 --> 00:00:22,800
+The standard advice is: 'contact the company yourself.'
+
+6
+00:00:23,000 --> 00:00:27,500
+But when people paste suspicious messages into an AI chatbot,
+
+7
+00:00:27,700 --> 00:00:31,000
+the model only guesses based on grammar and tone.
+
+8
+00:00:31,200 --> 00:00:33,800
+Scammers use AI too, so tone proves nothing. Meet Callback.
+
+9
+00:00:34,500 --> 00:00:38,500
+Instead of guessing, Callback runs a live investigation.
+
+10
+00:00:38,700 --> 00:00:41,800
+We paste the message and click Check it.
+
+11
+00:00:42,000 --> 00:00:46,800
+Callback resolves who the message claims to be—the US Postal Service—
+
+12
+00:00:47,000 --> 00:00:51,200
+from a curated list of official organizations, never from the message itself.
+
+13
+00:00:51,400 --> 00:00:55,500
+It compares the message's link against the real domain, usps.com.
+
+14
+00:00:55,700 --> 00:01:00,000
+The link isn't official, contains a lookalike brand name, and isn't in RDAP.
+
+15
+00:01:00,200 --> 00:01:03,800
+The verdict stamp lands: DOESN'T MATCH.
+
+16
+00:01:04,500 --> 00:01:08,200
+Callback doesn't just cry scam on everything.
+
+17
+00:01:08,400 --> 00:01:12,500
+When you receive a real fraud alert from your bank—like Wells Fargo—
+
+18
+00:01:12,700 --> 00:01:16,800
+it confirms the link is on wellsfargo.com and verifies the phone number
+
+19
+00:01:17,000 --> 00:01:21,000
+against Wells Fargo's own contact page. Green stamp: MATCHES.
+
+20
+00:01:21,200 --> 00:01:25,500
+That contrast is critical: false alarms make people ignore real warnings.
+
+21
+00:01:26,500 --> 00:01:30,000
+Callback also reads screenshots. Drop an image of a suspicious text,
+
+22
+00:01:30,200 --> 00:01:34,800
+and Gemini vision reads the message into structured data.
+
+23
+00:01:35,000 --> 00:01:39,500
+Our extraction guard re-scans the text and drops anything the AI hallucinated
+
+24
+00:01:39,700 --> 00:01:43,500
+that wasn't actually present in the original image.
+
+25
+00:01:44,500 --> 00:01:48,200
+If someone already clicked the link or replied, panic makes people freeze.
+
+26
+00:01:48,400 --> 00:01:53,000
+Callback's incident panel gives an immediate action checklist
+
+27
+00:01:53,200 --> 00:01:57,200
+tailored to how they paid, and exports a complete incident summary
+
+28
+00:01:57,400 --> 00:02:01,500
+with exact timestamps and receipts to paste directly into ReportFraud.ftc.gov.
+
+29
+00:02:02,500 --> 00:02:06,800
+Here is what makes Callback fundamentally different: the AI never decides the verdict.
+
+30
+00:02:07,000 --> 00:02:11,500
+Gemini is used only to read messy text and draft plain-English explanations
+
+31
+00:02:11,700 --> 00:02:16,000
+where every single sentence must cite an evidence receipt like E1 or it is dropped.
+
+32
+00:02:16,200 --> 00:02:19,800
+Seven fixed deterministic rules decide whether the channels match.
+
+33
+00:02:20,500 --> 00:02:24,500
+We tested this on 35 synthetic messages modeled on government warnings.
+
+34
+00:02:24,700 --> 00:02:29,000
+Gemini alone flagged all 20 scams, but it also falsely flagged a real bank alert
+
+35
+00:02:29,200 --> 00:02:33,000
+and gave no evidence. Callback caught 15 scams with zero false alarms,
+
+36
+00:02:33,200 --> 00:02:37,500
+cited evidence on 74 out of 80 sentences, and answered 'can't verify' on 28.6%.
+
+37
+00:02:38,500 --> 00:02:42,200
+Callback is honest about its limits. It focuses on US numbers and 27 curated orgs.
+
+38
+00:02:42,400 --> 00:02:47,000
+Official phone numbers can only be confirmed where organizations publish them.
+
+39
+00:02:47,200 --> 00:02:51,500
+If an entity is unlisted or blocks scraping, Callback says 'can't verify' instead of guessing.
+
+40
+00:02:52,200 --> 00:02:56,000
+I'm John Tewolde. Callback was built under my direction using an AI coding assistant and the review pass.
+
+41
+00:02:56,200 --> 00:02:59,800
+Try it live at callback-lac.vercel.app. Don't trust the number in the message. Callback finds the real one.

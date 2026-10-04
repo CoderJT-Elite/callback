@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexMono-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 700; src: url('assets/fonts/IBMPlexMono-Bold.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexSans-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 600; src: url('assets/fonts/IBMPlexSans-SemiBold.ttf') format('truetype'); }
+        @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 400; src: url('assets/fonts/Newsreader-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 600; src: url('assets/fonts/Newsreader-SemiBold.ttf') format('truetype'); }
+
+        #root {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 80px;
+          font-family: 'IBM Plex Sans', sans-serif;
+          color: #1C1A17;
+        }
+
+        .ledger-card {
+          background: #FBF8F1;
+          border: 2px solid #1C1A17;
+          box-shadow: 8px 8px 0 #1C1A17;
+          padding: 32px;
+        }
+
+        .inner-container {
+          width: 100%;
+          max-width: 1300px;
+          display: flex;
+          flex-direction: column;
+          gap: 28px;
+        }
+
+        .scene-header {
+          text-align: center;
+        }
+
+        .header-title {
+          font-family: 'Newsreader', serif;
+          font-size: 40px;
+          font-weight: 600;
+          margin-bottom: 6px;
+        }
+
+        .header-sub {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 14px;
+          color: #6B655A;
+        }
+
+        .split-grid {
+          display: grid;
+          grid-template-columns: 1fr 1.2fr;
+          gap: 36px;
+          align-items: center;
+        }
+
+        .img-container {
+          padding: 16px;
+          text-align: center;
+          position: relative;
+        }
+
+        .img-container img {
+          max-height: 420px;
+          width: auto;
+          border: 1px solid #D9D1C1;
+        }
+
+        .scan-line {
+          position: absolute;
+          left: 16px;
+          right: 16px;
+          top: 16px;
+          height: 3px;
+          background: #C23B22;
+          box-shadow: 0 0 8px #C23B22;
+          opacity: 0.8;
+        }
+
+        .guard-steps {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .step-item {
+          font-size: 15px;
+          line-height: 1.5;
+        }
+
+        .validator-stat {
+          padding: 12px;
+          background: #F3EEE4;
+          border: 1px solid #D9D1C1;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 12px;
+          color: #6B655A;
+        }
+      </style>
+
+      <div id="root" data-composition-id="scene-5" data-width="1920" data-height="1080">
+        <div class="inner-container">
+          <div class="scene-header">
+            <div id="s5-title" class="header-title">Multimodal Screenshot Verification</div>
+            <div id="s5-sub" class="header-sub">Gemini Vision (gemini-3.5-flash-lite) + Anti-Hallucination Re-Scanning Guard</div>
+          </div>
+
+          <div class="split-grid">
+            <div id="s5-img-card" class="ledger-card img-container">
+              <img src="assets/sample-screenshot.png" alt="Sample Screenshot" />
+              <div id="s5-scan-beam" class="scan-line"></div>
+            </div>
+
+            <div id="s5-guard-card" class="ledger-card guard-steps">
+              <div style="font-family: 'Newsreader', serif; font-size: 24px; font-weight: 600;">
+                The Anti-Hallucination Pipeline
+              </div>
+              <div class="step-item">
+                1. <strong>Structured Vision Extraction:</strong> Gemini vision parses messy phone screenshots into typed JSON contact points.
+              </div>
+              <div class="step-item">
+                2. <strong>Deterministic Re-Scan Guard:</strong> Every phone number, email, and URL is re-checked against raw OCR text. If the AI listed a contact point not present in the message, it is immediately dropped.
+              </div>
+              <div class="validator-stat">
+                Evidence Validator: 74 of 80 explanation sentences kept; 5 uncited dropped; 1 ungrounded extraction rejected.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#s5-title", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, 0.2);
+        tl.fromTo("#s5-sub", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, 0.4);
+        tl.fromTo("#s5-img-card", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.6 }, 0.8);
+        tl.fromTo("#s5-guard-card", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.6 }, 1.2);
+        tl.fromTo("#s5-scan-beam", { y: 0 }, { y: 380, duration: 3.5, repeat: 3, ease: "sine.inOut" }, 1.5);
+        window.__timelines = window.__timelines || {};
+        window.__timelines["scene-5"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

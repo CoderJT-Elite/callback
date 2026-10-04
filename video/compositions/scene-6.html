@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexMono-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 700; src: url('assets/fonts/IBMPlexMono-Bold.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; src: url('assets/fonts/IBMPlexSans-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 600; src: url('assets/fonts/IBMPlexSans-SemiBold.ttf') format('truetype'); }
+        @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 400; src: url('assets/fonts/Newsreader-Regular.ttf') format('truetype'); }
+        @font-face { font-family: 'Newsreader'; font-style: normal; font-weight: 600; src: url('assets/fonts/Newsreader-SemiBold.ttf') format('truetype'); }
+
+        #root {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 80px;
+          font-family: 'IBM Plex Sans', sans-serif;
+          color: #1C1A17;
+        }
+
+        .ledger-card {
+          background: #FBF8F1;
+          border: 2px solid #1C1A17;
+          box-shadow: 8px 8px 0 #1C1A17;
+          padding: 32px;
+        }
+
+        .scene-grid {
+          width: 100%;
+          max-width: 1400px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
+          align-items: center;
+        }
+
+        .ui-frame {
+          padding: 0;
+          overflow: hidden;
+          height: 560px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .ui-header {
+          background: #F3EEE4;
+          padding: 12px 20px;
+          border-bottom: 1.5px solid #1C1A17;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 12px;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .ui-screen {
+          flex: 1;
+          position: relative;
+          background: #fff;
+          overflow: hidden;
+        }
+
+        .ui-screen img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: top center;
+        }
+
+        .panel-title {
+          font-family: 'Newsreader', serif;
+          font-size: 32px;
+          font-weight: 600;
+          line-height: 1.25;
+          margin-bottom: 16px;
+        }
+
+        .panel-desc {
+          font-size: 16px;
+          line-height: 1.5;
+          color: #1C1A17;
+          margin-bottom: 20px;
+        }
+
+        .action-chip {
+          padding: 8px 12px;
+          background: #F3EEE4;
+          border: 1px solid #1C1A17;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 13px;
+        }
+      </style>
+
+      <div id="root" data-composition-id="scene-6" data-width="1920" data-height="1080">
+        <div class="scene-grid">
+          <div id="s6-left-card" class="ledger-card">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6B655A; margin-bottom: 8px;">
+              EMERGENCY RECOVERY TOOLKIT
+            </div>
+            <div class="panel-title">
+              "Already clicked, replied or paid?"
+            </div>
+            <div class="panel-desc">
+              When people realize they've been scammed, panic sets in. Callback provides instant, tailored remediation checklists by payment type.
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div class="action-chip">• Credit / Debit Card: Freeze card & dispute unauthorized charge</div>
+              <div class="action-chip">• Download summary (.txt) with timestamps & receipts</div>
+              <div class="action-chip">• One-click export to ReportFraud.ftc.gov and IC3.gov</div>
+            </div>
+          </div>
+
+          <div id="s6-ui-frame" class="ledger-card ui-frame">
+            <div class="ui-header">
+              <span>INCIDENT REPORT VIEW · /REPORT</span>
+              <span style="color: #6B655A;">PRINT-TO-PDF READY</span>
+            </div>
+            <div class="ui-screen">
+              <img src="assets/stills/10-incident-report-view.png" alt="Incident Report View" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#s6-left-card", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.6 }, 0.2);
+        tl.fromTo("#s6-ui-frame", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.6 }, 0.6);
+        window.__timelines = window.__timelines || {};
+        window.__timelines["scene-6"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

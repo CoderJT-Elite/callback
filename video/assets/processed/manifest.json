@@ -1,0 +1,14 @@
+{
+  "intro-face": {
+    "present": false
+  },
+  "demo-narration": {
+    "present": false
+  },
+  "voiceover-main": {
+    "present": false
+  },
+  "outro-face": {
+    "present": false
+  }
+}
