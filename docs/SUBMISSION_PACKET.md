@@ -75,3 +75,24 @@ Once you press "Submit":
 2. Confirm the demo video embeds and plays properly.
 3. Test that the GitHub link and live Vercel URL open correctly in an incognito window.
 4. Save the submission confirmation email to your records.
+
+---
+
+## Cross-Check Against ForgeHacks Master Checklist (00-SUBMIT-CHECKLIST.md)
+
+Audit against `submission-kit\00-SUBMIT-CHECKLIST.md`:
+
+| Item / Requirement | Status | Verification & Evidence |
+|---|:---:|---|
+| **Repo public / first commit after Oct 3 12 PM ET** | Ready for John | Repository is initialized locally on main; first commit Oct 3 2026; John OKs the push on Fri Oct 9. |
+| **Fresh clone installs & runs from README** | PASS | Verified `npm ci`, `npm run dev`, `npm run build`, `npm run start` execute cleanly. |
+| **Live link opened logged out, no signup, no key** | PASS | Verified `https://callback-lac.vercel.app` returns HTTP 200 OK without authentication. |
+| **Every number in README matches command in repo** | PASS | FTC June 2026 cited with URL; 35 synthetic messages reproduce via `npm run eval`. |
+| **"What works / what doesn't" section written & honest** | PASS | Written in both `README.md` and `DEVPOST_DESCRIPTION.md`. |
+| **AI disclosure in README & video end card** | PASS | Present in `README.md`, `DEVPOST_DESCRIPTION.md`, and burned into `frame-12-176s.png`. |
+| **No keys, tokens or personal data committed** | PASS | Git log scan (`git log -p -S "AIzaSy"`) verified 0 leaked keys; `.env.local` strictly ignored. |
+| **Reused code named in README** | PASS | Documented: "No code was reused from earlier projects." |
+| **Devpost form fields filled** | PASS | Complete text and field mappings provided above. |
+| **Demo video (2-3 min)** | PASS | Master video `callback-demo-16x9.mp4` is exactly 3:00 (180.00s); vertical cut is also 3:00. |
+| **Items package does not cover (John-only actions)** | Noted | 1) Adding Vercel `GEMINI_API_KEY`, 2) Uploading video & setting `VIDEO_URL_TBD`, 3) Final Devpost Submit. |
+
