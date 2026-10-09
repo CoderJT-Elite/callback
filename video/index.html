@@ -165,13 +165,39 @@
         inset: 0;
       }
 
-      .pip-slot {
+      #pip {
         position: absolute;
-        right: 64px;
-        bottom: 120px;
-        width: 440px;
-        height: 340px;
+        right: 56px;
+        bottom: 112px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        border: 3px solid var(--ink);
+        box-shadow: 5px 5px 0 var(--ink);
+        background: var(--sheet);
+        overflow: hidden;
         z-index: 90;
+        opacity: 0;
+        transform-origin: 100% 100%;
+      }
+      #pip video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      #pip .shape {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Newsreader', serif;
+        font-size: 104px;
+        font-weight: 600;
+        color: var(--ink);
+        background: var(--paper);
       }
     </style>
   </head>
@@ -198,10 +224,8 @@
         </div>
       </div>
 
-      <!-- Persistent Audio Bed -->
-      <audio id="audio-bed" src="assets/audio/silence-bed.mp3" data-start="0" data-duration="180" data-volume="0.2"></audio>
+      <div id="pip"><div class="shape">J</div></div>
 
-      <!-- Sub-Compositions: Scenes 1 through 10 -->
       <div
         id="scene-1-mount"
         class="scene-slot"
@@ -322,31 +346,6 @@
         data-height="1080"
       ></div>
 
-      <!-- John's Footage Slot Mounts -->
-      <div
-        id="slot-intro-mount"
-        class="pip-slot"
-        data-composition-id="slot-intro"
-        data-composition-src="compositions/slot-intro.html"
-        data-start="0"
-        data-duration="18"
-        data-track-index="2"
-        data-width="440"
-        data-height="340"
-      ></div>
-
-      <div
-        id="slot-outro-mount"
-        class="pip-slot"
-        data-composition-id="slot-outro"
-        data-composition-src="compositions/slot-outro.html"
-        data-start="172"
-        data-duration="8"
-        data-track-index="2"
-        data-width="440"
-        data-height="340"
-      ></div>
-
       <!-- Persistent Captions Bar -->
       <div id="captions-container" class="captions-bar">
         <div id="caption-label" class="caption-text">
@@ -366,47 +365,182 @@
 
       const captionLabel = document.getElementById("caption-label");
       const captionsData = [
-        { start: 0.5, text: "This text claims it's from the Postal Service asking for a two-dollar redelivery fee." },
-        { start: 5.2, text: "Is it real? Imposter scams were nearly one in three fraud reports to the FTC in 2025," },
-        { start: 9.2, text: "accounting for 3.5 billion dollars in reported losses." },
-        { start: 13.7, text: "When you receive a text like this, how do you verify it?" },
-        { start: 18.2, text: "The standard advice is: 'contact the company yourself.'" },
-        { start: 23.0, text: "But when people paste suspicious messages into an AI chatbot," },
-        { start: 27.7, text: "you get a verdict, but nothing you can check." },
-        { start: 31.2, text: "Scammers use AI too, so good grammar proves nothing. Meet Callback." },
-        { start: 34.5, text: "Instead of guessing, Callback runs a live investigation." },
-        { start: 38.7, text: "We paste the message and click Check it." },
-        { start: 42.0, text: "Callback resolves who the message claims to be—the US Postal Service—" },
-        { start: 47.0, text: "from a curated list of official organizations, never from the message itself." },
-        { start: 51.4, text: "It compares the message's link against the real domain, usps.com." },
-        { start: 55.7, text: "The link isn't official, contains the brand name, and the domain isn't registered." },
-        { start: 60.2, text: "The verdict stamp lands: DOESN'T MATCH." },
-        { start: 64.5, text: "Callback doesn't just cry scam on everything." },
-        { start: 68.4, text: "When you receive a real fraud alert from your bank—like Wells Fargo—" },
-        { start: 72.7, text: "it confirms the link is on wellsfargo.com and verifies the phone number" },
-        { start: 77.0, text: "against Wells Fargo's own contact page. Green stamp: MATCHES." },
-        { start: 81.2, text: "That contrast is critical: false alarms make people ignore real warnings." },
-        { start: 86.5, text: "Callback also reads screenshots. Drop an image of a suspicious text," },
-        { start: 90.2, text: "and Gemini vision reads the message into structured data." },
-        { start: 95.0, text: "Our extraction guard re-scans the text and drops anything the AI hallucinated" },
-        { start: 99.7, text: "that wasn't actually present in the original image." },
-        { start: 104.5, text: "If someone already clicked the link or replied, panic makes people freeze." },
-        { start: 108.4, text: "Callback's incident panel gives a checklist for what to do next" },
-        { start: 113.2, text: "based on how they paid, and downloads an incident summary" },
-        { start: 117.4, text: "with timestamps and receipts to paste into a ReportFraud.ftc.gov report." },
-        { start: 122.5, text: "Here is what makes Callback different: the AI never decides the verdict." },
-        { start: 127.0, text: "Gemini is used only to read messy text and draft plain-English explanations" },
-        { start: 131.7, text: "where every single sentence must cite an evidence receipt like E1 or it is dropped." },
-        { start: 136.2, text: "Seven fixed deterministic rules decide whether the channels match." },
-        { start: 140.5, text: "We tested this on 35 synthetic messages that we wrote." },
-        { start: 144.7, text: "Gemini alone flagged all 20 scams, but it also called a real payment receipt a scam" },
-        { start: 149.2, text: "and gave no evidence. Callback caught 15 scams with zero false alarms," },
-        { start: 153.2, text: "cited evidence on 74 out of 80 sentences, and answered 'can't verify' on 28.6%." },
-        { start: 158.5, text: "Callback is honest about its limits. It focuses on US numbers and 27 curated orgs." },
-        { start: 162.4, text: "Official phone numbers can only be confirmed where organizations publish them." },
-        { start: 167.2, text: "If an entity is unlisted or blocks scraping, Callback says 'can't verify' instead of guessing." },
-        { start: 172.2, text: "I'm John Tewolde, and this is Callback." },
-        { start: 176.2, text: "Try it live at callback-lac.vercel.app. Don't trust the number in the message. Callback finds the real one." }
+        {
+          "start": 0.4,
+          "text": "This text claims it's from the Postal Service, asking for a two-dollar redelivery fee."
+        },
+        {
+          "start": 5.36,
+          "text": "Is it real? Imposter scams were nearly one in three fraud reports to the FTC in 2025,"
+        },
+        {
+          "start": 10.98,
+          "text": "with 3.5 billion dollars in reported losses."
+        },
+        {
+          "start": 13.63,
+          "text": "When you get a text like this, how do you check it?"
+        },
+        {
+          "start": 18.4,
+          "text": "The standard advice is to contact the company yourself."
+        },
+        {
+          "start": 21.82,
+          "text": "But if you paste a suspicious message into an AI chatbot,"
+        },
+        {
+          "start": 26,
+          "text": "you get a verdict with nothing you can check."
+        },
+        {
+          "start": 29.42,
+          "text": "Scammers use AI too, so good grammar proves nothing. Meet Callback."
+        },
+        {
+          "start": 34.4,
+          "text": "Instead of guessing, Callback runs a live investigation."
+        },
+        {
+          "start": 37.6,
+          "text": "We paste the message and click Check it."
+        },
+        {
+          "start": 40.8,
+          "text": "Callback works out who the message claims to be, here the US Postal Service,"
+        },
+        {
+          "start": 46.4,
+          "text": "from a hand-checked list of official organizations, never from the message itself."
+        },
+        {
+          "start": 51.6,
+          "text": "Then it compares the message's link with the real domain, usps.com."
+        },
+        {
+          "start": 56.4,
+          "text": "The link isn't official, it contains the brand name, and the domain isn't registered."
+        },
+        {
+          "start": 62,
+          "text": "The verdict: doesn't match."
+        },
+        {
+          "start": 64.4,
+          "text": "Callback doesn't just cry scam on everything."
+        },
+        {
+          "start": 67.15,
+          "text": "When you get a real fraud alert from your bank, like Wells Fargo,"
+        },
+        {
+          "start": 72.25,
+          "text": "it confirms the link is on wellsfargo.com and checks the phone number"
+        },
+        {
+          "start": 77.36,
+          "text": "against Wells Fargo's own contact page. The verdict: it matches."
+        },
+        {
+          "start": 81.28,
+          "text": "That matters, because false alarms teach people to ignore real warnings."
+        },
+        {
+          "start": 86.4,
+          "text": "Callback also reads screenshots."
+        },
+        {
+          "start": 88.26,
+          "text": "Drop in an image of a suspicious text, and Gemini vision reads the message."
+        },
+        {
+          "start": 94.77,
+          "text": "Then a guard re-checks the result and drops anything the AI invented"
+        },
+        {
+          "start": 100.81,
+          "text": "that isn't really in the image."
+        },
+        {
+          "start": 104.4,
+          "text": "If someone already clicked the link or replied, panic makes people freeze."
+        },
+        {
+          "start": 108.99,
+          "text": "Callback's incident panel gives a checklist for what to do next, based on how they paid,"
+        },
+        {
+          "start": 115.1,
+          "text": "and downloads an incident summary with the evidence,"
+        },
+        {
+          "start": 118.16,
+          "text": "ready to paste into a report for the FTC."
+        },
+        {
+          "start": 122.4,
+          "text": "Here is what makes Callback different: the AI never decides the verdict."
+        },
+        {
+          "start": 126.61,
+          "text": "Gemini only reads messy text and writes the plain-English explanation,"
+        },
+        {
+          "start": 130.47,
+          "text": "and every sentence has to cite a numbered piece of evidence, like E1, or it gets dropped."
+        },
+        {
+          "start": 136.44,
+          "text": "Seven fixed rules decide whether the contact details match."
+        },
+        {
+          "start": 140.4,
+          "text": "We tested this on 35 synthetic messages that we made up for this project."
+        },
+        {
+          "start": 144.16,
+          "text": "Gemini alone flagged all 20 scams, but it also called a real payment receipt a scam, and showed no evidence."
+        },
+        {
+          "start": 149.54,
+          "text": "Callback caught 15 of the 20 scams, with zero false alarms,"
+        },
+        {
+          "start": 152.49,
+          "text": "backed 74 of 80 explanation sentences with evidence,"
+        },
+        {
+          "start": 154.64,
+          "text": "and abstained on 10 of the 35 messages instead of guessing."
+        },
+        {
+          "start": 158.4,
+          "text": "Callback is honest about its limits. It covers US numbers and 27 hand-checked organizations."
+        },
+        {
+          "start": 162.53,
+          "text": "A phone number can only be confirmed where the organization publishes it."
+        },
+        {
+          "start": 165.83,
+          "text": "If an organization isn't on the list, or its site blocks automated checks,"
+        },
+        {
+          "start": 169.4,
+          "text": "Callback says it can't verify, instead of guessing."
+        },
+        {
+          "start": 172.4,
+          "text": "I'm John Tewolde, and this is Callback."
+        },
+        {
+          "start": 174.27,
+          "text": "Try it live at callback-lac.vercel.app."
+        },
+        {
+          "start": 176.4,
+          "text": "Don't trust the number in the message. Callback finds the real one."
+        }
       ];
 
       captionsData.forEach(c => {
@@ -416,10 +550,16 @@
       });
 
       const timeDisplay = document.getElementById("time-display");
-      for (let t = 0; t <= 180; t++) {
-        const label = String(Math.floor(t / 60)).padStart(2, "0") + ":" + String(t % 60).padStart(2, "0") + " / 03:00";
+      const TOTAL = 180;
+      const fmt = (s) => String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+      for (let t = 0; t <= Math.ceil(TOTAL); t++) {
+        const label = fmt(t) + " / " + fmt(TOTAL);
         tl.call(() => { if (timeDisplay) timeDisplay.textContent = label; }, null, t);
       }
+      // Circle (John's video, or a monogram until a recording exists): big in the hook and closing, small during the demo.
+      tl.fromTo("#pip", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1.45, duration: 0.6, ease: "back.out(1.6)" }, 0.4);
+      tl.to("#pip", { scale: 1, duration: 0.7, ease: "power2.inOut" }, 18);
+      tl.to("#pip", { scale: 1.45, duration: 0.7, ease: "power2.inOut" }, 172);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;

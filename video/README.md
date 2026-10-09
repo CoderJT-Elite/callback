@@ -1,58 +1,47 @@
-# Callback Video Production (HyperFrames)
+# Callback demo video (HyperFrames)
 
-Deterministic, programmatic video production pipeline for Callback's ForgeHacks 2026 submission.
+The demo video is built from HTML scenes with [HyperFrames](https://github.com/heygen-com/hyperframes) (Apache 2.0),
+GSAP animation, and FFmpeg. Real recordings of the live site are in `assets/clips/` and `assets/stills/`.
 
-## Tech Stack & Architecture
-- **HyperFrames** v0.8.117 (Apache 2.0): deterministic HTML/CSS/DOM video rendering engine with hardware GPU acceleration.
-- **GSAP** (v3.14.2): seekable animation timelines registered on `window.__timelines`.
-- **System FFmpeg** (8.1.2): video assembly, audio loudness normalization (`loudnorm`), retiming, and stream verification.
-- **Playwright**: real UI browser automation and screen recording (`video/capture/capture.ts`).
+## How it works
 
-## Directory Structure
-- `index.html`: Master 16:9 composition (1920×1080, 180s duration).
-- `vertical/index.html`: Portrait 9:16 composition (1080×1920, 180s duration).
-- `slots.json`: Named footage slot definitions for John's live footage (`intro-face`, `demo-narration`, `voiceover-main`, `outro-face`).
-- `FOOTAGE_GUIDE.md`: 2-minute checklist and exact script lines for recording John's clips.
-- `LICENSES.md`: Open-source licenses for fonts (SIL OFL Newsreader, IBM Plex Sans, IBM Plex Mono) and assets.
-- `assets/`:
-  - `clips/`: Real Playwright screen recordings of the production Next.js build.
-  - `stills/`: High-resolution UI captures across samples, incident panel, mobile, dark mode.
-  - `fonts/`: Local SIL OFL TTF fonts and `fonts.css`.
-  - `audio/`: Audio bed tracks and voiceover slots.
-  - `captions.srt`: Synchronized subtitle file.
-  - `processed/`: Automatically scaled, retimed, loudness-normalized footage clips.
-- `footage/`: Directory where John drops raw camera / mic files.
-- `out/`: Rendered MP4 deliverables (`callback-demo-16x9.mp4`, `callback-demo-9x16.mp4`) and verification frame stills.
-- `scripts/`:
-  - `lint-footage.ts`: Verifies slot durations and emits ±8% speed-fit warnings.
-  - `prepare-footage.ts`: Automatically rescales, crops-to-fill, retimes, and normalizes dropped footage.
-  - `render-16x9.ts`: Builds footage manifest and renders 1920×1080 30fps MP4.
-  - `render-vertical.ts`: Builds footage manifest and renders 1080×1920 30fps MP4.
+1. The spoken script lives in **`script.json`** (one source of truth). `RECORD_THIS.md` and `docs/VIDEO_SCRIPT.md` are
+   generated from it (`npm run guide`).
+2. You drop **one recording** (voice or video of you, any name) into `footage/`.
+3. `npm run render` then:
+   - finds the recording, normalises its loudness, and for video crops it to a centered square for the circle;
+   - lines the script up with your voice (word-level timing with the HyperFrames speech model, or pause detection if
+     the model isn't installed) so **each scene starts on its own words**, and builds the captions from that;
+   - rewrites `index.html` from `index.tpl` and renders `out/callback-demo-16x9.mp4` (1920x1080, 30 fps).
+4. With no recording, it renders placeholder timing and a "J" monogram circle so the project always builds.
 
-## Scripts & Usage
+Your face (or the monogram) is a circle in the corner: large in the hook and the closing, small during the demo.
+
+## Commands (run inside `video/`)
 
 ```bash
-# 1. Preview compositions in HyperFrames live studio
-npm run preview
-
-# 2. Lint composition HTML and timing rules
-npm run lint
-
-# 3. Check John's footage files in video/footage/
-npm run lint:footage
-
-# 4. Re-capture live site recordings from local server (http://localhost:3100)
-npm run capture
-
-# 5. Render 16:9 master MP4 (1920x1080 30 fps, 180s)
-npm run render
-
-# 6. Render 9:16 vertical MP4 (1080x1920 30 fps, 180s)
-npm run render:vertical
+npm run check     # is the recording there, long enough, loud enough, not clipping
+npm run build     # align + rewrite index.html only (no render)
+npm run render    # build, then render out/callback-demo-16x9.mp4
+npm run preview   # live preview in HyperFrames Studio
+npm run lint      # composition lint
+npm run guide     # regenerate RECORD_THIS.md and docs/VIDEO_SCRIPT.md from script.json
+npm run capture   # re-record the live site (needs the app on http://localhost:3100)
 ```
 
-## HyperFrames Implementation Notes
-1. **Directory-based compositions:** In HyperFrames 0.8.x, commands accept directories containing an `index.html`. The root `video/` directory holds the 16:9 composition, and `video/vertical/` holds the 9:16 portrait composition.
-2. **Deterministic animations:** All timelines are initialized with `{ paused: true }` and registered on `window.__timelines[<comp-id>]`.
-3. **Editable element IDs:** All timeline elements declare explicit IDs (e.g. `id="scene-1-heading"`) to satisfy Studio linting.
-4. **Footage slot fallback:** Until John drops raw recordings into `video/footage/`, both preview and final render display clean, labeled placeholder cards with exact slot metadata.
+The speech model (one time, about 640 MB, runs locally): `npx hyperframes models install parakeet`.
+
+## Files
+
+- `script.json`: spoken script, scene titles, what's on screen.
+- `index.tpl`: master template; `index.html` is generated from it (do not hand-edit `index.html`).
+- `compositions/scene-1.html` ... `scene-10.html`: the scenes.
+- `scripts/`: `align.ts` (recording to script), `build-index.ts`, `render-16x9.ts`, `check-footage.ts`, `make-guide.ts`.
+- `assets/`: site recordings, stills, fonts, `captions.srt` (regenerated on build).
+- `vertical/`: an older 9:16 cut with fixed timing. It is silent and does not use your recording; not part of the submission.
+- `LICENSES.md`: fonts and assets.
+
+## Honesty notes
+
+- All numbers on screen come from `eval/results/summary.md` (35 synthetic messages) or the cited FTC release.
+- The site recordings show the real app; the saved examples are pre-computed results labelled as such.

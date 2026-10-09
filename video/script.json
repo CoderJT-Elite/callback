@@ -1,0 +1,119 @@
+{
+  "note": "Single source of truth for the spoken script. Edit here, then run npm run build:script.",
+  "scenes": [
+    {
+      "id": 1,
+      "title": "Hook: a fake USPS text",
+      "chunks": [
+        "This text claims it's from the Postal Service, asking for a two-dollar redelivery fee.",
+        "Is it real? Imposter scams were nearly one in three fraud reports to the FTC in 2025,",
+        "with 3.5 billion dollars in reported losses.",
+        "When you get a text like this, how do you check it?"
+      ],
+      "visual": "Big circle with you, a fake USPS text, and the FTC number counting up."
+    },
+    {
+      "id": 2,
+      "title": "The problem with asking a chatbot",
+      "chunks": [
+        "The standard advice is to contact the company yourself.",
+        "But if you paste a suspicious message into an AI chatbot,",
+        "you get a verdict with nothing you can check.",
+        "Scammers use AI too, so good grammar proves nothing. Meet Callback."
+      ],
+      "visual": "A typical chatbot answer next to what Callback does instead."
+    },
+    {
+      "id": 3,
+      "title": "Live check: the mismatch",
+      "chunks": [
+        "Instead of guessing, Callback runs a live investigation.",
+        "We paste the message and click Check it.",
+        "Callback works out who the message claims to be, here the US Postal Service,",
+        "from a hand-checked list of official organizations, never from the message itself.",
+        "Then it compares the message's link with the real domain, usps.com.",
+        "The link isn't official, it contains the brand name, and the domain isn't registered.",
+        "The verdict: doesn't match."
+      ],
+      "visual": "Live check: the trace ticks in and the red MISMATCH stamp lands."
+    },
+    {
+      "id": 4,
+      "title": "Contrast: a real bank alert",
+      "chunks": [
+        "Callback doesn't just cry scam on everything.",
+        "When you get a real fraud alert from your bank, like Wells Fargo,",
+        "it confirms the link is on wellsfargo.com and checks the phone number",
+        "against Wells Fargo's own contact page. The verdict: it matches.",
+        "That matters, because false alarms teach people to ignore real warnings."
+      ],
+      "visual": "A real Wells Fargo alert and the green MATCH stamp, for contrast."
+    },
+    {
+      "id": 5,
+      "title": "Screenshots",
+      "chunks": [
+        "Callback also reads screenshots.",
+        "Drop in an image of a suspicious text, and Gemini vision reads the message.",
+        "Then a guard re-checks the result and drops anything the AI invented",
+        "that isn't really in the image."
+      ],
+      "visual": "A screenshot goes in; the guard drops anything the AI invented."
+    },
+    {
+      "id": 6,
+      "title": "Already clicked or paid?",
+      "chunks": [
+        "If someone already clicked the link or replied, panic makes people freeze.",
+        "Callback's incident panel gives a checklist for what to do next, based on how they paid,",
+        "and downloads an incident summary with the evidence,",
+        "ready to paste into a report for the FTC."
+      ],
+      "visual": "The incident panel and the printable report."
+    },
+    {
+      "id": 7,
+      "title": "How it decides",
+      "chunks": [
+        "Here is what makes Callback different: the AI never decides the verdict.",
+        "Gemini only reads messy text and writes the plain-English explanation,",
+        "and every sentence has to cite a numbered piece of evidence, like E1, or it gets dropped.",
+        "Seven fixed rules decide whether the contact details match."
+      ],
+      "visual": "The pipeline and the seven fixed rules; the AI never decides."
+    },
+    {
+      "id": 8,
+      "title": "The honest comparison",
+      "chunks": [
+        "We tested this on 35 synthetic messages that we made up for this project.",
+        "Gemini alone flagged all 20 scams, but it also called a real payment receipt a scam, and showed no evidence.",
+        "Callback caught 15 of the 20 scams, with zero false alarms,",
+        "backed 74 of 80 explanation sentences with evidence,",
+        "and abstained on 10 of the 35 messages instead of guessing."
+      ],
+      "visual": "The 35-message synthetic comparison: Gemini alone vs Callback."
+    },
+    {
+      "id": 9,
+      "title": "What works and what doesn't",
+      "chunks": [
+        "Callback is honest about its limits. It covers US numbers and 27 hand-checked organizations.",
+        "A phone number can only be confirmed where the organization publishes it.",
+        "If an organization isn't on the list, or its site blocks automated checks,",
+        "Callback says it can't verify, instead of guessing."
+      ],
+      "visual": "Honest limits: US only, phone numbers only where published."
+    },
+    {
+      "id": 10,
+      "title": "Closing",
+      "chunks": [
+        "I'm John Tewolde, and this is Callback.",
+        "Try it live at callback-lac.vercel.app.",
+        "Don't trust the number in the message. Callback finds the real one."
+      ],
+      "visual": "End card with the repo, the live link and your closing line."
+    }
+  ]
+}

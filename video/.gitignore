@@ -3,3 +3,9 @@ node_modules/
 renders/
 *.log
 vertical/assets/
+build/
+transcript.json
+snapshots/
+assets/processed/
+footage/*
+!footage/.gitkeep

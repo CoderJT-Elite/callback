@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import { execSync } from "child_process";
-import { prepareFootage } from "./prepare-footage";
+import { align } from "./align";
+import { buildIndex } from "./build-index";
 
 const ROOT_VIDEO = path.resolve(import.meta.dirname, "..");
 const OUT_DIR = path.join(ROOT_VIDEO, "out");
@@ -16,9 +17,10 @@ async function main() {
     fs.mkdirSync(OUT_DIR, { recursive: true });
   }
 
-  // 1. Prepare raw footage (scale, crop, normalize loudness)
-  console.log("\nStep 1: Preparing dropped footage slots...");
-  prepareFootage();
+  // 1. Find the recording in footage/, line it up with the script, and rebuild index.html
+  console.log("\nStep 1: Aligning the recording to the script...");
+  align();
+  buildIndex();
 
   // 2. Execute HyperFrames Render
   console.log("\nStep 2: Executing HyperFrames render (1920x1080 @ 30fps)...");

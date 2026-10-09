@@ -5,10 +5,13 @@
   "scripts": {
     "preview": "npx hyperframes preview",
     "lint": "npx hyperframes lint .",
-    "lint:footage": "tsx scripts/lint-footage.ts",
+    "align": "tsx scripts/align.ts",
+    "build": "tsx scripts/build-all.ts",
+    "check": "tsx scripts/check-footage.ts",
     "capture": "tsx capture/capture.ts",
     "render": "tsx scripts/render-16x9.ts",
-    "render:vertical": "tsx scripts/render-vertical.ts"
+    "render:vertical": "tsx scripts/render-vertical.ts",
+    "guide": "tsx scripts/make-guide.ts"
   },
   "devDependencies": {
     "@types/node": "^22.13.5",
