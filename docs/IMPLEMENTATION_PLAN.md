@@ -22,11 +22,10 @@ open, take the simplest option that keeps the demo reliable, and record the choi
 3. **Track rules:** everything is built during the event (Oct 3-10). Existing libraries are fine.
    Don't copy code from any other local repo (in particular, nothing from `..\sentinel-ml` or
    `..\form_analyzer`).
-4. **AI disclosure:** the README must say plainly that AI coding agents (an AI coding assistant and
-   the review pass) wrote the code, which model the app calls at runtime, and what really runs vs what
+4. **AI disclosure:** the README must say plainly that AI coding assistants wrote the code, which model the app calls at runtime, and what really runs vs what
    is mocked.
 5. **No pushing, no deploying, no account actions.** Commit locally only. Don't create a GitHub
-   remote, don't run `vercel`, don't sign up for anything. John and the review pass handle publishing
+   remote, don't run `vercel`, don't sign up for anything. John handles publishing
    after review.
 6. **Honest failure beats a fake success.** Every pipeline step reports `ok | failed | skipped`
    with a reason, and the UI shows it.
@@ -476,7 +475,7 @@ C, and mark A and B `PENDING: needs GEMINI_API_KEY`.
 
 ---
 
-## 8. Image generation (the build agent has this; use it where it helps, never where text must be exact)
+## 8. Image generation (use it where it helps, never where text must be exact)
 
 **Use image generation for:**
 1. **Logo mark** (square, 1024 px): an abstract mark, a phone handset turning into a checkmark or
@@ -522,7 +521,7 @@ Keep one consistent style across all generated images (write the style prompt in
 7. Run locally: `npm install`, copy `.env.example` to `.env.local`, add the key, `npm run dev`,
    `npm test`, `npm run eval`.
 8. Privacy, safety (SSRF protections, prompt-injection handling), data sources and licences.
-9. **AI disclosure:** code written by AI coding agents (an AI coding assistant, the review pass) under
+9. **AI disclosure:** code written by AI coding assistants under
    John Tewolde's direction during ForgeHacks (Oct 3-10, 2026); the runtime model; and what's
    pre-computed vs live.
 

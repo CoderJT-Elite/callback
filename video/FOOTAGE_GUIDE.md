@@ -51,7 +51,7 @@ Read this before recording. Total recording time needed: under 10 minutes.
 - **Duration:** 8 seconds (target: 2:52 to 3:00)
 - **Framing:** Talking head, looking into camera with closing confidence.
 - **Lines to say:**
-  > "I'm John Tewolde. Callback was built under my direction using an AI coding assistant and the review pass for ForgeHacks 2026. Try it live at callback-lac.vercel.app. Don't trust the number in the message. Callback finds the real one."
+  > "I'm John Tewolde. Try Callback live at callback-lac.vercel.app. Don't trust the number in the message. Callback finds the real one."
 
 ---
 

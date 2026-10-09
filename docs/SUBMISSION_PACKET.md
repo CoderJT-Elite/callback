@@ -65,7 +65,7 @@ A quick preview of the sections included in that file:
 - **Accomplishments & Learnings:** Controlled 35-message synthetic evaluation matrix (Gemini alone vs Callback).
 - **What Works / What Doesn't:** Explicit rubric-compliant honesty boundaries.
 - **What's Next:** Global directories, share extensions, cryptographic DNS proofs.
-- **AI Disclosure:** Created by John Tewolde using an AI coding assistant and the review pass.
+- **AI Disclosure:** Built by John Tewolde with AI coding assistants.
 
 ---
 

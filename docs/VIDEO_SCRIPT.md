@@ -165,11 +165,11 @@
   - **Track:** `Cybersecurity · ForgeHacks Online 2026`
   - **Developer:** `John Tewolde (Solo, High School Senior)`
 - **[AUTO]** AI Disclosure Badge:
-  `"AI Disclosure: Built with AI coding agents (an AI coding assistant wrote v1; the review pass reviewed and fixed) under John Tewolde's direction."`
+  `"AI Disclosure: Built with AI coding assistants under John Tewolde's direction."`
 - **[AUTO]** Tagline:
   `"Don't trust the number in the message. Callback finds the real one."`
 - **[JOHN LIVE]** (On camera / voice-over):
-  > "I'm John Tewolde. Callback was built under my direction using an AI coding assistant and the review pass for ForgeHacks 2026. Try it live at callback-lac.vercel.app. Don't trust the number in the message. Callback finds the real one."
+  > "I'm John Tewolde. Try Callback live at callback-lac.vercel.app. Don't trust the number in the message. Callback finds the real one."
 
 ---
 

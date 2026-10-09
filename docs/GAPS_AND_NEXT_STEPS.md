@@ -1,6 +1,6 @@
 # Gaps and next steps
 
-Rewritten 2026-10-03 by the review pass. The earlier the build agent version was discarded: it stated coverage
+Rewritten 2026-10-03. An earlier draft was discarded: it stated coverage
 percentages ("55-60%", "85%"), a toll-scam growth figure and per-token prices with no source, described the
 safe fetcher wrongly (it follows up to 5 redirects, not 3), and numbered the verdict rules wrongly.
 Every conclusion below carries a confidence label: **Sourced** (a page I opened), **From our code or tests**,

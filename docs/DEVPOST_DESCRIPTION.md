@@ -111,4 +111,4 @@ Per the ForgeHacks rubric (*"A half-working project is okay. Overstating it isn'
 ---
 
 ## AI Disclosure
-In accordance with competition rules: Callback was designed and built under John Tewolde's direction with AI coding assistants. an AI coding assistant scaffolded the initial application architecture, and the review pass reviewed code quality, fixed edge cases, and hardened test coverage. All evaluation numbers, architectural trade-offs, and system boundaries reflect real executions and empirical tests.
+In accordance with competition rules: Callback was designed and built under John Tewolde's direction with AI coding assistants. AI assistants wrote most of the code from a written spec; a separate review pass checked every claim against real runs and fixed what it found. All evaluation numbers, architectural trade-offs, and system boundaries reflect real executions and empirical tests.

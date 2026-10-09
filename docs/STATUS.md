@@ -3,7 +3,7 @@
 Last updated: 2026-10-03 (ForgeHacks 2026)
 
 ## Overview & Current State
-- Active Phase: done (P0-P9), then independent review and fixes by the review pass (see the last section)
+- Active Phase: done (P0-P9), then independent review and fixes (see the last section)
 - Completed Phases: P0-P9
 - Secrets: Confirmed `.env.local` is ignored and never committed.
 - Gemini Model: `gemini-3.5-flash-lite` (switched from `gemini-3.8-flash`, whose free tier allows 20 requests per day).
@@ -520,9 +520,9 @@ Last updated: 2026-10-03 (ForgeHacks 2026)
 
 ---
 
-### Independent review and fixes (the review pass, 2026-10-03)
+### Independent review and fixes (2026-10-03)
 
-the build agent's P0-P9 report above was re-checked from scratch: fresh clone, real commands, the code
+The P0-P9 build report above was re-checked from scratch: fresh clone, real commands, the code
 itself, live fetches of every curated source, and live API calls. The build, tests and e2e passed as
 reported. These problems were found and fixed:
 
@@ -563,17 +563,17 @@ Citi alert -> MATCHES; GIF upload rejected. Mobile (375 px): no horizontal scrol
 - Contact points inside the legitimate eval items were checked on 2026-10-03 against the organization snapshots (see eval/SOURCES.md); the prose around them is still invented.
 - Not pushed, not deployed.
 
-## Redesign, eval audit, GitHub (the review pass, 2026-10-03, later)
+## Redesign, eval audit, GitHub (2026-10-03, later)
 - **Redesign** ("case file" identity): warm paper/ink palette with stamp-red, pine and ochre; Newsreader + IBM Plex; square corners and hairline rules; rubber-stamp verdict; evidence as a ledger; saved examples as a plain text list; new SVG logo mark and code-drawn Open Graph image. Removed the AI-generated `logo.png`, `hero-illustration.png`, `og-background.png`, `app/icon.png`, `app/apple-icon.png`, `app/opengraph-image.png`. `lucide-react` is no longer imported. Commit `dbc5e56`.
 - **Eval audit:** every phone in the legitimate test messages is in that organization's snapshot (Wells Fargo, Capital One, Bank of America, Medicare); domains are on the official lists. Recorded in `eval/SOURCES.md`. Eval numbers unchanged (no text changed).
 - **Bug fixed:** the keyless extractor could list the same link twice (`https://x` and `x`); deduped. Saved examples regenerated with the AI on.
 - **Verification:** `npx tsc --noEmit`, 76 unit tests, `npm run build`, 18 Playwright tests all pass; Devpost screenshots recaptured against the production build.
 - **GitHub:** public repo https://github.com/CoderJT-Elite/callback pushed (key check: no `.env.local` tracked, no key string in history).
 - **Vercel: deployed** after re-login via CLI device flow: https://callback-lac.vercel.app (production, `GEMINI_MODEL=gemini-3.5-flash-lite` set, Vercel Authentication turned off so it is public). **No `GEMINI_API_KEY` yet** (John's to add), so the live site runs rules-only. Smoke test: home, how-it-works, OG image 200; a Chase scam paste returns DOESN'T MATCH.
-- **the build agent prompt** for the video and submission package: `.agents/BUILD_AGENT_GOAL_SUBMISSION_PACKAGE_VIDEO_2026-10-03.md` (HyperFrames, footage slots, gallery, packet).
+- Prompt for the video and submission package written (HyperFrames, footage slots, gallery, packet).
 
-## Verification of the build agent's submission package (the review pass, 2026-10-03)
-the build agent added `video/` (HyperFrames project, captures, slots, footage guide), gallery images, stress test, competitor sweep, gap analysis and a submission packet in commit `0953c66`/`3f9ad2a`. Scope was respected (nothing changed outside `video/`, `docs/`, README, `.agents/`; no key in files or history; footage folder empty). Content was **not** all reliable. Found and fixed:
+## Verification of the submission package (2026-10-03)
+The build agent added `video/` (HyperFrames project, captures, slots, footage guide), gallery images, stress test, competitor sweep, gap analysis and a submission packet in commit `0953c66`/`3f9ad2a`. Scope was respected (nothing changed outside `video/`, `docs/`, README, `.agents/`; no key in files or history; footage folder empty). Content was **not** all reliable. Found and fixed:
 
 | Problem found | Fix |
 |---|---|

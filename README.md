@@ -143,8 +143,8 @@ Wikidata (CC0); US government consumer pages (public domain); official contact-p
 
 ## How this was built (AI disclosure)
 
-Built during ForgeHacks (Oct 3-10, 2026) by John Tewolde with AI coding agents: an AI coding assistant
-wrote the first full version from a written spec, and the review pass reviewed it, fixed
-the problems it found (wrong official domains, schema handling, evaluation labeling, overclaims) and
-re-ran the evaluation. No code was reused from earlier projects. At runtime, Google Gemini reads
+Built during ForgeHacks (Oct 3-10, 2026) by John Tewolde with AI coding assistants, which wrote
+most of the code from a written spec under his direction. A separate review pass re-checked every
+claim against real runs and fixed what it found (wrong official domains, schema handling,
+evaluation labeling, overclaims), then re-ran the evaluation. No code was reused from earlier projects. At runtime, Google Gemini reads
 messages and writes explanations; it never decides the verdict.

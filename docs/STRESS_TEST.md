@@ -18,7 +18,7 @@
 | **Local Rate Limiter Enforcement** | **PASS** (Rate limit correctly enforced after 8 rapid requests. Blocked status returned with retry-after.) | In-memory token bucket |
 | **Live Vercel Deployment Health (3 URLs)** | **3 of 3 returned 200** | Gentle spot-check |
 
-> **Reviewer note (the review pass, 2026-10-03):** the original report was checked against the code and tools. Corrections are marked "corrected". "Primary verdict" below is the most common verdict in each category; this run counted crashes and timings and did **not** score verdicts against expected labels, so it is not an accuracy result. Notably, all 27 genuine-message cases ended `CAN'T VERIFY` in keyless mode, i.e. genuine messages were not confirmed there; that is a limitation to read as such, not a pass.
+> **Reviewer note (2026-10-03):** the original report was checked against the code and tools. Corrections are marked "corrected". "Primary verdict" below is the most common verdict in each category; this run counted crashes and timings and did **not** score verdicts against expected labels, so it is not an accuracy result. Notably, all 27 genuine-message cases ended `CAN'T VERIFY` in keyless mode, i.e. genuine messages were not confirmed there; that is a limitation to read as such, not a pass.
 
 ---
 

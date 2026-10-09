@@ -1,7 +1,7 @@
 # Competitors and prior art
 
-Written 2026-10-03 by the review pass after 12 targeted web searches and opening the sources below. An earlier
-version of this file (produced by the build agent) was **discarded**: it cited a paper whose arXiv number is a
+Written 2026-10-03 after 12 targeted web searches and opening the sources below. An earlier
+draft of this file was **discarded**: it cited a paper whose arXiv number is a
 math paper, a patent that is about security playbooks, and a second patent and ACM DOI that don't resolve.
 Everything here comes from a page that was actually returned or opened. "Could not verify" means exactly that.
 
