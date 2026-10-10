@@ -1,0 +1,154 @@
+{
+  "fps": 30,
+  "wpm": 150,
+  "scenes": [
+    {
+      "id": "hook",
+      "label": "The text",
+      "node": null,
+      "text": "This text claims it's from the Postal Service, asking for a two-dollar redelivery fee. Is it real? Imposter scams were nearly one in three fraud reports to the FTC in 2025, with 3.5 billion dollars in reported losses. When you get a text like this, how do you check it?",
+      "cues": {
+        "sms": "This text claims",
+        "fee": "asking",
+        "real": "Is it real",
+        "stat": "nearly one in three",
+        "loss": "billion",
+        "how": "how do you check"
+      }
+    },
+    {
+      "id": "problem",
+      "label": "The problem",
+      "node": null,
+      "text": "The standard advice is to contact the company yourself. But if you paste a suspicious message into an AI chatbot, you get a verdict with nothing you can check. Scammers use AI too, so good grammar proves nothing. Meet Callback.",
+      "cues": {
+        "advice": "The standard advice",
+        "bot": "AI chatbot",
+        "nothing": "nothing you can",
+        "scam": "Scammers use",
+        "grammar": "grammar",
+        "meet": "Meet Callback"
+      }
+    },
+    {
+      "id": "mismatch",
+      "label": "Live check",
+      "node": null,
+      "text": "Instead of guessing, Callback runs a live investigation. We paste the message and click Check it. Callback works out who the message claims to be, here the US Postal Service, from a hand-checked list of official organizations, never from the message itself. Then it compares the message's link with the real domain, usps.com. The link isn't official, it contains the brand name, and the domain isn't registered. The verdict: doesn't match.",
+      "cues": {
+        "paste": "We paste the message",
+        "click": "click Check it",
+        "who": "works out who",
+        "list": "official organizations",
+        "never": "never from the message",
+        "compare": "compares",
+        "official": "link isn't official",
+        "brand": "brand name",
+        "unreg": "isn't registered",
+        "verdict": "doesn't match"
+      }
+    },
+    {
+      "id": "genuine",
+      "label": "A real alert",
+      "node": null,
+      "text": "Callback doesn't just cry scam on everything. When you get a real fraud alert from your bank, like Wells Fargo, it confirms the link is on wellsfargo.com and checks the phone number against Wells Fargo's own contact page. The verdict: it matches. That matters, because false alarms teach people to ignore real warnings.",
+      "cues": {
+        "real": "real fraud alert",
+        "link": "confirms the link",
+        "phone": "checks the phone number",
+        "verdict": "The verdict",
+        "matters": "That matters",
+        "alarms": "false alarms"
+      }
+    },
+    {
+      "id": "screenshot",
+      "label": "Screenshots",
+      "node": null,
+      "text": "Callback also reads screenshots. Drop in an image of a suspicious text, and Gemini vision reads the message. Then a guard re-checks the result and drops anything the AI invented that isn't really in the image.",
+      "cues": {
+        "reads": "reads screenshots",
+        "drop": "Drop in an image",
+        "vision": "Gemini vision",
+        "guard": "a guard",
+        "invented": "drops anything"
+      }
+    },
+    {
+      "id": "incident",
+      "label": "Already clicked?",
+      "node": null,
+      "text": "If someone already clicked the link or replied, panic makes people freeze. Callback's incident panel gives a checklist for what to do next, based on how they paid, and downloads an incident summary with the evidence, ready to paste into a report for the FTC.",
+      "cues": {
+        "clicked": "clicked",
+        "freeze": "freeze",
+        "panel": "panel",
+        "checklist": "checklist",
+        "paid": "how they paid",
+        "evidence": "with the evidence",
+        "summary": "an incident summary",
+        "ftc": "FTC"
+      }
+    },
+    {
+      "id": "rules",
+      "label": "How it decides",
+      "node": null,
+      "text": "Here is what makes Callback different: the AI never decides the verdict. Gemini only reads messy text and writes the plain-English explanation, and every sentence has to cite a numbered piece of evidence, like E1, or it gets dropped. Seven fixed rules decide whether the contact details match.",
+      "cues": {
+        "diff": "makes Callback different",
+        "never": "never decides",
+        "reads": "Gemini only reads",
+        "cite": "every sentence",
+        "e1": "E1",
+        "seven": "Seven fixed rules"
+      }
+    },
+    {
+      "id": "eval",
+      "label": "The test",
+      "node": null,
+      "text": "We tested this on 35 synthetic messages that we made up for this project. Gemini alone flagged all 20 scams, but it also called a real payment receipt a scam, and showed no evidence. Callback caught 15 of the 20 scams, with zero false alarms, backed 74 of 80 explanation sentences with evidence, and abstained on 10 of the 35 messages instead of guessing.",
+      "cues": {
+        "tested": "We tested this",
+        "synth": "synthetic",
+        "gem": "Gemini alone",
+        "receipt": "payment receipt",
+        "noev": "no evidence",
+        "caught": "Callback caught",
+        "zero": "zero false alarms",
+        "backed": "backed",
+        "abst": "abstained"
+      }
+    },
+    {
+      "id": "limits",
+      "label": "Honest limits",
+      "node": null,
+      "text": "Callback is honest about its limits. It covers US numbers and 27 hand-checked organizations. A phone number can only be confirmed where the organization publishes it. If an organization isn't on the list, or its site blocks automated checks, Callback says it can't verify, instead of guessing.",
+      "cues": {
+        "honest": "honest about its limits",
+        "us": "US numbers",
+        "orgs": "organizations",
+        "phone": "A phone number",
+        "unlisted": "isn't listed",
+        "blocks": "blocks automated checks",
+        "cant": "can't verify",
+        "guess": "instead of guessing"
+      }
+    },
+    {
+      "id": "close",
+      "label": "Try it",
+      "node": null,
+      "text": "I'm John Tewolde, and this is Callback. Try it live at callback-lac.vercel.app. Don't trust the number in the message. Callback finds the real one.",
+      "cues": {
+        "name": "I'm John",
+        "live": "live",
+        "tag": "Don't trust",
+        "real": "Callback finds"
+      }
+    }
+  ]
+}

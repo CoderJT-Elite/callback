@@ -1,175 +1,175 @@
 1
-00:00:00,400 --> 00:00:05,310
+00:00:00,400 --> 00:00:06,430
 This text claims it's from the Postal Service, asking for a two-dollar redelivery fee.
 
 2
-00:00:05,360 --> 00:00:10,930
+00:00:06,480 --> 00:00:12,190
 Is it real? Imposter scams were nearly one in three fraud reports to the FTC in 2025,
 
 3
-00:00:10,980 --> 00:00:13,580
+00:00:12,240 --> 00:00:15,870
 with 3.5 billion dollars in reported losses.
 
 4
-00:00:13,630 --> 00:00:18,350
+00:00:15,920 --> 00:00:19,230
 When you get a text like this, how do you check it?
 
 5
-00:00:18,400 --> 00:00:21,770
+00:00:19,280 --> 00:00:22,750
 The standard advice is to contact the company yourself.
 
 6
-00:00:21,820 --> 00:00:25,950
+00:00:22,800 --> 00:00:27,070
 But if you paste a suspicious message into an AI chatbot,
 
 7
-00:00:26,000 --> 00:00:29,370
+00:00:27,120 --> 00:00:29,550
 you get a verdict with nothing you can check.
 
 8
-00:00:29,420 --> 00:00:34,350
+00:00:29,600 --> 00:00:35,710
 Scammers use AI too, so good grammar proves nothing. Meet Callback.
 
 9
-00:00:34,400 --> 00:00:37,550
+00:00:35,760 --> 00:00:40,030
 Instead of guessing, Callback runs a live investigation.
 
 10
-00:00:37,600 --> 00:00:40,750
+00:00:40,080 --> 00:00:43,230
 We paste the message and click Check it.
 
 11
-00:00:40,800 --> 00:00:46,350
+00:00:43,280 --> 00:00:48,510
 Callback works out who the message claims to be, here the US Postal Service,
 
 12
-00:00:46,400 --> 00:00:51,550
+00:00:48,560 --> 00:00:53,790
 from a hand-checked list of official organizations, never from the message itself.
 
 13
-00:00:51,600 --> 00:00:56,350
+00:00:53,840 --> 00:00:58,510
 Then it compares the message's link with the real domain, usps.com.
 
 14
-00:00:56,400 --> 00:01:01,950
+00:00:58,560 --> 00:01:04,000
 The link isn't official, it contains the brand name, and the domain isn't registered.
 
 15
-00:01:02,000 --> 00:01:04,350
+00:01:04,050 --> 00:01:06,560
 The verdict: doesn't match.
 
 16
-00:01:04,400 --> 00:01:07,100
+00:01:06,610 --> 00:01:10,080
 Callback doesn't just cry scam on everything.
 
 17
-00:01:07,150 --> 00:01:12,200
+00:01:10,130 --> 00:01:14,400
 When you get a real fraud alert from your bank, like Wells Fargo,
 
 18
-00:01:12,250 --> 00:01:17,310
+00:01:14,450 --> 00:01:19,520
 it confirms the link is on wellsfargo.com and checks the phone number
 
 19
-00:01:17,360 --> 00:01:21,230
+00:01:19,570 --> 00:01:24,080
 against Wells Fargo's own contact page. The verdict: it matches.
 
 20
-00:01:21,280 --> 00:01:26,350
+00:01:24,130 --> 00:01:29,760
 That matters, because false alarms teach people to ignore real warnings.
 
 21
-00:01:26,400 --> 00:01:28,210
+00:01:29,810 --> 00:01:32,560
 Callback also reads screenshots.
 
 22
-00:01:28,260 --> 00:01:34,720
+00:01:32,610 --> 00:01:38,160
 Drop in an image of a suspicious text, and Gemini vision reads the message.
 
 23
-00:01:34,770 --> 00:01:40,760
+00:01:38,210 --> 00:01:43,040
 Then a guard re-checks the result and drops anything the AI invented
 
 24
-00:01:40,810 --> 00:01:44,350
+00:01:43,090 --> 00:01:46,000
 that isn't really in the image.
 
 25
-00:01:44,400 --> 00:01:48,940
+00:01:46,050 --> 00:01:51,280
 If someone already clicked the link or replied, panic makes people freeze.
 
 26
-00:01:48,990 --> 00:01:55,050
+00:01:51,330 --> 00:01:57,200
 Callback's incident panel gives a checklist for what to do next, based on how they paid,
 
 27
-00:01:55,100 --> 00:01:58,110
+00:01:57,250 --> 00:02:00,560
 and downloads an incident summary with the evidence,
 
 28
-00:01:58,160 --> 00:02:02,350
+00:02:00,610 --> 00:02:04,570
 ready to paste into a report for the FTC.
 
 29
-00:02:02,400 --> 00:02:06,560
+00:02:04,620 --> 00:02:10,170
 Here is what makes Callback different: the AI never decides the verdict.
 
 30
-00:02:06,610 --> 00:02:10,420
+00:02:10,220 --> 00:02:14,970
 Gemini only reads messy text and writes the plain-English explanation,
 
 31
-00:02:10,470 --> 00:02:16,390
+00:02:15,020 --> 00:02:21,370
 and every sentence has to cite a numbered piece of evidence, like E1, or it gets dropped.
 
 32
-00:02:16,440 --> 00:02:20,350
+00:02:21,420 --> 00:02:26,490
 Seven fixed rules decide whether the contact details match.
 
 33
-00:02:20,400 --> 00:02:24,110
+00:02:26,540 --> 00:02:31,850
 We tested this on 35 synthetic messages that we made up for this project.
 
 34
-00:02:24,160 --> 00:02:29,490
+00:02:31,900 --> 00:02:39,850
 Gemini alone flagged all 20 scams, but it also called a real payment receipt a scam, and showed no evidence.
 
 35
-00:02:29,540 --> 00:02:32,440
+00:02:40,060 --> 00:02:45,290
 Callback caught 15 of the 20 scams, with zero false alarms,
 
 36
-00:02:32,490 --> 00:02:34,590
+00:02:45,340 --> 00:02:49,450
 backed 74 of 80 explanation sentences with evidence,
 
 37
-00:02:34,640 --> 00:02:38,350
+00:02:49,500 --> 00:02:56,330
 and abstained on 10 of the 35 messages instead of guessing.
 
 38
-00:02:38,400 --> 00:02:42,480
+00:02:56,380 --> 00:03:03,450
 Callback is honest about its limits. It covers US numbers and 27 hand-checked organizations.
 
 39
-00:02:42,530 --> 00:02:45,780
+00:03:03,500 --> 00:03:08,200
 A phone number can only be confirmed where the organization publishes it.
 
 40
-00:02:45,830 --> 00:02:49,350
+00:03:08,250 --> 00:03:13,400
 If an organization isn't on the list, or its site blocks automated checks,
 
 41
-00:02:49,400 --> 00:02:52,350
+00:03:13,450 --> 00:03:17,400
 Callback says it can't verify, instead of guessing.
 
 42
-00:02:52,400 --> 00:02:54,220
+00:03:17,450 --> 00:03:20,360
 I'm John Tewolde, and this is Callback.
 
 43
-00:02:54,270 --> 00:02:56,350
+00:03:20,410 --> 00:03:26,120
 Try it live at callback-lac.vercel.app.
 
 44
-00:02:56,400 --> 00:02:59,950
+00:03:26,170 --> 00:03:31,240
 Don't trust the number in the message. Callback finds the real one.

@@ -15,7 +15,7 @@ export function buildIndex(): void {
     .map(
       s => `<div
         id="scene-${s.id}-mount"
-        class="scene-slot"
+        class="scene-slot clip"
         data-composition-id="scene-${s.id}"
         data-composition-src="compositions/scene-${s.id}.html"
         data-start="${s.start}"

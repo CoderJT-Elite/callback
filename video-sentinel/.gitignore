@@ -1,0 +1,10 @@
+clips/*.mp4
+clips/*.words.json
+panels/
+_frames/
+_matte/*.torchscript
+out/
+raw_nocaps.mp4
+captions.ass
+*.log
+__pycache__/

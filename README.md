@@ -146,5 +146,5 @@ Wikidata (CC0); US government consumer pages (public domain); official contact-p
 Built during ForgeHacks (Oct 3-10, 2026) by John Tewolde with AI coding assistants, which wrote
 most of the code from a written spec under his direction. A separate review pass re-checked every
 claim against real runs and fixed what it found (wrong official domains, schema handling,
-evaluation labeling, overclaims), then re-ran the evaluation. No code was reused from earlier projects. At runtime, Google Gemini reads
+evaluation labeling, overclaims), then re-ran the evaluation. No application code was reused from earlier projects. The only reused code is the demo-video build tooling in `video-sentinel/` (render, speaker cut-out and caption scripts from the author's earlier project, Sentinel); its scenes, script and screenshots are new. At runtime, Google Gemini reads
 messages and writes explanations; it never decides the verdict.
