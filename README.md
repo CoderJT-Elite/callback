@@ -8,7 +8,7 @@ and shows, with receipts, whether the phone number, link and email in the messag
 them.
 
 - **Live app:** https://callback-lac.vercel.app
-- **Demo video:** `VIDEO_URL_TBD`
+- **Demo video:** https://youtu.be/si-QT_GqV8w
 - **Track:** AI + Cybersecurity, ForgeHacks Online 2026
 
 ![Callback checking a fake Wells Fargo text](docs/devpost/01-sample1-bank-alert-desktop.png)

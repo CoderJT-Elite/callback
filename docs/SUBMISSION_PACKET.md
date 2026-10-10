@@ -36,7 +36,7 @@ Copy and paste the exact content below into each field on Devpost:
 - **Live Demo URL:**  
   `https://callback-lac.vercel.app`
 - **Video Demo URL:**  
-  `[PASTE YOUR YOUTUBE/VIMEO LINK HERE]` *(from Step 3 above)*
+  `https://youtu.be/si-QT_GqV8w`
 
 ### 4. Built With (Tags)
 `next.js`, `react`, `typescript`, `tailwind-css`, `google-gemini`, `playwright`, `vitest`, `hyperframes`, `ffmpeg`, `libphonenumber-js`
